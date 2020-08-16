@@ -13,6 +13,8 @@
 
     {{-- css links --}}
     @include('partials.assets-link.css-links')
+    {{-- css section --}}
+    @yield('style')
 
 </head>
 <body>
@@ -34,5 +36,7 @@
 
     {{-- javascript links --}}
     @include('partials.assets-link.js-links')
+    {{-- js section --}}
+    @yield('js')
 </body>
 </html>

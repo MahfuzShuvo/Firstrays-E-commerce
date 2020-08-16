@@ -38,9 +38,17 @@
 							<i class="ti-bag icon-single" style="font-weight: 900;"></i>&nbsp; Cart
 						</a>
 					</li>
-					<li class="nav-item ml-md-3">
-						<a class="btn btn-primary custom-btn" href="{{ route('login') }}"><i class="bx bxs-user-circle mr-1"></i> Log In / Register</a>
-					</li>
+					@guest
+						<li class="nav-item ml-md-3">
+							<a class="btn btn-primary custom-btn" href="{{ route('login') }}"><i class="bx bx-log-in-circle mr-1"></i> Log In / Register</a>
+						</li>
+					@else
+						@if (Auth::guard('web')->check())
+							<li class="nav-item ml-md-3">
+								<a class="btn btn-primary custom-btn" href="{{ route('user') }}"><i class="bx bxs-user-circle mr-1"></i> Account</a>
+							</li>
+						@endif
+					@endguest
 				</ul>
 			</div>
 		</div>
@@ -97,10 +105,10 @@
 						<a class="nav-link custom-nav" href="#">Products</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link custom-nav" href="#">Schools</a>
+						<a class="nav-link custom-nav" href="#">Shop</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link custom-nav" href="#">Publishers</a>
+						<a class="nav-link custom-nav" href="#">Blog</a>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle custom-nav" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

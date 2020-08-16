@@ -16,22 +16,22 @@
 			<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
 				<h6 class="text-uppercase mb-4 font-weight-bold">GET TO KNOW US</h6>
 				<p class="custom-link">
-					<a href="#">About Us</a>
+					<a href="{{ route('about-us') }}">About Us</a>
 				</p>
 				<p class="custom-link">
-					<a href="#">Privacy Policy</a>
+					<a href="{{ route('privacy-policy') }}">Privacy Policy</a>
 				</p>
 				<p class="custom-link">
-					<a href="#">Cookie Policy</a>
+					<a href="{{ route('cookie-policy') }}">Cookie Policy</a>
 				</p>
 				<p class="custom-link">
-					<a href="#">Warrenty Policy</a>
+					<a href="{{ route('warrenty-policy') }}">Warrenty Policy</a>
 				</p>
 				<p class="custom-link">
-					<a href="#">Shipping Policy</a>
+					<a href="{{ route('shipping-policy') }}">Shipping Policy</a>
 				</p>
 				<p class="custom-link">
-					<a href="#">Why Shop with Us</a>
+					<a href="{{ route('why-shop-with-us') }}">Why Shop with Us</a>
 				</p>
 				<p class="custom-link">
 					<a href="#">Return & Replacement</a>
@@ -40,7 +40,7 @@
 					<a href="#">Terms & Conditions</a>
 				</p>
 				<p class="custom-link">
-					<a href="#">FAQs</a>
+					<a href="{{ route('faq') }}">FAQs</a>
 				</p>
 			</div>
 			<!-- Grid column -->
@@ -49,7 +49,7 @@
 			<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
 				<h6 class="text-uppercase mb-4 font-weight-bold">LET US HELP YOU</h6>
 				<p class="custom-link">
-					<a href="#">Your Account</a>
+					<a href="{{ route('home') }}">Your Account</a>
 				</p>
 				<p class="custom-link">
 					<a href="#">Your Order</a>

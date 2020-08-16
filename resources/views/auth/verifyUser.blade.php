@@ -106,20 +106,7 @@
                     <div class="login_form_inner">
                         <h3>OTP Verification</h3>
                         <div class="card-body">
-                            @if (Session::has('message'))
-                                <div class="alert alert-info">{{ Session::get('message') }}</div>
-                            @endif
-                            @if (session('success'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-
-                            @if (session('error'))
-                                <div class="alert alert-danger" role="alert">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
+                            @include('partials.alert')
                         </div>
                         <form method="POST" action="{{ route('verify') }}" class="row login_form" id="contactForm">
                             @csrf

@@ -767,6 +767,7 @@ Version:1.0
 .cown-down .content .heading-block{
 	padding: 0;
 	position: relative;
+	top: 150px;
 }
 .shop-blog .shop-single-blog {
 	margin-bottom: 30px;

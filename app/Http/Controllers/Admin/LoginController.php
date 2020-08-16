@@ -49,7 +49,7 @@ class LoginController extends Controller
         if (Auth::guard('admin')->attempt($credential, $request->member)) {
             return redirect()->intended(route('admin.home'));
         }
-        return redirect()->back()->withInput($request->only('phone, remember'));
+        return redirect()->back()->withInput($request->only('phone, remember'))->with('error', 'Invalid phone number or password');
     }
 
     public function username()
@@ -65,6 +65,6 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::guard('admin')->logout();
-        return redirect('/');
+        return redirect('/admin');
     }
 }

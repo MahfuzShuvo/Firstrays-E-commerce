@@ -51,10 +51,38 @@ Route::group(['prefix'=>'admin'], function() {
 	Route::post('/postVerifyToken', 'Admin\VerificationTokenController@postVerifyToken')->name('admin.postVerifyToken');
 	//Reset Password
 	Route::resource('/adminresetpassword', 'Admin\ResetPasswordController');
+
+
+
 });
 
 
-// checkout
-Route::get('/checkout', 'MasterController@checkout')->name('checkout');
-// product-details
-Route::get('/product-details', 'MasterController@product_details')->name('product-details');
+//  Back-end pages
+// ......................
+	Route::get('/customers', 'AdminController@customers')->name('customers');
+	Route::get('/slider', 'AdminController@slider')->name('slider');
+
+
+
+//	Front-end Pages
+// ......................
+	// checkout
+	Route::get('/checkout', 'MasterController@checkout')->name('checkout');
+	// product-details
+	Route::get('/product-details', 'MasterController@product_details')->name('product-details');
+	// user-dashboard
+	Route::get('/user', 'MasterController@user')->name('user');
+	// about-us
+	Route::get('/about-us', 'MasterController@about')->name('about-us');
+	// privacy-policy
+	Route::get('/privacy-policy', 'MasterController@privacy_policy')->name('privacy-policy');
+	// cookie-policy
+	Route::get('/cookie-policy', 'MasterController@cookie_policy')->name('cookie-policy');
+	// warrenty-policy
+	Route::get('/warrenty-policy', 'MasterController@warrenty_policy')->name('warrenty-policy');
+	// shipping-policy
+	Route::get('/shipping-policy', 'MasterController@shipping_policy')->name('shipping-policy');
+	// why-shop-with-us
+	Route::get('/why-shop-with-us', 'MasterController@why_shop_with_us')->name('why-shop-with-us');
+	// faq
+	Route::get('/faq', 'MasterController@faq')->name('faq');
