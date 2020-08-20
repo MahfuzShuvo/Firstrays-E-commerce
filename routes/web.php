@@ -61,7 +61,11 @@ Route::group(['prefix'=>'admin'], function() {
 // ......................
 	Route::get('/customers', 'AdminController@customers')->name('customers');
 	Route::get('/slider', 'AdminController@slider')->name('slider');
-
+	Route::post('/slider', 'Admin\Pages\SliderController@store')->name('slider.store');
+	Route::post('/status/{id}', 'Admin\Pages\SliderController@status');
+	Route::post('/delete_slider/{id}', 'Admin\Pages\SliderController@delete_slider');
+	Route::post('/add_url/{id}', 'Admin\Pages\SliderController@add_url');
+	Route::post('/priority/{id}', 'Admin\Pages\SliderController@priority');
 
 
 //	Front-end Pages
@@ -86,3 +90,6 @@ Route::group(['prefix'=>'admin'], function() {
 	Route::get('/why-shop-with-us', 'MasterController@why_shop_with_us')->name('why-shop-with-us');
 	// faq
 	Route::get('/faq', 'MasterController@faq')->name('faq');
+
+
+

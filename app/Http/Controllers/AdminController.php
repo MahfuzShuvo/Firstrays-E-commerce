@@ -35,6 +35,7 @@ class AdminController extends Controller
 
     public function slider()
     {
-        return view('admin.pages.slider');
+        $sliders = DB::table('sliders')->get();
+        return view('admin.pages.slider', compact('sliders'));
     }
 }

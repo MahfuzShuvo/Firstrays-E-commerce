@@ -5640,7 +5640,7 @@ input[type="radio"]:checked ~ label { cursor: default; }
 .ni { 
   /* use !important to prevent issues with browser extensions that change fonts */ 
   font-family: "Nioicon" !important;
-  padding-left: 2px;
+  padding-left: 1px;
   speak: never; font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -9658,7 +9658,7 @@ body.nav-shown { overflow: hidden; }
 
 .is-light .nk-menu-link:hover, .is-light .active > .nk-menu-link {
   /*color: #9769ff;*/
-  color: #ff005c;
+  color: #ff005c!important;
 }
 
 .is-theme .nk-menu-link:hover, .is-theme .active > .nk-menu-link { color: #fff; }
@@ -10544,13 +10544,29 @@ h6 .badge { margin-left: 0.5rem; }
 
 @media (min-width: 1540px) { .card-aside { width: 380px; } }
 
-.user-avatar, [class^="user-avatar"]:not([class*="-group"]) { border-radius: 50%; height: 40px; width: 40px; display: flex; justify-content: center; align-items: center; color: #fff; background: #9d72ff; font-size: 14px; font-weight: 700; letter-spacing: 0.06em; flex-shrink: 0; position: relative; }
+.user-avatar, [class^="user-avatar"]:not([class*="-group"]) {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background: #9d72ff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+  position: relative;
+}
 
 .user-avatar + .user-info, [class^="user-avatar"]:not([class*="-group"]) + .user-info { margin-left: 1rem; }
 
 .user-avatar + .user-name, [class^="user-avatar"]:not([class*="-group"]) + .user-name { margin-left: 0.75rem; }
 
-.user-avatar img, [class^="user-avatar"]:not([class*="-group"]) img { border-radius: 50%; }
+.user-avatar img, [class^="user-avatar"]:not([class*="-group"]) img {
+  /*border-radius: 50%;*/
+}
 
 .user-avatar.md + .user-info, [class^="user-avatar"]:not([class*="-group"]).md + .user-info { margin-left: 1.5rem; }
 
@@ -11701,7 +11717,11 @@ p > span > .icon.ni { vertical-align: middle; }
 
 .nk-tb-list .tb-product { display: flex; align-items: center; }
 
-.nk-tb-list .tb-product .thumb { width: 48px; border-radius: 4px; margin-right: 1rem; }
+.nk-tb-list .tb-product .thumb {
+  width: 100px;
+  border-radius: 3px;
+  /*margin-right: 1rem;*/
+}
 
 .nk-tb-list .tb-product .title { font-weight: 700; font-size: .875rem; color: #364a63; }
 
