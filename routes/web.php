@@ -71,11 +71,17 @@ Route::group(['prefix'=>'admin'], function() {
 	Route::post('/add_url/{id}', 'Admin\Pages\SliderController@add_url');
 	Route::post('/priority/{id}', 'Admin\Pages\SliderController@priority');
 
-	// customer
+	// small banner
 	Route::get('/small_banner', 'AdminController@small_banner')->name('small_banner');
 	Route::post('/small_banner', 'Admin\Pages\SmallBannerController@store')->name('small_banner.store');
 	Route::post('/small_banner_status/{id}', 'Admin\Pages\SmallBannerController@status');
 	Route::post('/delete_small_banner/{id}', 'Admin\Pages\SmallBannerController@delete_small_banner');
+
+	// medium banner
+	Route::get('/medium_banner', 'AdminController@medium_banner')->name('medium_banner');
+	Route::post('/medium_banner', 'Admin\Pages\MediumBannerController@store')->name('medium_banner.store');
+	Route::post('/medium_banner_status/{id}', 'Admin\Pages\MediumBannerController@status');
+	Route::post('/delete_medium_banner/{id}', 'Admin\Pages\MediumBannerController@delete_medium_banner');
 
 
 

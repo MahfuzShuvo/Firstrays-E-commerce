@@ -109,7 +109,7 @@
                                             <a href="{{ route('small_banner') }}" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Small Banner</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="html/user-list-compact.html" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Medium Banner</span></a>
+                                            <a href="{{ route('medium_banner') }}" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Medium Banner</span></a>
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="html/user-details-regular.html" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Blog</span></a>

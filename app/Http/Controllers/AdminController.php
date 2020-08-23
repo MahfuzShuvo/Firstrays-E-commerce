@@ -44,4 +44,10 @@ class AdminController extends Controller
         $small_banners = DB::table('small_banners')->get();
         return view('admin.pages.small_banner', compact('small_banners'));
     }
+
+    public function medium_banner()
+    {
+        $medium_banners = DB::table('medium_banners')->get();
+        return view('admin.pages.medium_banner', compact('medium_banners'));
+    }
 }
