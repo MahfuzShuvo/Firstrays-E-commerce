@@ -59,13 +59,25 @@ Route::group(['prefix'=>'admin'], function() {
 
 //  Back-end pages
 // ......................
+	// customer
 	Route::get('/customers', 'AdminController@customers')->name('customers');
+	Route::post('/customer_status/{id}', 'Admin\Pages\CustomerController@status');
+
+	// slider
 	Route::get('/slider', 'AdminController@slider')->name('slider');
 	Route::post('/slider', 'Admin\Pages\SliderController@store')->name('slider.store');
-	Route::post('/status/{id}', 'Admin\Pages\SliderController@status');
+	Route::post('/slider_status/{id}', 'Admin\Pages\SliderController@status');
 	Route::post('/delete_slider/{id}', 'Admin\Pages\SliderController@delete_slider');
 	Route::post('/add_url/{id}', 'Admin\Pages\SliderController@add_url');
 	Route::post('/priority/{id}', 'Admin\Pages\SliderController@priority');
+
+	// customer
+	Route::get('/small_banner', 'AdminController@small_banner')->name('small_banner');
+	Route::post('/small_banner', 'Admin\Pages\SmallBannerController@store')->name('small_banner.store');
+	Route::post('/small_banner_status/{id}', 'Admin\Pages\SmallBannerController@status');
+	Route::post('/delete_small_banner/{id}', 'Admin\Pages\SmallBannerController@delete_small_banner');
+
+
 
 
 //	Front-end Pages

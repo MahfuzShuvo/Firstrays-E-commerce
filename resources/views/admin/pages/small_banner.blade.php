@@ -2,10 +2,6 @@
 
 @section('admin-style')
 
-
-{{-- dropzone cdn --}}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.css" integrity="sha512-bbUR1MeyQAnEuvdmss7V2LclMzO+R9BzRntEE57WIKInFVQjvX7l7QZSxjNDt8bg41Ww05oHSh0ycKFijqD7dA==" crossorigin="anonymous" />
-
 	<style type="text/css">
 		.heading {
 			font-family: "Montserrat", Arial, sans-serif;
@@ -49,14 +45,7 @@
 			transform: scale(1.15);
 		}
 
-		/*
-
-		The following rule will only run if your browser supports CSS grid.
-
-		Remove or comment-out the code block below to see how the browser will fall-back to flexbox styling. 
-
-		*/
-
+		
 		@supports (display: grid) {
 			.gallery {
 				display: grid;
@@ -70,7 +59,7 @@
 			}
 		}
 		.custom-avatar {
-			width: 120px!important;
+			width: 80px!important;
             height: auto!important;
 		}
 		.custom-avatar img {
@@ -79,12 +68,20 @@
 		.card-body {
 			padding: 0px!important;
 		}
-        .link-list-opt .remove_btn .icon {
+        .link-list-opt .custom_btn .icon {
             font-size: 1.125rem;
             width: 1.75rem;
             opacity: .8;
+            margin-right: 3px;
         }
-        .link-list-opt .remove_btn {
+        .link-list-opt .custom_btn:hover {
+        	color: #854fff;
+    		background: #f5f6fa;
+        }
+        .link-list-opt .custom_btn:focus {
+        	outline: none;
+        }
+        .link-list-opt .custom_btn {
             display: flex;
             align-items: center;
             padding: .625rem 1.0rem;
@@ -96,6 +93,7 @@
             position: relative;
             background: transparent;
             border: none;
+            width: -webkit-fill-available;
         }
         .view_img {
             max-width: 100%!important;
@@ -103,6 +101,23 @@
         }
         .view_img_modal {
             padding-right: 0px!important;
+        }
+        .custom-banner-row {
+        	padding: 20px;
+        }
+        .tb-lead {
+        	font-size: 12px;
+        	font-weight: 400;
+        }
+        .custom_date {
+        	font-size: 12px!important;
+        }
+        .user-card {
+        	display: contents;
+        }
+        .custom-user-info {
+        	margin-top: 5px;
+        	margin-left: 0px!important;
         }
 	</style>
 @endsection
@@ -115,7 +130,7 @@
                     <div class="nk-block-head nk-block-head-sm">
                         <div class="nk-block-between">
                             <div class="nk-block-head-content">
-                                <h3 class="nk-block-title page-title">Slider Images</h3>
+                                <h3 class="nk-block-title page-title">Small Image</h3>
                             </div><!-- .nk-block-head-content -->
                             <div class="nk-block-head-content">
                                 <div class="toggle-wrap nk-block-tools-toggle">
@@ -151,11 +166,11 @@
                                                     <label class="custom-control-label" for="uid"></label>
                                                 </div>
                                             </div>
-                                            <div class="nk-tb-col"><span class="sub-text">Image</span></div>
+                                            <div class="nk-tb-col"><span class="sub-text">First Image</span></div>
                                             {{-- <div class="nk-tb-col tb-col-mb"><span class="sub-text">Ordered</span></div> --}}
-                                            <div class="nk-tb-col tb-col-md"><span class="sub-text">URL link</span></div>
-                                            <div class="nk-tb-col tb-col-lg"><span class="sub-text">Size</span></div>
-                                            <div class="nk-tb-col tb-col-lg"><span class="sub-text">Priority</span></div>
+                                            <div class="nk-tb-col tb-col-md"><span class="sub-text">Second Image</span></div>
+                                            <div class="nk-tb-col tb-col-lg"><span class="sub-text">Third Image</span></div>
+                                            <div class="nk-tb-col tb-col-lg"><span class="sub-text">Date & Time</span></div>
                                             <div class="nk-tb-col"><span class="sub-text">Status</span></div>
                                             <div class="nk-tb-col nk-tb-col-tools">
                                                 <ul class="nk-tb-actions gx-1 my-n1">
@@ -175,7 +190,17 @@
                                                 </ul>
                                             </div>
                                         </div><!-- .nk-tb-item -->
-                                        @foreach ($sliders as $item)
+                                        @foreach ($small_banners as $item)
+                                        		@php
+                                                    $num_1 = $item->size_1/1000000;
+                                                    $num_1 = number_format($num_1, 2);
+
+                                                    $num_2 = $item->size_2/1000000;
+                                                    $num_2 = number_format($num_2, 2);
+
+                                                    $num_3 = $item->size_3/1000000;
+                                                    $num_3 = number_format($num_3, 2);
+                                                @endphp
                                         	<div class="nk-tb-item">
                                             <div class="nk-tb-col nk-tb-col-check">
                                                 <div class="custom-control custom-control-sm custom-checkbox notext">
@@ -184,40 +209,72 @@
                                                 </div>
                                             </div>
                                             <div class="nk-tb-col">
-                                                <a href="#viewModal{{ $item->id }}" data-toggle="modal">
+                                                <a href="html/ecommerce/customer-details.html">
                                                     <div class="user-card">
                                                         <div class="user-avatar bg-primary custom-avatar">
                                                             
 			                                                    {{-- <em class="icon ni ni-user-alt"></em> --}}
-			                                                    <img src="{{ $item->path }}">
+			                                                    <img src="{{ $item->path_1 }}">
                                                         </div>
-                                                        {{-- <div class="user-info">
-                                                            <span class="tb-lead">{{ $user->name }} <span class="dot dot-success d-md-none ml-1"></span></span>
-                                                            <span>info@softnio.com</span>
-                                                        </div> --}}
+                                                        <div class="user-info custom-user-info">
+                                                            <span class="tb-lead">{{ $item->url_1 }} <span class="dot dot-success d-md-none ml-1"></span></span>
+                                                            <span>{{ $num_1 }} MB</span>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="nk-tb-col">
+                                                <a href="html/ecommerce/customer-details.html">
+                                                    <div class="user-card">
+                                                        <div class="user-avatar bg-primary custom-avatar">
+                                                            
+			                                                    {{-- <em class="icon ni ni-user-alt"></em> --}}
+			                                                    <img src="{{ $item->path_2 }}">
+                                                        </div>
+                                                        <div class="user-info custom-user-info">
+                                                            <span class="tb-lead">{{ $item->url_2 }} <span class="dot dot-success d-md-none ml-1"></span></span>
+                                                            <span>{{ $num_2 }} MB</span>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="nk-tb-col">
+                                                <a href="html/ecommerce/customer-details.html">
+                                                    <div class="user-card">
+                                                        <div class="user-avatar bg-primary custom-avatar">
+                                                            
+			                                                    {{-- <em class="icon ni ni-user-alt"></em> --}}
+			                                                    <img src="{{ $item->path_3 }}">
+                                                        </div>
+                                                        <div class="user-info custom-user-info">
+                                                            <span class="tb-lead">{{ $item->url_3 }} <span class="dot dot-success d-md-none ml-1"></span></span>
+                                                            <span>{{ $num_3 }} MB</span>
+                                                        </div>
                                                     </div>
                                                 </a>
                                             </div>
                                             {{-- <div class="nk-tb-col tb-col-mb">
                                                 <span class="tb-amount">35,040.34 <span class="currency">USD</span></span>
                                             </div> --}}
-                                            <div class="nk-tb-col tb-col-md">
+                                            {{-- <div class="nk-tb-col tb-col-md">
                                                 @if ($item->url)
                                                     <span>{{ $item->url }}</span>
                                                 @else
                                                     <span>-</span>
                                                 @endif
                                                 
-                                            </div>
-                                            <div class="nk-tb-col tb-col-lg">
+                                            </div> --}}
+                                            {{-- <div class="nk-tb-col tb-col-lg">
                                                 @php
                                                     $num = $item->size/1000000;
                                                     $num = number_format($num, 2);
                                                 @endphp
                                                 <span>{{ $num }} MB</span>
-                                            </div>
-                                            <div class="nk-tb-col tb-col-lg">
-                                                <span>{{ $item->priority }}</span>
+                                            </div> --}}
+                                            <div class="nk-tb-col tb-col-lg custom_date">
+                                                <span style="font-weight: bold;">{{ Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }}</span>
+                                                <br>
+                                                <span>{{ Carbon\Carbon::parse($item->created_at)->format('H:i:s A') }}</span>
                                             </div>
 
                                             	@if( $item->status == 1)
@@ -234,16 +291,16 @@
                                             </div> --}}
                                             <div class="nk-tb-col nk-tb-col-tools">
                                                 <ul class="nk-tb-actions gx-1">
-                                                    <li class="nk-tb-action-hidden">
+                                                    {{-- <li class="nk-tb-action-hidden">
                                                         <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Set Priority">
-                                                            {{-- <span ></span> --}}
+                                                            <span ></span>
                                                             <em data-toggle="modal" data-target="#priorityModal{{ $item->id }}" class="icon ni ni-layers-fill"></em>
                                                             
                                                         </button>
-                                                    </li>
-                                                    	@if ($item->status)
+                                                    </li> --}}
+                                                    	{{-- @if ($item->status)
                                                     		<li class="nk-tb-action-hidden">
-                                                    			<form action="{{ url('/slider_status', $item->id) }}" method="post">
+                                                    			<form action="{{ url('/small_banner_status', $item->id) }}" method="post">
                                                     				@csrf
                                                     				<button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Disable">
 			                                                            <em class="icon ni ni-cross-circle-fill"></em>
@@ -253,30 +310,51 @@
 		                                                    </li>
                                                     	@else
                                                     		<li class="nk-tb-action-hidden">
-                                                    			<form action="{{ url('/slider_status', $item->id) }}" method="post">
+                                                    			<form action="{{ url('/small_banner_status', $item->id) }}" method="post">
                                                     				@csrf
 			                                                        <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Enable">
 			                                                            <em class="icon ni ni-check-circle-fill"></em>
 			                                                        </button>
 			                                                    </form>
 		                                                    </li>
-                                                    	@endif
+                                                    	@endif --}}
                                                     <li>
                                                         <div class="drodown">
                                                             <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <ul class="link-list-opt no-bdr">
-                                                                    <li>
+                                                                    {{-- <li>
                                                                         <a href="#viewModal{{ $item->id }}" data-toggle="modal">
                                                                             <em class="icon ni ni-eye"></em><span>View</span>
                                                                         </a>
-                                                                    </li>
-                                                                    <li>
+                                                                    </li> --}}
+                                                                    @if ($item->status)
+                                                                    	<li>
+                                                                    		<form action="{{ url('/small_banner_status', $item->id) }}" method="post">
+                                                    						@csrf
+		                                                                        <button type="submit" class="custom_btn">
+		                                                                            <em class="icon ni ni-cross-circle"></em>
+		                                                                            <span>Disable</span>
+		                                                                        </button>
+		                                                                    </form>
+	                                                                    </li>
+	                                                                @else
+	                                                                	<li>
+                                                                    		<form action="{{ url('/small_banner_status', $item->id) }}" method="post">
+                                                    						@csrf
+		                                                                        <button type="submit" class="custom_btn">
+		                                                                            <em class="icon ni ni-check-circle"></em>
+		                                                                            <span>Enable</span>
+		                                                                        </button>
+		                                                                    </form>
+	                                                                    </li>
+                                                                    @endif
+                                                                    {{-- <li>
                                                                         <a href="#urlModal{{ $item->id }}" data-toggle="modal">
-                                                                            <em class="icon ni ni-link-alt"></em>
+                                                                            <em class="icon ni ni-check-circle-fill"></em>
                                                                             <span>Add URL</span>
                                                                         </a>
-                                                                    </li>
+                                                                    </li> --}}
                                                                     <li>
                                                                         <a href="#deleteModal{{ $item->id }}" data-toggle="modal">
                                                                             <em class="icon ni ni-trash"></em>
@@ -298,7 +376,7 @@
                                         <!-- Modal Content Code -->
 
                                         <!-- priority Modal start -->
-                                        <div class="modal fade" tabindex="-1" id="priorityModal{{ $item->id }}">
+                                        {{-- <div class="modal fade" tabindex="-1" id="priorityModal{{ $item->id }}">
                                             <div class="modal-dialog modal-dialog-top" role="document">
                                                 <div class="modal-content">
                                                     <a href="#" class="close" data-dismiss="modal" aria-label="Close">
@@ -312,15 +390,8 @@
                                                             @csrf
                                                             
                                                             <div class="form-group">
-                                                                {{-- <label class="form-label" for="full-name">Full Name</label> --}}
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control" id="priority" name="priority" placeholder="Priority" required>
-
-                                                                    {{-- @error('priority')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror --}}
                                                                 </div>
                                                             </div>
                                                             
@@ -331,19 +402,19 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <!-- priority Modal end -->
 
                                         <!-- view Modal start -->
-                                        <div class="modal fade view_img_modal" tabindex="-1" id="viewModal{{ $item->id }}">
+                                        {{-- <div class="modal fade view_img_modal" tabindex="-1" id="viewModal{{ $item->id }}">
                                             <div class="modal-dialog view_img" role="document">
                                                 <img src="{{ $item->path }}">
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <!-- view Modal end -->
 
                                         <!-- add url Modal start -->
-                                        <div class="modal fade" tabindex="-1" id="urlModal{{ $item->id }}">
+                                        {{-- <div class="modal fade" tabindex="-1" id="urlModal{{ $item->id }}">
                                             <div class="modal-dialog modal-dialog-top" role="document">
                                                 <div class="modal-content">
                                                     <a href="#" class="close" data-dismiss="modal" aria-label="Close">
@@ -357,7 +428,6 @@
                                                             @csrf
                                                             
                                                             <div class="form-group">
-                                                                {{-- <label class="form-label" for="full-name">Full Name</label> --}}
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control" id="url" name="url" placeholder="https://yourlink.com" required>
                                                                 </div>
@@ -370,7 +440,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <!-- add url Modal end -->
 
                                         <!-- Delete Modal start -->
@@ -387,7 +457,7 @@
                                                         
                                                     </div> --}}
                                                     <div class="modal-footer">
-                                                        <form action="{{ url('/delete_slider', $item->id) }}" method="post">
+                                                        <form action="{{ url('/delete_small_banner', $item->id) }}" method="post">
                                                             {{ csrf_field() }}
                                                             <button type="submit" class="btn btn-danger" style="font-size: 13px;">YES, delete permanently</button>
                                                         </form>
@@ -456,9 +526,68 @@
 	<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<form action="{{ route('slider.store') }}" method="post" class="dropzone" id="my-awesome-dropzone" >
+				<form action="{{ route('small_banner.store') }}" method="post" enctype="multipart/form-data">
 					@csrf
-					<div class="dz-message" data-dz-message><span style="color: #559bfb; font-size: 14px; font-weight: 500;"><em class="icon ni ni-upload-cloud" style="font-size: 50px;"><br></em>Drop files here to upload</span></div>
+					<div class="row custom-banner-row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label class="form-label" for="default-06">First Banner</label>
+								<div class="form-control-wrap">
+									<div class="custom-file">
+										<input type="file" class="custom-file-input" id="customFile" name="img_1">
+										<label class="custom-file-label" for="customFile">Choose file</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
+								<div class="form-control-wrap">
+									<input type="text" class="form-control" id="url_1" name="url_1" placeholder="Button url" required>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+                                <label class="form-label" for="default-06">Second Banner</label>
+                                <div class="form-control-wrap">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile" name="img_2">
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="form-group">
+								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
+								<div class="form-control-wrap">
+									<input type="text" class="form-control" id="url_2" name="url_2" placeholder="Button url" required>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+                                <label class="form-label" for="default-06">Third Banner</label>
+                                <div class="form-control-wrap">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile" name="img_3">
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="form-group">
+								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
+								<div class="form-control-wrap">
+									<input type="text" class="form-control" id="url_3" name="url_3" placeholder="Button url" required>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row custom-banner-row">
+						<div class="col-md-12">
+							<div class="form-group">
+	                            <button type="submit" class="btn btn-md btn-primary">Upload</button>
+	                        </div>
+						</div>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -466,26 +595,7 @@
 @endsection
 
 @section('admin-js')
-
-
-{{-- dropzone cdn --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js" integrity="sha512-9WciDs0XP20sojTJ9E7mChDXy6pcO0qHpwbEJID1YVavz2H6QBz5eLoDD8lseZOb2yGT8xDNIV7HIe1ZbuiDWg==" crossorigin="anonymous"></script>
-
-
 	<script type="text/javascript">
         
-        Dropzone.autoDiscover = false;
-// or disable for specific dropzone:
-// Dropzone.options.myDropzone = false;
-
-$(function() {
-  // Now that the DOM is fully loaded, create the dropzone, and setup the
-  // event listeners
-  var myDropzone = new Dropzone("#my-awesome-dropzone");
-  myDropzone.on("complete", function(file) {
-    myDropzone.removeFile(file);
-    window.location.reload();
-  });
-})
 	</script>
 @endsection

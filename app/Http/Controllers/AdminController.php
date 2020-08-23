@@ -38,4 +38,10 @@ class AdminController extends Controller
         $sliders = DB::table('sliders')->get();
         return view('admin.pages.slider', compact('sliders'));
     }
+
+    public function small_banner()
+    {
+        $small_banners = DB::table('small_banners')->get();
+        return view('admin.pages.small_banner', compact('small_banners'));
+    }
 }

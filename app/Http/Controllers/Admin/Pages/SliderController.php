@@ -32,9 +32,9 @@ class SliderController extends Controller
                 'path' => "public/assets/images/banner/".$file_title,
                 'extension' => $extension
             ]);
-
-
         }
+        session()->flash('success', 'Slider image uploaded successfully');
+        // return redirect()->back();
     }
 
     public function status($id)

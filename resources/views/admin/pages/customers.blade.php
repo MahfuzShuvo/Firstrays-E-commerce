@@ -1,5 +1,13 @@
 @extends('admin.main')
 
+@section('admin-style')
+    <style type="text/css">
+        .card-body {
+            padding: 0px!important;
+        }
+    </style>
+@endsection
+
 @section('content')
 	<div class="nk-content ">
                     <div class="container-fluid">
@@ -45,6 +53,9 @@
                                         </div><!-- .nk-block-head-content -->
                                     </div><!-- .nk-block-between -->
                                 </div><!-- .nk-block-head -->
+                                <div class="card-body">
+                                    @include('partials.alert')
+                                </div>
                                 <div class="nk-block">
                                     <div class="nk-tb-list is-separate mb-3">
                                         <div class="nk-tb-item nk-tb-head">
@@ -114,19 +125,16 @@
                                                 <span>10 Feb 2020</span>
                                             </div> --}}
 
-                                            @php
-                                            	if( $user->active == 1)
-                                            	{
-                                            		echo '<div class="nk-tb-col tb-col-md">';
-		                                                echo '<span class="tb-status text-success">Active</span>';
-		                                            echo '</div>';
-                                            	}
-                                            	else {
-                                            		echo '<div class="nk-tb-col tb-col-md">';
-		                                                echo '<span class="tb-status text-warning">Pending</span>';
-		                                            echo '</div>';
-                                            	}
-                                            @endphp
+                                            
+                                            @if ($user->active)
+                                            	<div class="nk-tb-col tb-col-md">
+		                                            <span class="tb-status text-success">Active</span>
+		                                        </div>
+                                            @else
+                                            	<div class="nk-tb-col tb-col-md">
+		                                            <span class="tb-status text-warning">Pending</span>
+		                                        </div>
+                                            @endif
                                             {{-- <div class="nk-tb-col tb-col-md">
                                                 <span class="tb-status text-success">Active</span>
                                             </div> --}}
@@ -137,11 +145,30 @@
                                                             <em class="icon ni ni-mail-fill"></em>
                                                         </a>
                                                     </li>
-                                                    <li class="nk-tb-action-hidden">
+                                                    @if ($user->active)
+                                                        <form action="{{ url('/customer_status', $user->id) }}" method="post">
+                                                        @csrf
+                                                            <li class="nk-tb-action-hidden">
+                                                                <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Suspend">
+                                                                    <em class="icon ni ni-user-cross-fill"></em>
+                                                                </button>
+                                                            </li>
+                                                        </form>
+                                                    @else
+                                                        <form action="{{ url('/customer_status', $user->id) }}" method="post">
+                                                        @csrf
+                                                            <li class="nk-tb-action-hidden">
+                                                                <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Activate">
+                                                                    <em class="icon ni ni-user-check-fill"></em>
+                                                                </button>
+                                                            </li>
+                                                        </form>
+                                                    @endif
+                                                    {{-- <li class="nk-tb-action-hidden">
                                                         <a href="#" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Suspend">
                                                             <em class="icon ni ni-user-cross-fill"></em>
                                                         </a>
-                                                    </li>
+                                                    </li> --}}
                                                     <li>
                                                         <div class="drodown">
                                                             <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
@@ -215,4 +242,10 @@
                         </div>
                     </div>
                 </div>
+@endsection
+
+@section('admin-js')
+    <script type="text/javascript">
+        
+    </script>
 @endsection
