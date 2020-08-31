@@ -97,7 +97,9 @@
         }
         .view_img {
             max-width: 100%!important;
-            margin: 1.75rem!important;
+            /*margin: 1.75rem!important;*/
+            justify-content: center;
+
         }
         .view_img_modal {
             padding-right: 0px!important;
@@ -112,15 +114,12 @@
         .custom_date {
         	font-size: 12px!important;
         }
-        .user-card {
+        .custom-user-card {
         	display: contents;
         }
         .custom-user-info {
         	margin-top: 5px;
         	margin-left: 0px!important;
-        }
-        .custom_txt {
-        	color: #a5a5a5;
         }
 	</style>
 @endsection
@@ -133,7 +132,7 @@
                     <div class="nk-block-head nk-block-head-sm">
                         <div class="nk-block-between">
                             <div class="nk-block-head-content">
-                                <h3 class="nk-block-title page-title">Medium Banner</h3>
+                                <h3 class="nk-block-title page-title">Small Banner</h3>
                             </div><!-- .nk-block-head-content -->
                             <div class="nk-block-head-content">
                                 <div class="toggle-wrap nk-block-tools-toggle">
@@ -160,154 +159,128 @@
                     <div class="card-body">
                         @include('partials.alert')
                     </div>
-                    <div class="nk-block">
-                                    <div class="nk-tb-list is-separate mb-3">
-                                        <div class="nk-tb-item nk-tb-head">
-                                            <div class="nk-tb-col nk-tb-col-check">
+                    <div class="nk-block nk-block-lg">
+                        <div class="card card-preview">
+                            <div class="card-inner">
+                                <table class="datatable-init nk-tb-list nk-tb-ulist" data-auto-responsive="false">
+                                    <thead>
+                                        <tr class="nk-tb-item nk-tb-head">
+                                            {{-- <th class="nk-tb-col nk-tb-col-check">
                                                 <div class="custom-control custom-control-sm custom-checkbox notext">
                                                     <input type="checkbox" class="custom-control-input" id="uid">
                                                     <label class="custom-control-label" for="uid"></label>
                                                 </div>
-                                            </div>
-                                            <div class="nk-tb-col"><span class="sub-text">First Image</span></div>
-                                            {{-- <div class="nk-tb-col tb-col-mb"><span class="sub-text">Ordered</span></div> --}}
-                                            <div class="nk-tb-col tb-col-md"><span class="sub-text">Second Image</span></div>
-                                            {{-- <div class="nk-tb-col tb-col-lg"><span class="sub-text">Third Image</span></div> --}}
-                                            <div class="nk-tb-col tb-col-lg"><span class="sub-text">Date & Time</span></div>
-                                            <div class="nk-tb-col"><span class="sub-text">Status</span></div>
-                                            <div class="nk-tb-col nk-tb-col-tools">
-                                                <ul class="nk-tb-actions gx-1 my-n1">
-                                                    <li>
-                                                        <div class="drodown">
-                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger mr-n1" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                                            <div class="dropdown-menu dropdown-menu-right">
-                                                                <ul class="link-list-opt no-bdr" style="width: 207px">
-                                                                    {{-- <li><a href="#"><em class="icon ni ni-mail"></em><span>Send Email to All</span></a></li> --}}
-                                                                    <li><a href="#"><em class="icon ni ni-na"></em><span>Enable/Disable Selected</span></a></li>
-                                                                    <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Selected</span></a></li>
-                                                                    {{-- <li><a href="#"><em class="icon ni ni-shield-star"></em><span>Reset Password</span></a></li> --}}
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div><!-- .nk-tb-item -->
-                                        @foreach ($medium_banners as $item)
-                                        		@php
+                                            </th> --}}
+                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">#</span></th>
+                                            <th class="nk-tb-col"><span class="sub-text">First Image</span></th>
+                                            {{-- <th class="nk-tb-col tb-col-mb"><span class="sub-text">Ordered</span></th> --}}
+                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Second Image</span></th>
+                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Third Image</span></th>
+                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Date & Time</span></th>
+                                            <th class="nk-tb-col"><span class="sub-text">Status</span></th>
+                                            <th class="nk-tb-col nk-tb-col-tools text-right"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php $n = 0; @endphp
+                                        @foreach ($small_banners as $item)
+                                                @php
                                                     $num_1 = $item->size_1/1000000;
                                                     $num_1 = number_format($num_1, 2);
 
                                                     $num_2 = $item->size_2/1000000;
                                                     $num_2 = number_format($num_2, 2);
+
+                                                    $num_3 = $item->size_3/1000000;
+                                                    $num_3 = number_format($num_3, 2);
                                                 @endphp
-                                        	<div class="nk-tb-item">
-                                            <div class="nk-tb-col nk-tb-col-check">
+                                        <tr class="nk-tb-item">
+                                            {{--  <td class="nk-tb-col nk-tb-col-check">
                                                 <div class="custom-control custom-control-sm custom-checkbox notext">
                                                     <input type="checkbox" class="custom-control-input" id="uid1">
                                                     <label class="custom-control-label" for="uid1"></label>
                                                 </div>
-                                            </div>
-                                            <div class="nk-tb-col">
-                                                <a href="html/ecommerce/customer-details.html">
-                                                    <div class="user-card">
+                                            </td> --}}
+                                             <td class="nk-tb-col tb-col-md">
+                                                <span>@php echo ++$n; @endphp</span>
+                                            </td>
+                                            <td class="nk-tb-col">
+                                                <a href="#viewModalA{{ $item->id }}" data-toggle="modal">
+                                                    <div class="user-card custom-user-card">
                                                         <div class="user-avatar bg-primary custom-avatar">
                                                             
-			                                                    {{-- <em class="icon ni ni-user-alt"></em> --}}
-			                                                    <img src="{{ $item->path_1 }}">
+                                                                {{-- <em class="icon ni ni-user-alt"></em> --}}
+                                                                <img src="{{ $item->path_1 }}">
                                                         </div>
                                                         <div class="user-info custom-user-info">
-                                                            <span class="tb-lead">
-                                                            	<span style="font-weight: bold;">Header Text: </span>
-                                                            	<span class="custom_txt">{{ $item->header_txt_1 }}</span>
+                                                            <span class="tb-lead">{{ $item->url_1 }}
+                                                                {{-- <span class="dot dot-success d-md-none ml-1"></span> --}}
                                                             </span>
-                                                            <span class="tb-lead">
-                                                            	<span style="font-weight: bold;">Body Text: </span>
-                                                            	<span class="custom_txt">{{ $item->txt_1 }} {{ $item->discount_1 }}</span>
-                                                            </span>
-                                                        </div>
-                                                        <div class="user-info custom-user-info">
-                                                            <span class="tb-lead">
-                                                            	<span style="font-weight: bold;">Button URL: </span>
-                                                            	<span class="custom_txt">{{ $item->url_1 }}</span>
-                                                            </span>
-                                                            <span class="tb-lead">
-                                                            	<span style="font-weight: bold;">Image Size: </span>
-                                                            	<span class="custom_txt">{{ $num_1 }} MB</span>
-                                                            </span>
+                                                            <span>{{ $num_1 }} MB</span>
                                                         </div>
                                                     </div>
                                                 </a>
-                                            </div>
-                                            <div class="nk-tb-col">
-                                                <a href="html/ecommerce/customer-details.html">
-                                                    <div class="user-card">
+                                            </td>
+                                            <td class="nk-tb-col tb-col-md">
+                                                <a href="#viewModalB{{ $item->id }}" data-toggle="modal">
+                                                    <div class="user-card custom-user-card">
                                                         <div class="user-avatar bg-primary custom-avatar">
                                                             
-			                                                    {{-- <em class="icon ni ni-user-alt"></em> --}}
-			                                                    <img src="{{ $item->path_2 }}">
-                                                        </div>
-                                                        
-                                                        <div class="user-info custom-user-info">
-                                                            <span class="tb-lead">
-                                                            	<span style="font-weight: bold;">Header Text: </span>
-                                                            	<span class="custom_txt">{{ $item->header_txt_2 }}</span>
-                                                            </span>
-                                                            <span class="tb-lead">
-                                                            	<span style="font-weight: bold;">Body Text: </span>
-                                                            	<span class="custom_txt">{{ $item->txt_2 }} {{ $item->discount_2 }}</span>
-                                                            </span>
+                                                                {{-- <em class="icon ni ni-user-alt"></em> --}}
+                                                                <img src="{{ $item->path_2 }}">
                                                         </div>
                                                         <div class="user-info custom-user-info">
-                                                            <span class="tb-lead">
-                                                            	<span style="font-weight: bold;">Button URL: </span>
-                                                            	<span class="custom_txt">{{ $item->url_2 }}</span>
+                                                            <span class="tb-lead">{{ $item->url_2 }}
+                                                                {{-- <span class="dot dot-success d-md-none ml-1"></span> --}}
                                                             </span>
-                                                            <span class="tb-lead">
-                                                            	<span style="font-weight: bold;">Image Size: </span>
-                                                            	<span class="custom_txt">{{ $num_2 }} MB</span>
-                                                            </span>
+                                                            <span>{{ $num_2 }} MB</span>
                                                         </div>
                                                     </div>
                                                 </a>
-                                            </div>
-                                            {{-- <div class="nk-tb-col tb-col-mb">
-                                                <span class="tb-amount">35,040.34 <span class="currency">USD</span></span>
-                                            </div> --}}
-                                            {{-- <div class="nk-tb-col tb-col-md">
-                                                @if ($item->url)
-                                                    <span>{{ $item->url }}</span>
-                                                @else
-                                                    <span>-</span>
-                                                @endif
-                                                
-                                            </div> --}}
-                                            {{-- <div class="nk-tb-col tb-col-lg">
-                                                @php
-                                                    $num = $item->size/1000000;
-                                                    $num = number_format($num, 2);
-                                                @endphp
-                                                <span>{{ $num }} MB</span>
-                                            </div> --}}
-                                            <div class="nk-tb-col tb-col-lg custom_date">
+                                            </td>
+
+                                            <td class="nk-tb-col tb-col-md">
+                                                <a href="#viewModalC{{ $item->id }}" data-toggle="modal">
+                                                    <div class="user-card custom-user-card">
+                                                        <div class="user-avatar bg-primary custom-avatar">
+                                                            
+                                                                {{-- <em class="icon ni ni-user-alt"></em> --}}
+                                                                <img src="{{ $item->path_3 }}">
+                                                        </div>
+                                                        <div class="user-info custom-user-info">
+                                                            <span class="tb-lead">{{ $item->url_3 }}
+                                                                {{-- <span class="dot dot-success d-md-none ml-1"></span> --}}
+                                                            </span>
+                                                            <span>{{ $num_3 }} MB</span>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </td>
+
+                                            {{-- <td class="nk-tb-col tb-col-lg custom_des">
+                                                <span>{{ $item->description }}</span>
+                                            </td> --}}
+                                            
+                                           
+                                            <td class="nk-tb-col tb-col-lg custom_date">
                                                 <span style="font-weight: bold;">{{ Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }}</span>
                                                 <br>
                                                 <span>{{ Carbon\Carbon::parse($item->created_at)->format('H:i:s A') }}</span>
-                                            </div>
+                                            </td>
 
-                                            	@if( $item->status == 1)
-                                            		<div class="nk-tb-col">
-		                                                <span class="tb-status text-success">Enable</span>
-		                                            </div>
-                                            	@else
-                                            		<div class="nk-tb-col">
-		                                                <span class="tb-status text-danger">Disable</span>
-		                                            </div>
-		                                        @endif
-                                            {{-- <div class="nk-tb-col tb-col-md">
+                                                @if( $item->status == 1)
+                                                    <td class="nk-tb-col">
+                                                        <span class="tb-status text-success">Enable</span>
+                                                    </td>
+                                                @else
+                                                    <td class="nk-tb-col">
+                                                        <span class="tb-status text-danger">Disable</span>
+                                                    </td>
+                                                @endif
+                                            {{-- <td class="nk-tb-col tb-col-md">
                                                 <span class="tb-status text-success">Active</span>
-                                            </div> --}}
-                                            <div class="nk-tb-col nk-tb-col-tools">
+                                            </td> --}}
+                                            <td class="nk-tb-col nk-tb-col-tools">
                                                 <ul class="nk-tb-actions gx-1">
                                                     {{-- <li class="nk-tb-action-hidden">
                                                         <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Set Priority">
@@ -316,26 +289,26 @@
                                                             
                                                         </button>
                                                     </li> --}}
-                                                    	{{-- @if ($item->status)
-                                                    		<li class="nk-tb-action-hidden">
-                                                    			<form action="{{ url('/small_banner_status', $item->id) }}" method="post">
-                                                    				@csrf
-                                                    				<button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Disable">
-			                                                            <em class="icon ni ni-cross-circle-fill"></em>
-			                                                        </button>
-                                                    			</form>
-		                                                        
-		                                                    </li>
-                                                    	@else
-                                                    		<li class="nk-tb-action-hidden">
-                                                    			<form action="{{ url('/small_banner_status', $item->id) }}" method="post">
-                                                    				@csrf
-			                                                        <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Enable">
-			                                                            <em class="icon ni ni-check-circle-fill"></em>
-			                                                        </button>
-			                                                    </form>
-		                                                    </li>
-                                                    	@endif --}}
+                                                        {{-- @if ($item->status)
+                                                            <li class="nk-tb-action-hidden">
+                                                                <form action="{{ url('/small_banner_status', $item->id) }}" method="post">
+                                                                    @csrf
+                                                                    <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Disable">
+                                                                        <em class="icon ni ni-cross-circle-fill"></em>
+                                                                    </button>
+                                                                </form>
+                                                                
+                                                            </li>
+                                                        @else
+                                                            <li class="nk-tb-action-hidden">
+                                                                <form action="{{ url('/small_banner_status', $item->id) }}" method="post">
+                                                                    @csrf
+                                                                    <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Enable">
+                                                                        <em class="icon ni ni-check-circle-fill"></em>
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                        @endif --}}
                                                     <li>
                                                         <div class="drodown">
                                                             <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
@@ -347,25 +320,25 @@
                                                                         </a>
                                                                     </li> --}}
                                                                     @if ($item->status)
-                                                                    	<li>
-                                                                    		<form action="{{ url('/medium_banner_status', $item->id) }}" method="post">
-                                                    						@csrf
-		                                                                        <button type="submit" class="custom_btn">
-		                                                                            <em class="icon ni ni-cross-circle"></em>
-		                                                                            <span>Disable</span>
-		                                                                        </button>
-		                                                                    </form>
-	                                                                    </li>
-	                                                                @else
-	                                                                	<li>
-                                                                    		<form action="{{ url('/medium_banner_status', $item->id) }}" method="post">
-                                                    						@csrf
-		                                                                        <button type="submit" class="custom_btn">
-		                                                                            <em class="icon ni ni-check-circle"></em>
-		                                                                            <span>Enable</span>
-		                                                                        </button>
-		                                                                    </form>
-	                                                                    </li>
+                                                                        <li>
+                                                                            <form action="{{ url('/small_banner_status', $item->id) }}" method="post">
+                                                                            @csrf
+                                                                                <button type="submit" class="custom_btn">
+                                                                                    <em class="icon ni ni-cross-circle"></em>
+                                                                                    <span>Disable</span>
+                                                                                </button>
+                                                                            </form>
+                                                                        </li>
+                                                                    @else
+                                                                        <li>
+                                                                            <form action="{{ url('/small_banner_status', $item->id) }}" method="post">
+                                                                            @csrf
+                                                                                <button type="submit" class="custom_btn">
+                                                                                    <em class="icon ni ni-check-circle"></em>
+                                                                                    <span>Enable</span>
+                                                                                </button>
+                                                                            </form>
+                                                                        </li>
                                                                     @endif
                                                                     {{-- <li>
                                                                         <a href="#urlModal{{ $item->id }}" data-toggle="modal">
@@ -389,9 +362,10 @@
                                                         </div>
                                                     </li>
                                                 </ul>
-                                            </div>
-                                        </div><!-- .nk-tb-item -->
-                                        <!-- Modal Content Code -->
+                                            </td>
+
+                                            </tr><!-- .nk-tb-item  -->
+                                            <!-- Modal Content Code -->
 
                                         <!-- priority Modal start -->
                                         {{-- <div class="modal fade" tabindex="-1" id="priorityModal{{ $item->id }}">
@@ -423,13 +397,29 @@
                                         </div> --}}
                                         <!-- priority Modal end -->
 
-                                        <!-- view Modal start -->
-                                        {{-- <div class="modal fade view_img_modal" tabindex="-1" id="viewModal{{ $item->id }}">
+                                        <!-- view Modal 1 start -->
+                                        <div class="modal fade view_img_modal" tabindex="-1" id="viewModalA{{ $item->id }}">
                                             <div class="modal-dialog view_img" role="document">
-                                                <img src="{{ $item->path }}">
+                                                <img src="{{ $item->path_1 }}">
                                             </div>
-                                        </div> --}}
-                                        <!-- view Modal end -->
+                                        </div>
+                                        <!-- view Modal 1 end -->
+
+                                        <!-- view Modal 2 start -->
+                                        <div class="modal fade view_img_modal" tabindex="-1" id="viewModalB{{ $item->id }}">
+                                            <div class="modal-dialog view_img" role="document">
+                                                <img src="{{ $item->path_2 }}">
+                                            </div>
+                                        </div>
+                                        <!-- view Modal 2 end -->
+
+                                        <!-- view Modal 3 start -->
+                                        <div class="modal fade view_img_modal" tabindex="-1" id="viewModalC{{ $item->id }}">
+                                            <div class="modal-dialog view_img" role="document">
+                                                <img src="{{ $item->path_3 }}">
+                                            </div>
+                                        </div>
+                                        <!-- view Modal 3 end -->
 
                                         <!-- add url Modal start -->
                                         {{-- <div class="modal fade" tabindex="-1" id="urlModal{{ $item->id }}">
@@ -475,7 +465,7 @@
                                                         
                                                     </div> --}}
                                                     <div class="modal-footer">
-                                                        <form action="{{ url('/delete_medium_banner', $item->id) }}" method="post">
+                                                        <form action="{{ url('/delete_small_banner', $item->id) }}" method="post">
                                                             {{ csrf_field() }}
                                                             <button type="submit" class="btn btn-danger" style="font-size: 13px;">YES, delete permanently</button>
                                                         </form>
@@ -485,57 +475,13 @@
                                             </div>
                                         </div>
                                         <!-- Delete Modal end -->
-                                        @endforeach
-                                        
-                                        
-                                    </div><!-- .nk-tb-list -->
-                                    <div class="card">
-                                        <div class="card-inner">
-                                            <div class="nk-block-between-md g-3">
-                                                <div class="g">
-                                                    <ul class="pagination justify-content-center justify-content-md-start">
-                                                        <li class="page-item"><a class="page-link" href="#"><em class="icon ni ni-chevrons-left"></em></a></li>
-                                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                        <li class="page-item"><span class="page-link"><em class="icon ni ni-more-h"></em></span></li>
-                                                        <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                                        <li class="page-item"><a class="page-link" href="#">7</a></li>
-                                                        <li class="page-item"><a class="page-link" href="#"><em class="icon ni ni-chevrons-right"></em></a></li>
-                                                    </ul><!-- .pagination -->
-                                                </div>
-                                                <div class="g">
-                                                    <div class="pagination-goto d-flex justify-content-center justify-content-md-start gx-3">
-                                                        <div>Page</div>
-                                                        <div>
-                                                            <select class="form-select form-select-sm" data-search="on" data-dropdown="xs center">
-                                                                <option value="page-1">1</option>
-                                                                <option value="page-2">2</option>
-                                                                <option value="page-4">4</option>
-                                                                <option value="page-5">5</option>
-                                                                <option value="page-6">6</option>
-                                                                <option value="page-7">7</option>
-                                                                <option value="page-8">8</option>
-                                                                <option value="page-9">9</option>
-                                                                <option value="page-10">10</option>
-                                                                <option value="page-11">11</option>
-                                                                <option value="page-12">12</option>
-                                                                <option value="page-13">13</option>
-                                                                <option value="page-14">14</option>
-                                                                <option value="page-15">15</option>
-                                                                <option value="page-16">16</option>
-                                                                <option value="page-17">17</option>
-                                                                <option value="page-18">18</option>
-                                                                <option value="page-19">19</option>
-                                                                <option value="page-20">20</option>
-                                                            </select>
-                                                        </div>
-                                                        <div>OF 102</div>
-                                                    </div>
-                                                </div><!-- .pagination-goto -->
-                                            </div><!-- .nk-block-between -->
-                                        </div>
-                                    </div>
-                                </div><!-- .nk-block -->
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </div><!-- .card-preview -->
+                            </div>
+                    
                 </div>
             </div>
         </div>
@@ -544,10 +490,10 @@
 	<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<form action="{{ route('medium_banner.store') }}" method="post" enctype="multipart/form-data">
+				<form action="{{ route('small_banner.store') }}" method="post" enctype="multipart/form-data">
 					@csrf
 					<div class="row custom-banner-row">
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="form-group">
 								<label class="form-label" for="default-06">First Banner</label>
 								<div class="form-control-wrap">
@@ -560,29 +506,11 @@
 							<div class="form-group">
 								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
 								<div class="form-control-wrap">
-									<input type="text" class="form-control" id="header_txt_1" name="header_txt_1" placeholder="Header Text" required>
-								</div>
-							</div>
-							<div class="form-group">
-								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
-								<div class="form-control-wrap">
-									<input type="text" class="form-control" id="txt_1" name="txt_1" placeholder="Body Text" required>
-								</div>
-							</div>
-							<div class="form-group">
-								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
-								<div class="form-control-wrap">
-									<input type="text" class="form-control" id="discount_1" name="discount_1" placeholder="Discount Persentage" required>
-								</div>
-							</div>
-							<div class="form-group">
-								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
-								<div class="form-control-wrap">
 									<input type="text" class="form-control" id="url_1" name="url_1" placeholder="Button url" required>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="form-group">
                                 <label class="form-label" for="default-06">Second Banner</label>
                                 <div class="form-control-wrap">
@@ -592,28 +520,27 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
-								<div class="form-control-wrap">
-									<input type="text" class="form-control" id="header_txt_2" name="header_txt_2" placeholder="Header Text" required>
-								</div>
-							</div>
-							<div class="form-group">
-								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
-								<div class="form-control-wrap">
-									<input type="text" class="form-control" id="txt_2" name="txt_2" placeholder="Body Text" required>
-								</div>
-							</div>
-							<div class="form-group">
-								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
-								<div class="form-control-wrap">
-									<input type="text" class="form-control" id="discount_2" name="discount_2" placeholder="Discount Persentage" required>
-								</div>
-							</div>
 							<div class="form-group">
 								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
 								<div class="form-control-wrap">
 									<input type="text" class="form-control" id="url_2" name="url_2" placeholder="Button url" required>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+                                <label class="form-label" for="default-06">Third Banner</label>
+                                <div class="form-control-wrap">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile" name="img_3">
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="form-group">
+								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
+								<div class="form-control-wrap">
+									<input type="text" class="form-control" id="url_3" name="url_3" placeholder="Button url" required>
 								</div>
 							</div>
 						</div>

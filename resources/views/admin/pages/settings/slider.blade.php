@@ -99,7 +99,8 @@
         }
         .view_img {
             max-width: 100%!important;
-            margin: 1.75rem!important;
+            /*margin: 1.75rem!important;*/
+            justify-content: center;
         }
         .view_img_modal {
             padding-right: 0px!important;
@@ -142,54 +143,55 @@
                     <div class="card-body">
                         @include('partials.alert')
                     </div>
-                    <div class="nk-block">
-                                    <div class="nk-tb-list is-separate mb-3">
-                                        <div class="nk-tb-item nk-tb-head">
-                                            <div class="nk-tb-col nk-tb-col-check">
+                    <div class="nk-block nk-block-lg">
+                        <div class="card card-preview">
+                            <div class="card-inner">
+                                <table class="datatable-init nk-tb-list nk-tb-ulist" data-auto-responsive="false">
+                                    <thead>
+                                        <tr class="nk-tb-item nk-tb-head">
+                                            {{-- <th class="nk-tb-col nk-tb-col-check">
                                                 <div class="custom-control custom-control-sm custom-checkbox notext">
                                                     <input type="checkbox" class="custom-control-input" id="uid">
                                                     <label class="custom-control-label" for="uid"></label>
                                                 </div>
-                                            </div>
-                                            <div class="nk-tb-col"><span class="sub-text">Image</span></div>
-                                            {{-- <div class="nk-tb-col tb-col-mb"><span class="sub-text">Ordered</span></div> --}}
-                                            <div class="nk-tb-col tb-col-md"><span class="sub-text">URL link</span></div>
-                                            <div class="nk-tb-col tb-col-lg"><span class="sub-text">Size</span></div>
-                                            <div class="nk-tb-col tb-col-lg"><span class="sub-text">Priority</span></div>
-                                            <div class="nk-tb-col"><span class="sub-text">Status</span></div>
-                                            <div class="nk-tb-col nk-tb-col-tools">
-                                                <ul class="nk-tb-actions gx-1 my-n1">
-                                                    <li>
-                                                        <div class="drodown">
-                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger mr-n1" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                                            <div class="dropdown-menu dropdown-menu-right">
-                                                                <ul class="link-list-opt no-bdr" style="width: 207px">
-                                                                    {{-- <li><a href="#"><em class="icon ni ni-mail"></em><span>Send Email to All</span></a></li> --}}
-                                                                    <li><a href="#"><em class="icon ni ni-na"></em><span>Enable/Disable Selected</span></a></li>
-                                                                    <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Selected</span></a></li>
-                                                                    {{-- <li><a href="#"><em class="icon ni ni-shield-star"></em><span>Reset Password</span></a></li> --}}
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div><!-- .nk-tb-item -->
+                                            </th> --}}
+                                            <th class="nk-tb-col tb-col-md"><span class="sub-text">#</span></th>
+                                            <th class="nk-tb-col"><span class="sub-text">Image</span></th>
+                                            {{-- <th class="nk-tb-col tb-col-mb"><span class="sub-text">Ordered</span></th> --}}
+                                            <th class="nk-tb-col tb-col-md"><span class="sub-text">URL link</span></th>
+                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Size</span></th>
+                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Priority</span></th>
+                                            <th class="nk-tb-col"><span class="sub-text">Status</span></th>
+                                            <th class="nk-tb-col nk-tb-col-tools text-right"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php $n = 0; @endphp
                                         @foreach ($sliders as $item)
-                                        	<div class="nk-tb-item">
-                                            <div class="nk-tb-col nk-tb-col-check">
+                                                @php
+                                                    $num_1 = $item->size_1/1000000;
+                                                    $num_1 = number_format($num_1, 2);
+
+                                                    $num_2 = $item->size_2/1000000;
+                                                    $num_2 = number_format($num_2, 2);
+                                                @endphp
+                                        <tr class="nk-tb-item">
+                                            {{--  <td class="nk-tb-col nk-tb-col-check">
                                                 <div class="custom-control custom-control-sm custom-checkbox notext">
                                                     <input type="checkbox" class="custom-control-input" id="uid1">
                                                     <label class="custom-control-label" for="uid1"></label>
                                                 </div>
-                                            </div>
-                                            <div class="nk-tb-col">
+                                            </td> --}}
+                                             <td class="nk-tb-col tb-col-md">
+                                                <span>@php echo ++$n; @endphp</span>
+                                            </td>
+                                            <td class="nk-tb-col">
                                                 <a href="#viewModal{{ $item->id }}" data-toggle="modal">
                                                     <div class="user-card">
                                                         <div class="user-avatar bg-primary custom-avatar">
                                                             
-			                                                    {{-- <em class="icon ni ni-user-alt"></em> --}}
-			                                                    <img src="{{ $item->path }}">
+                                                                {{-- <em class="icon ni ni-user-alt"></em> --}}
+                                                                <img src="{{ $item->path }}">
                                                         </div>
                                                         {{-- <div class="user-info">
                                                             <span class="tb-lead">{{ $user->name }} <span class="dot dot-success d-md-none ml-1"></span></span>
@@ -197,42 +199,46 @@
                                                         </div> --}}
                                                     </div>
                                                 </a>
-                                            </div>
-                                            {{-- <div class="nk-tb-col tb-col-mb">
-                                                <span class="tb-amount">35,040.34 <span class="currency">USD</span></span>
-                                            </div> --}}
-                                            <div class="nk-tb-col tb-col-md">
+                                            </td>
+                                            <td class="nk-tb-col tb-col-md">
                                                 @if ($item->url)
                                                     <span>{{ $item->url }}</span>
                                                 @else
                                                     <span>-</span>
                                                 @endif
-                                                
-                                            </div>
-                                            <div class="nk-tb-col tb-col-lg">
+                                            </td>
+
+                                            
+                                            {{-- <td class="nk-tb-col tb-col-lg custom_des">
+                                                <span>{{ $item->description }}</span>
+                                            </td> --}}
+                                            
+                                           
+                                            
+                                            <td class="nk-tb-col tb-col-lg">
                                                 @php
                                                     $num = $item->size/1000000;
                                                     $num = number_format($num, 2);
                                                 @endphp
                                                 <span>{{ $num }} MB</span>
-                                            </div>
-                                            <div class="nk-tb-col tb-col-lg">
+                                            </td>
+                                            <td class="nk-tb-col tb-col-lg">
                                                 <span>{{ $item->priority }}</span>
-                                            </div>
+                                            </td>
 
-                                            	@if( $item->status == 1)
-                                            		<div class="nk-tb-col">
-		                                                <span class="tb-status text-success">Enable</span>
-		                                            </div>
-                                            	@else
-                                            		<div class="nk-tb-col">
-		                                                <span class="tb-status text-danger">Disable</span>
-		                                            </div>
-		                                        @endif
-                                            {{-- <div class="nk-tb-col tb-col-md">
+                                                @if( $item->status == 1)
+                                                    <td class="nk-tb-col">
+                                                        <span class="tb-status text-success">Enable</span>
+                                                    </td>
+                                                @else
+                                                    <td class="nk-tb-col">
+                                                        <span class="tb-status text-danger">Disable</span>
+                                                    </td>
+                                                @endif
+                                            {{-- <td class="nk-tb-col tb-col-md">
                                                 <span class="tb-status text-success">Active</span>
-                                            </div> --}}
-                                            <div class="nk-tb-col nk-tb-col-tools">
+                                            </td> --}}
+                                            <td class="nk-tb-col nk-tb-col-tools">
                                                 <ul class="nk-tb-actions gx-1">
                                                     <li class="nk-tb-action-hidden">
                                                         <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Set Priority">
@@ -241,26 +247,26 @@
                                                             
                                                         </button>
                                                     </li>
-                                                    	@if ($item->status)
-                                                    		<li class="nk-tb-action-hidden">
-                                                    			<form action="{{ url('/slider_status', $item->id) }}" method="post">
-                                                    				@csrf
-                                                    				<button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Disable">
-			                                                            <em class="icon ni ni-cross-circle-fill"></em>
-			                                                        </button>
-                                                    			</form>
-		                                                        
-		                                                    </li>
-                                                    	@else
-                                                    		<li class="nk-tb-action-hidden">
-                                                    			<form action="{{ url('/slider_status', $item->id) }}" method="post">
-                                                    				@csrf
-			                                                        <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Enable">
-			                                                            <em class="icon ni ni-check-circle-fill"></em>
-			                                                        </button>
-			                                                    </form>
-		                                                    </li>
-                                                    	@endif
+                                                        @if ($item->status)
+                                                            <li class="nk-tb-action-hidden">
+                                                                <form action="{{ url('/slider_status', $item->id) }}" method="post">
+                                                                    @csrf
+                                                                    <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Disable">
+                                                                        <em class="icon ni ni-cross-circle-fill"></em>
+                                                                    </button>
+                                                                </form>
+                                                                
+                                                            </li>
+                                                        @else
+                                                            <li class="nk-tb-action-hidden">
+                                                                <form action="{{ url('/slider_status', $item->id) }}" method="post">
+                                                                    @csrf
+                                                                    <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Enable">
+                                                                        <em class="icon ni ni-check-circle-fill"></em>
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                        @endif
                                                     <li>
                                                         <div class="drodown">
                                                             <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
@@ -293,9 +299,10 @@
                                                         </div>
                                                     </li>
                                                 </ul>
-                                            </div>
-                                        </div><!-- .nk-tb-item -->
-                                        <!-- Modal Content Code -->
+                                            </td>
+
+                                            </tr><!-- .nk-tb-item  -->
+                                            <!-- Modal Content Code -->
 
                                         <!-- priority Modal start -->
                                         <div class="modal fade" tabindex="-1" id="priorityModal{{ $item->id }}">
@@ -397,57 +404,13 @@
                                             </div>
                                         </div>
                                         <!-- Delete Modal end -->
-                                        @endforeach
-                                        
-                                        
-                                    </div><!-- .nk-tb-list -->
-                                    <div class="card">
-                                        <div class="card-inner">
-                                            <div class="nk-block-between-md g-3">
-                                                <div class="g">
-                                                    <ul class="pagination justify-content-center justify-content-md-start">
-                                                        <li class="page-item"><a class="page-link" href="#"><em class="icon ni ni-chevrons-left"></em></a></li>
-                                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                        <li class="page-item"><span class="page-link"><em class="icon ni ni-more-h"></em></span></li>
-                                                        <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                                        <li class="page-item"><a class="page-link" href="#">7</a></li>
-                                                        <li class="page-item"><a class="page-link" href="#"><em class="icon ni ni-chevrons-right"></em></a></li>
-                                                    </ul><!-- .pagination -->
-                                                </div>
-                                                <div class="g">
-                                                    <div class="pagination-goto d-flex justify-content-center justify-content-md-start gx-3">
-                                                        <div>Page</div>
-                                                        <div>
-                                                            <select class="form-select form-select-sm" data-search="on" data-dropdown="xs center">
-                                                                <option value="page-1">1</option>
-                                                                <option value="page-2">2</option>
-                                                                <option value="page-4">4</option>
-                                                                <option value="page-5">5</option>
-                                                                <option value="page-6">6</option>
-                                                                <option value="page-7">7</option>
-                                                                <option value="page-8">8</option>
-                                                                <option value="page-9">9</option>
-                                                                <option value="page-10">10</option>
-                                                                <option value="page-11">11</option>
-                                                                <option value="page-12">12</option>
-                                                                <option value="page-13">13</option>
-                                                                <option value="page-14">14</option>
-                                                                <option value="page-15">15</option>
-                                                                <option value="page-16">16</option>
-                                                                <option value="page-17">17</option>
-                                                                <option value="page-18">18</option>
-                                                                <option value="page-19">19</option>
-                                                                <option value="page-20">20</option>
-                                                            </select>
-                                                        </div>
-                                                        <div>OF 102</div>
-                                                    </div>
-                                                </div><!-- .pagination-goto -->
-                                            </div><!-- .nk-block-between -->
-                                        </div>
-                                    </div>
-                                </div><!-- .nk-block -->
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </div><!-- .card-preview -->
+                            </div>
+                    
                 </div>
             </div>
         </div>
