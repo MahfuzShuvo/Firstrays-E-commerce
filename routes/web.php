@@ -56,14 +56,17 @@ Route::group(['prefix'=>'admin'], function() {
 
 });
 
-
+// ...........................................................................................
 //  Back-end pages
-// ......................
+// ............................................................................................
 	// customer
 	Route::get('/customers', 'AdminController@customers')->name('customers');
 	Route::post('/customer_status/{id}', 'Admin\Pages\Customers\CustomerController@status');
 
-	// products
+
+	// Products module
+	// .............................................................................................
+	// all products
 	Route::get('/products', 'AdminController@all_products')->name('products');
 	Route::post('/products', 'Admin\Pages\Products\ProductsController@store')->name('product.store');
 	Route::post('/product_status/{id}', 'Admin\Pages\Products\ProductsController@status');
@@ -80,6 +83,9 @@ Route::group(['prefix'=>'admin'], function() {
 	Route::post('/delete_brand/{id}', 'Admin\Pages\Products\BrandsController@delete_brand');
 	Route::post('/edit_brand/{id}', 'Admin\Pages\Products\BrandsController@edit_brand');
 
+
+	// Settings module
+	// ............................................................................................
 	// slider
 	Route::get('/slider', 'AdminController@slider')->name('slider');
 	Route::post('/slider', 'Admin\Pages\Settings\SliderController@store')->name('slider.store');
@@ -87,24 +93,27 @@ Route::group(['prefix'=>'admin'], function() {
 	Route::post('/delete_slider/{id}', 'Admin\Pages\Settings\SliderController@delete_slider');
 	Route::post('/add_url/{id}', 'Admin\Pages\Settings\SliderController@add_url');
 	Route::post('/priority/{id}', 'Admin\Pages\Settings\SliderController@priority');
-
 	// small banner
 	Route::get('/small_banner', 'AdminController@small_banner')->name('small_banner');
 	Route::post('/small_banner', 'Admin\Pages\Settings\SmallBannerController@store')->name('small_banner.store');
 	Route::post('/small_banner_status/{id}', 'Admin\Pages\Settings\SmallBannerController@status');
 	Route::post('/delete_small_banner/{id}', 'Admin\Pages\Settings\SmallBannerController@delete_small_banner');
-
 	// medium banner
 	Route::get('/medium_banner', 'AdminController@medium_banner')->name('medium_banner');
 	Route::post('/medium_banner', 'Admin\Pages\Settings\MediumBannerController@store')->name('medium_banner.store');
 	Route::post('/medium_banner_status/{id}', 'Admin\Pages\Settings\MediumBannerController@status');
 	Route::post('/delete_medium_banner/{id}', 'Admin\Pages\Settings\MediumBannerController@delete_medium_banner');
+	// faq
+	Route::get('/faqs', 'AdminController@faqs')->name('faqs');
+	Route::post('/faqs', 'Admin\Pages\Settings\FaqController@store')->name('faqs.store');
+	Route::post('/delete_faqs/{id}', 'Admin\Pages\Settings\FaqController@delete_faqs');
+	Route::post('/edit_faqs/{id}', 'Admin\Pages\Settings\FaqController@edit_faqs');
 
 
 
-
+// ........................................................................................................
 //	Front-end Pages
-// ......................
+// ......................................................................................................
 	// checkout
 	Route::get('/checkout', 'MasterController@checkout')->name('checkout');
 	// product-details

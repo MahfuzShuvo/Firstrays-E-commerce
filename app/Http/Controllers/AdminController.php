@@ -11,6 +11,7 @@ use App\Brand;
 use App\Slider;
 use App\SmallBanner;
 use App\MediumBanner;
+use App\Faq;
 
 class AdminController extends Controller
 {
@@ -75,5 +76,11 @@ class AdminController extends Controller
     {
         $medium_banners = MediumBanner::orderBy('id', 'desc')->get();
         return view('admin.pages.settings.medium_banner', compact('medium_banners'));
+    }
+
+    public function faqs()
+    {
+        $faqs = Faq::orderBy('faq', 'asc')->get();
+        return view('admin.pages.settings.faqs', compact('faqs'));
     }
 }

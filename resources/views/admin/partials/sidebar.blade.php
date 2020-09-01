@@ -4,7 +4,7 @@
                         <a href="{{ route('admin.home') }}" class="logo-link nk-sidebar-logo">
                             <img class="logo-light logo-img" src="{{asset('public/admin/assets/images/logo-white.png')}}" srcset="{{asset('public/admin/assets/images/logo2.png 2x')}}" alt="logo">
                             <img class="{{asset('logo-dark logo-img')}}" src="{{asset('public/admin/assets/images/logo2.png')}}" srcset="{{asset('public/admin/assets/images/logo2.png 2x')}}" alt="logo-dark">
-                            <img class="logo-small logo-img logo-img-small" src="{{asset('public/admin/assets/images/logo-small2.png')}}" srcset="{{asset('public/admin/images/logo-small2.png 2x')}}" alt="logo-small" style="height: 30px; top: 14px; left: 3px;">
+                            <img class="logo-small logo-img logo-img-small" src="{{asset('public/admin/assets/images/logo-small2.png')}}" srcset="{{asset('public/admin/assets/images/logo-small2.png 2x')}}" alt="logo-small" style="height: 30px; top: 14px; left: 3px;">
                         </a>
                     </div>
                     <div class="nk-menu-trigger mr-n2">
@@ -115,7 +115,7 @@
                                             <a href="html/user-details-regular.html" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Blog</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="html/user-profile-regular.html" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> FAQs</span></a>
+                                            <a href="{{ route('faqs') }}" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> FAQs</span></a>
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li><!-- .nk-menu-item -->

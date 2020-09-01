@@ -507,7 +507,7 @@
                                                             <div class="row custom-banner-row">
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
-                                                                        <button type="submit" class="btn btn-md btn-primary">Save</button>
+                                                                        <button type="submit" class="btn btn-md btn-primary">Update</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
