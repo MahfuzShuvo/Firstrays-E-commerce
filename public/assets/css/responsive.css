@@ -1344,9 +1344,23 @@ Version:1.0
 .shop-home-list .shop-section-title {
 	margin-top: 20px;
 }
+.shop-home-list .shop-section-title h1 {
+	font-size: 15px;
+}
+.shop-home-list .single-list .content .title a {
+	font-size: 11px;
+	line-height: 0.1;
+}
+.shop-home-list .single-list .content .price {
+	margin-top: 0px;
+	font-size: 12px;
+}
+.product-title, .rating, .product-description, .price, .vote, .sizes {
+	margin-bottom: 0px;
+}
 .shop-home-list .single-list .content {
 	padding: 0;
-	padding: 20px;
+	/*padding: 20px;*/
 	text-align: center;
 }
 .cown-down {
@@ -1382,7 +1396,8 @@ Version:1.0
 	padding:50px 0;
 }
 .shop-services .single-service {
-	padding: 42px 0 18px 0;
+	/*padding: 42px 0 18px 0;*/
+	padding: 0;
 	text-align: center;
 }
 .shop-services .single-service i {
@@ -1394,8 +1409,15 @@ Version:1.0
 	left: 50%;
 	margin-left:-20px;
 }
+.shop-services .single-service h4 {
+	font-size: 14px;
+}
+.shop-services .single-service p {
+	font-size: 9px;
+}
 .shop-services.home {
-	padding: 25px 0;
+	/*padding: 25px 0;*/
+	padding: 0;
 }
 .shop-newsletter .newsletter-inner input {
 	width: 100%;

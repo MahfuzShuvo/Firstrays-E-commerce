@@ -38,5 +38,6 @@
     @include('partials.assets-link.js-links')
     {{-- js section --}}
     @yield('js')
+    
 </body>
 </html>

@@ -369,7 +369,7 @@
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <div class="form-control-wrap">
-                                                                            <textarea type="text" class="form-control" id="summary-ckeditor{{$item->id}}" name="ans" placeholder="Description" rows="2" >{{ $item->ans }}</textarea>
+                                                                            <textarea type="text" class="form-control" id="summary-ckeditor{{$item->id}}" name="ans" placeholder="Answer" rows="2" >{{ $item->ans }}</textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>

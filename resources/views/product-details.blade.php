@@ -1,5 +1,21 @@
 @extends('main')
 
+@section('style')
+	<style type="text/css">
+		.brand-img {
+			width: 10%;
+		    margin-left: 5px;
+		    border-radius: 3px;
+		}
+		.custom-select {
+			height: calc(1.4em + .75rem + 2px)!important;
+		    line-height: 1.4!important;
+		    font-size: .85rem;
+		    color: #495057;
+		}
+	</style>
+@endsection
+
 @section('content')
 	{{-- product-details start --}}
     <section>
@@ -11,7 +27,26 @@
 								<div class="preview col-lg-4">
 									
 									<div class="preview-pic tab-content">
-										<div class="tab-pane mag1 active" id="pic-1">
+										@php
+											$i = 2;
+										@endphp
+										@foreach ($product->images as $key => $product_img)
+                                    		@if ($key == 0)
+												<div class="tab-pane mag1 active" id="pic-1">
+													<img data-toggle="magnify" src="{{ asset($product_img->display_image) }}" class="img-fluid img-rounded mx-auto"/>
+												</div>
+											@endif
+                                		@endforeach
+                                		@foreach ($product->images as $pro_img)
+											<div class="tab-pane mag1" id="pic-{{ $i }}">
+												<img data-toggle="magnify" src="{{ asset($pro_img->image) }}" class="img-fluid img-rounded mx-auto"/>
+											</div>
+											@php
+												$i++;
+											@endphp
+										@endforeach
+										
+										{{-- <div class="tab-pane mag1 active" id="pic-1">
 											<img data-toggle="magnify" src="{{asset('public/assets/images/products/shoe.jpg')}}" class="img-fluid img-rounded mx-auto"/>
 										</div>
 										<div class="tab-pane mag1" id="pic-2">
@@ -25,16 +60,35 @@
 										</div>
 										<div class="tab-pane mag1" id="pic-5">
 											<img data-toggle="magnify" src="{{asset('public/assets/images/products/shoe.jpg')}}" class="img-fluid img-rounded mx-auto"/>
-										</div>
+										</div> --}}
 									</div>
 									<!-- image thumnail -->
+									
 									<ul class="preview-thumbnail nav nav-tabs">
-										<li class="active">
-											<a data-target="#pic-1" data-toggle="tab">
-												<img src="{{asset('public/assets/images/products/shoe.jpg')}}" />
-											</a>
-										</li>
-										<li>
+										@php
+											$j = 2;
+										@endphp
+										@foreach ($product->images as $key => $product_img)
+                                    		@if ($key == 0)
+												<li class="active">
+													<a data-target="#pic-1" data-toggle="tab">
+														<img src="{{ asset($product_img->display_image) }}" />
+													</a>
+												</li>
+											@endif
+                                		@endforeach
+                                		@foreach ($product->images as $pro_img)
+                                			<li>
+												<a data-target="#pic-{{ $j }}" data-toggle="tab">
+													<img src="{{ asset($pro_img->image) }}" />
+												</a>
+											</li>
+											@php
+												$j++;
+											@endphp
+										@endforeach
+										
+										{{-- <li>
 											<a data-target="#pic-2" data-toggle="tab">
 												<img src="{{asset('public/assets/images/products/t-shirt.jpg')}}" />
 											</a>
@@ -52,13 +106,13 @@
 										<a data-target="#pic-5" data-toggle="tab">
 											<img src="{{asset('public/assets/images/products/shoe.jpg')}}" />
 										</a>
-									</li>
+									</li> --}}
 								</ul>
 								
 							</div>
 							<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
 								<div class="quickview-content" style="padding-top: 0px!important;">
-									<h2>Flared Shift Dress</h2>
+									<h2>{{ $product->name }}</h2>
 									<div class="quickview-ratting-review">
 										<div class="quickview-ratting-wrap">
 											<div class="quickview-ratting">
@@ -70,13 +124,58 @@
 											</div>
 											<a href="#"> (1 customer review)</a>
 										</div>
-										<div class="quickview-stock">
-											<span><i class="fa fa-check-circle-o"></i> in stock</span>
-										</div>
+										@if ($product->quantity > 0)
+											<div class="quickview-in-stock">
+												<span><i class="fa fa-check-circle-o"></i> in stock</span>
+											</div>
+										@else
+											<div class="quickview-out-of-stock">
+												<span><i class="fa fa-times-circle-o"></i> out of stock</span>
+											</div>
+										@endif
 									</div>
-									<h3>$29.00</h3>
+									<h3>
+										@if ($product->discount == null)
+											<span>
+												@php
+													echo number_format($product->price, 2);
+												@endphp
+												 &#2547;
+											</span>
+										@else
+											<span>
+												@php
+													echo number_format($product->discount, 2);
+												@endphp
+												 &#2547;
+											</span>
+											<span style="color: #a5a5a5; text-decoration: line-through; padding-left: 5px;">
+												@php
+													echo number_format($product->price, 2);
+												@endphp
+												 &#2547;
+											</span>
+										@endif
+									</h3>
 									<div class="quickview-peragraph">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui nemo ipsum numquam.</p>
+										{{-- <p>@php echo $product->description; @endphp</p> --}}
+										<div class="custom-pera">
+											<p style="margin-bottom: 0;"><b>SKU: </b>{{ $product->sku}}</p>
+											<p><b>Category: </b>
+												@if ($product->category->parent_id != null)
+			                                        {{ App\Category::where('id', $product->category->parent_id)->first()->name }}, 
+			                                    @endif
+			                                    {{ $product->category->name }}
+											</p>
+											@if ($product->brand_id)
+												<p><b>Brand: </b>{{ $product->brand->name }} 
+													<img src="{{ asset($product->brand->image) }}" class="brand-img">
+												</p>
+											@else
+												<p><b>Brand: </b> N/A</p>
+											@endif
+											
+										</div>
 									</div>
 									<div class="size">
 										<div class="row">
@@ -90,7 +189,7 @@
 															<i class="bx bx-minus" style="font-size:12px;"></i>
 															</button>
 														</span>
-														<input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="100">
+														<input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="{{ $product->quantity }}">
 														<span class="input-group-btn button plus">
 															<button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]" style="border-radius: 0px .25rem .25rem 0px;">
 															<i class="bx bx-plus" style="font-size:12px;"></i>
@@ -100,7 +199,23 @@
 													<!--/ End Input Order -->
 												</div>
 											</div>
-											<div class="col-sm-2 col-12">
+											@foreach ($product->attributes->unique('attribute_id') as $key => $attr)
+												@foreach (App\Attribute::where('id', $attr->attribute_id)->get() as $element)
+														<div class="col-lg-3 col-12">
+															<h5 class="title">{{ $element->name }}</h5>
+															<select class="custom-select">
+																@foreach (App\ProductAttribute::where('attribute_id', $element->id)->get() as $key => $e)
+																	<option value="{{ $e->id }}" >{{ $e->value }}</option>
+																@endforeach
+																{{-- <option selected="selected">s</option>
+																<option>m</option>
+																<option>l</option>
+																<option>xl</option> --}}
+															</select>
+														</div>
+												@endforeach	
+											@endforeach
+											{{-- <div class="col-sm-2 col-12">
 												<h5 class="title">Size</h5>
 												<select class="custom-select">
 													<option selected="selected">s</option>
@@ -108,8 +223,8 @@
 													<option>l</option>
 													<option>xl</option>
 												</select>
-											</div>
-											<div class="col-lg-3 col-12">
+											</div> --}}
+											{{-- <div class="col-lg-3 col-12">
 												<h5 class="title">Color</h5>
 												<select class="custom-select">
 													<option selected="selected">orange</option>
@@ -117,12 +232,16 @@
 													<option>black</option>
 													<option>pink</option>
 												</select>
-											</div>
+											</div> --}}
 										</div>
 									</div>
 									
 									<div class="add-to-cart">
-										<a href="#" class="btn">Add to cart</a>
+										@if ($product->quantity > 0)
+											<a href="#" class="btn">Add to cart</a>
+										@else
+											<a href="#" class="btn disabled">Add to cart</a>
+										@endif
 										<a href="#" class="btn min"><i class="ti-heart"></i></a>
 										<a href="#" class="btn min"><i class="fa fa-compress"></i></a>
 									</div>
@@ -148,7 +267,7 @@
 			<div class="container">
 				<h6 class="section-title h1">Product Details</h6>
 				<div class="row" style="margin-top: 50px;">
-					<div class="col-xs-12 ">
+					<div class="col-md-12 ">
 						<ul class="nav nav-tabs md-tabs" id="myTabMD" role="tablist">
 							<li class="nav-item">
 								<a class="nav-link active" id="home-tab-md" data-toggle="tab" href="#home-md" role="tab" aria-controls="home-md"
@@ -165,11 +284,7 @@
 						</ul>
 						<div class="tab-content card pt-5" id="myTabContentMD">
 							<div class="tab-pane fade show active" id="home-md" role="tabpanel" aria-labelledby="home-tab-md">
-								<p class="pro-detailes-cls">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua,
-									retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-									Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry
-									richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american
-								apparel, butcher voluptate nisi qui.</p>
+								<div class="pro-detailes-cls">@php echo $product->description; @endphp</div>
 							</div>
 							<div class="tab-pane fade" id="profile-md" role="tabpanel" aria-labelledby="profile-tab-md">
 								<p class="pro-detailes-cls">Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.

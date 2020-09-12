@@ -82,6 +82,10 @@ Route::group(['prefix'=>'admin'], function() {
 	Route::post('/brands', 'Admin\Pages\Products\BrandsController@store')->name('brand.store');
 	Route::post('/delete_brand/{id}', 'Admin\Pages\Products\BrandsController@delete_brand');
 	Route::post('/edit_brand/{id}', 'Admin\Pages\Products\BrandsController@edit_brand');
+	// attributes
+	Route::get('/attributes', 'AdminController@attributes')->name('attributes');
+	Route::post('/attributes', 'Admin\Pages\Products\AttributesController@store')->name('attribute.store');
+	Route::post('/delete_attribute/{id}', 'Admin\Pages\Products\AttributesController@delete_attribute');
 
 
 	// Settings module
@@ -117,7 +121,7 @@ Route::group(['prefix'=>'admin'], function() {
 	// checkout
 	Route::get('/checkout', 'MasterController@checkout')->name('checkout');
 	// product-details
-	Route::get('/product-details', 'MasterController@product_details')->name('product-details');
+	Route::get('/product-details/{slug}', 'MasterController@product_details');
 	// user-dashboard
 	Route::get('/user', 'MasterController@user')->name('user');
 	// about-us

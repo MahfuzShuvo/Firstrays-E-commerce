@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="section-title">
-					<h2>Hot Item</h2>
+					<h2>Featured Item</h2>
 					<span class="custom-underline"></span>
 				</div>
 			</div>
@@ -15,7 +15,7 @@
 					<!-- Start Single Product -->
 					<div class="single-product">
 						<div class="product-img">
-							<a href="{{route('product-details')}}">
+							<a href="#">
 								<img class="default-img" src="{{asset('public/assets/images/products/product-4.jpg')}}" alt="#">
 								<!-- <img class="hover-img" src="assets/images/products/product-4.jpg" alt="#"> -->
 								<span class="out-of-stock">Hot</span>
@@ -32,7 +32,7 @@
 							</div>
 						</div>
 						<div class="product-content">
-							<h3><a href="{{route('product-details')}}">Black Sunglass For Women</a></h3>
+							<h3><a href="#">Black Sunglass For Women</a></h3>
 							<div class="product-price">
 								<span class="old">$60.00</span>
 								<span>$50.00</span>
@@ -43,7 +43,7 @@
 					<!-- Start Single Product -->
 					<div class="single-product">
 						<div class="product-img">
-							<a href="{{route('product-details')}}">
+							<a href="#">
 								<img class="default-img" src="{{asset('public/assets/images/products/women-3.jpg')}}" alt="#">
 								<!-- <img class="hover-img" src="assets/images/products/women-3.jpg" alt="#"> -->
 							</a>
@@ -59,7 +59,7 @@
 							</div>
 						</div>
 						<div class="product-content">
-							<h3><a href="{{route('product-details')}}">Women Hot Collection</a></h3>
+							<h3><a href="#">Women Hot Collection</a></h3>
 							<div class="product-price">
 								<span>$50.00</span>
 							</div>
@@ -69,7 +69,7 @@
 					<!-- Start Single Product -->
 					<div class="single-product">
 						<div class="product-img">
-							<a href="{{route('product-details')}}">
+							<a href="#">
 								<img class="default-img" src="{{asset('public/assets/images/products/product-9.jpg')}}" alt="#">
 								<!-- <img class="hover-img" src="assets/images/products/product-9.jpg" alt="#"> -->
 								<span class="new">New</span>
@@ -86,7 +86,7 @@
 							</div>
 						</div>
 						<div class="product-content">
-							<h3><a href="{{route('product-details')}}">Awesome Pink Show</a></h3>
+							<h3><a href="#">Awesome Pink Show</a></h3>
 							<div class="product-price">
 								<span>$50.00</span>
 							</div>
@@ -96,7 +96,7 @@
 					<!-- Start Single Product -->
 					<div class="single-product">
 						<div class="product-img">
-							<a href="{{route('product-details')}}">
+							<a href="#">
 								<img class="default-img" src="{{asset('public/assets/images/products/women-4.jpg')}}" alt="#">
 								<!-- <img class="hover-img" src="assets/images/products/women-4.jpg" alt="#"> -->
 							</a>
@@ -112,7 +112,7 @@
 							</div>
 						</div>
 						<div class="product-content">
-							<h3><a href="{{route('product-details')}}">Awesome Bags Collection</a></h3>
+							<h3><a href="#">Awesome Bags Collection</a></h3>
 							<div class="product-price">
 								<span>$50.00</span>
 							</div>

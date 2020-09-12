@@ -498,33 +498,53 @@
 								<label class="form-label" for="default-06">First Banner</label>
 								<div class="form-control-wrap">
 									<div class="custom-file">
-										<input type="file" class="custom-file-input" id="customFile" name="img_1">
+										<input type="file" class="custom-file-input @error('img_1') is-invalid @enderror" value="{{ old('img_1') }}" id="customFile" name="img_1">
 										<label class="custom-file-label" for="customFile">Choose file</label>
+                                        @error('img_1')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
 								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
 								<div class="form-control-wrap">
-									<input type="text" class="form-control" id="header_txt_1" name="header_txt_1" placeholder="Header Text" required>
+									<input type="text" class="form-control @error('header_txt_1') is-invalid @enderror" value="{{ old('header_txt_1') }}" id="header_txt_1" name="header_txt_1" placeholder="Header Text">
+                                    @error('header_txt_1')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
 								</div>
 							</div>
 							<div class="form-group">
 								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
 								<div class="form-control-wrap">
-									<input type="text" class="form-control" id="txt_1" name="txt_1" placeholder="Body Text" required>
+									<input type="text" class="form-control @error('txt_1') is-invalid @enderror" value="{{ old('txt_1') }}" id="txt_1" name="txt_1" placeholder="Body Text">
+                                    @error('txt_1')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
 								</div>
 							</div>
 							<div class="form-group">
 								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
 								<div class="form-control-wrap">
-									<input type="text" class="form-control" id="discount_1" name="discount_1" placeholder="Discount Persentage" required>
+									<input type="text" class="form-control @error('discount_1') is-invalid @enderror" value="{{ old('discount_1') }}" id="discount_1" name="discount_1" placeholder="Discount Persentage">
+                                    @error('discount_1')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
 								</div>
 							</div>
 							<div class="form-group">
 								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
 								<div class="form-control-wrap">
-									<input type="text" class="form-control" id="url_1" name="url_1" placeholder="Button url" required>
+									<input type="text" class="form-control" id="url_1" name="url_1" placeholder="Button url">
 								</div>
 							</div>
 						</div>
@@ -533,33 +553,53 @@
                                 <label class="form-label" for="default-06">Second Banner</label>
                                 <div class="form-control-wrap">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile" name="img_2">
+                                        <input type="file" class="custom-file-input @error('img_2') is-invalid @enderror" value="{{ old('img_2') }}" id="customFile" name="img_2">
                                         <label class="custom-file-label" for="customFile">Choose file</label>
+                                        @error('img_2')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
 								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
 								<div class="form-control-wrap">
-									<input type="text" class="form-control" id="header_txt_2" name="header_txt_2" placeholder="Header Text" required>
+									<input type="text" class="form-control @error('header_txt_2') is-invalid @enderror" value="{{ old('header_txt_2') }}" id="header_txt_2" name="header_txt_2" placeholder="Header Text">
+                                    @error('header_txt_2')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
 								</div>
 							</div>
 							<div class="form-group">
 								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
 								<div class="form-control-wrap">
-									<input type="text" class="form-control" id="txt_2" name="txt_2" placeholder="Body Text" required>
+									<input type="text" class="form-control @error('txt_2') is-invalid @enderror" value="{{ old('txt_2') }}" id="txt_2" name="txt_2" placeholder="Body Text">
+                                    @error('txt_2')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
 								</div>
 							</div>
 							<div class="form-group">
 								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
 								<div class="form-control-wrap">
-									<input type="text" class="form-control" id="discount_2" name="discount_2" placeholder="Discount Persentage" required>
+									<input type="text" class="form-control @error('discount_2') is-invalid @enderror" value="{{ old('discount_2') }}" id="discount_2" name="discount_2" placeholder="Discount Persentage">
+                                    @error('discount_2')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
 								</div>
 							</div>
 							<div class="form-group">
 								{{-- <label class="form-label" for="full-name">Full Name</label> --}}
 								<div class="form-control-wrap">
-									<input type="text" class="form-control" id="url_2" name="url_2" placeholder="Button url" required>
+									<input type="text" class="form-control" id="url_2" name="url_2" placeholder="Button url">
 								</div>
 							</div>
 						</div>
@@ -579,6 +619,8 @@
 
 @section('admin-js')
 	<script type="text/javascript">
-        
+        @if (count($errors) > 0)
+            $('.bd-example-modal-lg').modal('show');
+        @endif
 	</script>
 @endsection

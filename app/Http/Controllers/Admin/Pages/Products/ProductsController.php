@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Product;
+use App\ProductAttribute;
 use App\ProductImage;
 use File;
 
@@ -20,8 +21,8 @@ class ProductsController extends Controller
             'price' => 'required|numeric',
             'quantity' => 'required|numeric',
             'display_image' => 'required',
-            'category_id' => 'required',
-            'brand_id' => 'required'
+            // 'image' => 'mimes:jpg, jpeg, png',
+            'category_id' => 'required'
         ]);
 
         if($validator->fails()) {
@@ -42,6 +43,28 @@ class ProductsController extends Controller
         $product->sku = "#FR".uniqid();
 
     	$product->save();
+
+        if ($request->attribute_id2) {
+            foreach ($request->value2 as $value) {
+                $productAttribute = new ProductAttribute;
+                $productAttribute->value = $value;
+                $productAttribute->product_id = $product->id;
+                $productAttribute->attribute_id = $request->attribute_id2;
+
+                $productAttribute->save();
+            }
+        }
+
+        if ($request->attribute_id) {
+            foreach ($request->value as $value) {
+                $productAttribute = new ProductAttribute;
+                $productAttribute->value = $value;
+                $productAttribute->product_id = $product->id;
+                $productAttribute->attribute_id = $request->attribute_id;
+
+                $productAttribute->save();
+            }
+        }
 
     	if ($request->hasFile('image') && $request->hasFile('display_image')) {
     		$image = $request->file('display_image');
@@ -119,6 +142,15 @@ class ProductsController extends Controller
 
         $product = Product::find($id);
         $product_img = ProductImage::where('product_id', $product->id)->get();
+
+        // $validator  = \Validator::make($request->all(), [
+        //     'display_image' => 'mimes:jpg, jpeg, png',
+        //     'image' => 'mimes:jpg, jpeg, png'
+        // ]);
+
+        // if($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
 
         $product->name = $request->name;
         $product->description = $request->description;

@@ -257,7 +257,12 @@
                                                 <span>{{ $item->quantity }}</span>
                                             </td>
                                             <td class="nk-tb-col tb-col-md">
-                                                <span>{{ $item->category->name }}</span>
+                                                <span>
+                                                    @if ($item->category->parent_id != null)
+                                                        {{ App\Category::where('id', $item->category->parent_id)->first()->name }}, 
+                                                    @endif
+                                                    {{ $item->category->name }}
+                                                </span>
                                             </td>
                                             <td class="nk-tb-col tb-col-md">
                                                 <span>{{ $item->brand->name }}</span>
@@ -290,11 +295,13 @@
                                                             <em class="icon ni ni-wallet-fill"></em>
                                                         </a>
                                                     </li> --}}
-                                                    {{-- <li class="nk-tb-action-hidden">
-                                                        <a href="#" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Send Email">
-                                                            <em class="icon ni ni-mail-fill"></em>
-                                                        </a>
-                                                    </li> --}}
+                                                    <li class="nk-tb-action-hidden">
+                                                        <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Add Attributes">
+                                                            {{-- <span ></span> --}}
+                                                            <em data-toggle="modal" data-target="#attributeModal{{ $item->id }}" class="icon ni ni-opt-alt-fill"></em>
+                                                            
+                                                        </button>
+                                                    </li>
                                                     @if ($item->status)
                                                         <li class="nk-tb-action-hidden">
                                                             <form action="{{ url('/product_status', $item->id) }}" method="post">
@@ -356,15 +363,15 @@
                                             </tr><!-- .nk-tb-item  -->
                                             <!-- Modal Content Code -->
 
-                                        <!-- priority Modal start -->
-                                        {{-- <div class="modal fade" tabindex="-1" id="priorityModal{{ $item->id }}">
+                                        <!-- add attributes Modal start -->
+                                        <div class="modal fade" tabindex="-1" id="attributeModal{{ $item->id }}">
                                             <div class="modal-dialog modal-dialog-top" role="document">
                                                 <div class="modal-content">
                                                     <a href="#" class="close" data-dismiss="modal" aria-label="Close">
                                                         <em class="icon ni ni-cross"></em>
                                                     </a>
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">Set Priority</h5>
+                                                        <h5 class="modal-title">Product Attributes</h5>
                                                     </div>
                                                     <div class="modal-body">
                                                         <form action="{{ url('/priority', $item->id) }}" method="post" class="form-validate is-alter">
@@ -375,6 +382,17 @@
                                                                     <input type="text" class="form-control" id="priority" name="priority" placeholder="Priority" required>
                                                                 </div>
                                                             </div>
+                                                            <div class="form-group">
+                                                                <div class="field_wrapper">
+                                                                    <div style="display: flex;">
+                                                                        <input type="text" name="size[]" id="size" placeholder="Size" class="form-control" style="width: 120px; margin-right: 5px;" />
+                                                                        <input type="text" name="color[]" id="color" placeholder="Color" class="form-control" style="width: 120px; margin-right: 5px;" />
+                                                                        <a href="javascript:void(0);" class="add_button" title="Add field">
+                                                                            <em class="icon ni ni-plus-circle-fill"></em>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                             
                                                             <div class="form-group">
                                                                 <button type="submit" class="btn btn-md btn-primary">Save</button>
@@ -383,8 +401,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div> --}}
-                                        <!-- priority Modal end -->
+                                        </div>
+                                        <!-- add attributes Modal end -->
 
                                         <!-- view Modal start -->
                                         <div class="modal fade view_img_modal" tabindex="-1" id="viewModal{{ $item->id }}">
@@ -416,7 +434,7 @@
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <div class="form-control-wrap">
-                                                                            <textarea type="text" class="form-control" id="description" name="description" placeholder="Description" rows="2" >{{ $item->description }}</textarea>
+                                                                            <textarea type="text" class="form-control" id="summary-ckeditor{{$item->id}}" name="description" placeholder="Description" rows="2" >{{ $item->description }}</textarea>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row" style="margin-bottom: 1.25rem;">
@@ -460,7 +478,7 @@
                                                                                 <div class="form-control-wrap">
                                                                                     <label class="form-label" for="default-06">Brand</label>
                                                                                     <select class="form-control" name="brand_id">
-                                                                                        <option value="">Select a brand</option>
+                                                                                        <option value="0">Select a brand</option>
                                                                                         @foreach (App\Brand::orderBy('name', 'asc')->get() as $br)
 
                                                                                           <option value="{{ $br->id }}" {{ $br->id == $item->brand->id ? 'selected':'' }}>{{ $br->name }}</option>
@@ -575,7 +593,7 @@
 							</div>
 							<div class="form-group">
 								<div class="form-control-wrap">
-									<textarea type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" placeholder="Description" rows="2" >{{ old('description') }}</textarea>
+									<textarea type="text" class="form-control @error('description') is-invalid @enderror" id="summary-ckeditor" name="description" placeholder="Description" rows="2" >{{ old('description') }}</textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -584,9 +602,10 @@
 								</div>
 							</div>
                             <div class="row" style="margin-bottom: 1.25rem;">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="form-control-wrap">
+                                            <label class="form-label" for="default-06">Price</label>
                                             <input type="number" class="form-control @error('price') is-invalid @enderror" value="{{ old('price') }}" id="price" name="price" placeholder="Price" >
                                             @error('price')
                                                 <span class="invalid-feedback" role="alert">
@@ -596,24 +615,76 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="form-control-wrap">
+                                            <label class="form-label" for="default-06">Discount Price</label>
                                             <input type="number" class="form-control" value="{{ old('discount') }}" id="discount" name="discount" placeholder="Discount Price">
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="form-control-wrap">
+                                            <label class="form-label" for="default-06">Quantity</label>
+                                            <input type="number" class="form-control @error('quantity') is-invalid @enderror" value="{{ old('quantity') }}" id="quantity" name="quantity" placeholder="Quantity" >
+                                            @error('quantity')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-							<div class="form-group">
-								<div class="form-control-wrap">
-									<input type="number" class="form-control @error('quantity') is-invalid @enderror" value="{{ old('quantity') }}" id="quantity" name="quantity" placeholder="Quantity" >
-                                    @error('quantity')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-								</div>
-							</div>
+                            <div class="row" style="margin-bottom: 1.25rem;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="field_wrapper">
+                                            <label class="form-label" for="default-06">First Attribute</label>
+                                            <div class="cus-attr">
+                                                <select class="form-control" name="attribute_id" style="margin-right: 5px;">
+                                                    <option value="0">Select an attribute</option>
+                                                    @foreach (App\Attribute::orderBy('name', 'asc')->get() as $attr)
+
+                                                      <option value="{{ $attr->id }}">{{ $attr->name }}</option>
+
+                                                    @endforeach
+                                                </select>
+                                                <div style="display: flex;">
+                                                    <input type="text" name="value[]" id="value" placeholder="Value" class="form-control" style="margin-right: 5px; margin-top: 5px;" />
+                                                    <a href="javascript:void(0);" class="add_button" title="Add field" style="padding-top: 15px;">
+                                                        <em class="icon ni ni-plus-circle-fill"></em>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="field_wrapper">
+                                            <label class="form-label" for="default-06">Second Attribute</label>
+                                            <div class="cus-attr2">
+                                                <select class="form-control" name="attribute_id2" style="margin-right: 5px;">
+                                                    <option value="0">Select an attribute</option>
+                                                    @foreach (App\Attribute::orderBy('name', 'asc')->get() as $attr)
+
+                                                      <option value="{{ $attr->id }}">{{ $attr->name }}</option>
+
+                                                    @endforeach
+                                                </select>
+                                                <div style="display: flex;">
+                                                    <input type="text" name="value2[]" id="value" placeholder="Value" class="form-control" style="margin-right: 5px; margin-top: 5px;" />
+                                                    <a href="javascript:void(0);" class="add_button2" title="Add field" style="padding-top: 15px;">
+                                                        <em class="icon ni ni-plus-circle-fill"></em>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row" style="margin-bottom: 1.25rem;">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -645,7 +716,7 @@
                                         <div class="form-control-wrap">
                                             <label class="form-label" for="default-06">Brand</label>
                                             <select class="form-control" name="brand_id">
-                                                <option value="">Select a brand</option>
+                                                <option value="0">Select a brand</option>
                                                 @foreach (App\Brand::orderBy('name', 'asc')->get() as $brand)
 
                                                   <option value="{{ $brand->id }}">{{ $brand->name }}</option>
@@ -709,9 +780,59 @@
 @section('admin-js')
 	
 	<script type="text/javascript">
-
         @if (count($errors) > 0)
-        $('.bd-example-modal-lg').modal('show');
-    @endif
+            $('.bd-example-modal-lg').modal('show');
+        @endif
 	</script>
+    {{-- CKEditor --}}
+    <script src="{{ asset('public/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace( 'summary-ckeditor' );
+        @foreach (App\Product::orderBy('id', 'asc')->get() as $product)
+            CKEDITOR.replace( 'summary-ckeditor{{ $product->id }}' );
+        @endforeach
+    </script>
+    {{-- Add Remove field dynamic --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        var maxField = 10; //Input fields increment limitation
+        var addButton = $('.add_button'); //Add button selector
+        var addButton2 = $('.add_button2'); //Add button selector
+        var wrapper = $('.cus-attr'); //Input field wrapper
+        var wrapper2 = $('.cus-attr2'); //Input field wrapper
+        var fieldHTML = '<div style="display: flex;"><input type="text" name="value[]" id="value" placeholder="Value" class="form-control" style="margin-right: 5px; margin-top: 5px;" /><a href="javascript:void(0);" class="remove_button" style="padding-top: 15px;"><em class="icon ni ni-minus-circle-fill"></em></a></div>'; //New input field html 
+        var fieldHTML2 = '<div style="display: flex;"><input type="text" name="value2[]" id="value" placeholder="Value" class="form-control" style="margin-right: 5px; margin-top: 5px;" /><a href="javascript:void(0);" class="remove_button2" style="padding-top: 15px;"><em class="icon ni ni-minus-circle-fill"></em></a></div>'; //New input field html 
+        var x = 1; //Initial field counter is 1
+        var y = 1; //Initial field counter is 1
+        
+        //Once add button is clicked
+        $(addButton).click(function(){
+            //Check maximum number of input fields
+            if(x < maxField){ 
+                x++; //Increment field counter
+                $(wrapper).append(fieldHTML); //Add field html
+            }
+        });
+        $(addButton2).click(function(){
+            //Check maximum number of input fields
+            if(y < maxField){ 
+                y++; //Increment field counter
+                $(wrapper2).append(fieldHTML2); //Add field html
+            }
+        });
+        
+        //Once remove button is clicked
+        $(wrapper).on('click', '.remove_button', function(e){
+            e.preventDefault();
+            $(this).parent('div').remove(); //Remove field html
+            x--; //Decrement field counter
+        });
+        $(wrapper2).on('click', '.remove_button2', function(e){
+            e.preventDefault();
+            $(this).parent('div').remove(); //Remove field html
+            y--; //Decrement field counter
+        });
+    });
+    </script>
 @endsection

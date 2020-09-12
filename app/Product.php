@@ -25,4 +25,10 @@ class Product extends Model
     {
     	return $this->belongsTo(Brand::class)->withDefault();
     }
+
+    public function attributes()
+    {
+        return $this->hasMany(ProductAttribute::class);
+        // return $this->hasMany(Attribute::class);
+    }
 }

@@ -11,7 +11,24 @@ class MediumBannerController extends Controller
 {
     public function store(Request $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
+        $validator  = \Validator::make($request->all(), [
+            'img_1' => 'required',
+            'img_2' => 'required',
+
+            'header_txt_1' => 'required',
+            'header_txt_2' => 'required',
+
+            'txt_1' => 'required',
+            'txt_2' => 'required',
+
+            'discount_1' => 'required',
+            'discount_2' => 'required'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $file_1 = $request->file('img_1');
         $file_2 = $request->file('img_2');

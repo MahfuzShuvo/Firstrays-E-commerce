@@ -12,7 +12,14 @@ class SliderController extends Controller
     
     public function store(Request $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
+        // $validator  = \Validator::make($request->all(), [
+        //     'file' => 'mimes:jpg, jpeg, png'
+        // ]);
+
+        // if($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
 
         $file = $request->file('file');
 

@@ -8,6 +8,7 @@ use App\User;
 use App\Product;
 use App\Category;
 use App\Brand;
+use App\Attribute;
 use App\Slider;
 use App\SmallBanner;
 use App\MediumBanner;
@@ -58,6 +59,12 @@ class AdminController extends Controller
     {
         $brands = Brand::orderBy('name', 'asc')->get();
         return view('admin.pages.products.brands', compact('brands'));
+    }
+
+    public function attributes()
+    {
+        $attributes = Attribute::orderBy('name', 'asc')->get();
+        return view('admin.pages.products.attributes', compact('attributes'));
     }
 
     public function slider()

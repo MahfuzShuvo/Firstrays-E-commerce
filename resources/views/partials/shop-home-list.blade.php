@@ -2,7 +2,7 @@
 <section class="shop-home-list section">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-4 col-md-6 col-12">
+			<div class="col-lg-4 col-md-4 col-4">
 				<div class="row">
 					<div class="col-12">
 						<div class="shop-section-title">
@@ -66,7 +66,7 @@
 				</div>
 				<!-- End Single List  -->
 			</div>
-			<div class="col-lg-4 col-md-6 col-12">
+			<div class="col-lg-4 col-md-4 col-4">
 				<div class="row">
 					<div class="col-12">
 						<div class="shop-section-title">
@@ -130,7 +130,7 @@
 				</div>
 				<!-- End Single List  -->
 			</div>
-			<div class="col-lg-4 col-md-6 col-12">
+			<div class="col-lg-4 col-md-4 col-4">
 				<div class="row">
 					<div class="col-12">
 						<div class="shop-section-title">

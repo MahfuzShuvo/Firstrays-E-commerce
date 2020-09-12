@@ -62,6 +62,9 @@
                                             <a href="{{ route('brands') }}" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Brands</span></a>
                                         </li>
                                         <li class="nk-menu-item">
+                                            <a href="{{ route('attributes') }}" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Attributes</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
                                             <a href="html/user-details-regular.html" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Report</span></a>
                                         </li>
                                     </ul><!-- .nk-menu-sub -->

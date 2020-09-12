@@ -2,7 +2,7 @@
 <section class="shop-services section home">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-3 col-md-6 col-12 custom-service">
+			<div class="col-lg-3 col-md-6 col-3 custom-service">
 				<!-- Start Single Service -->
 				<div class="single-service">
 					<i class="fa fa-rocket service-icon"></i>
@@ -11,7 +11,7 @@
 				</div>
 				<!-- End Single Service -->
 			</div>
-			<div class="col-lg-3 col-md-6 col-12 custom-service">
+			<div class="col-lg-3 col-md-6 col-3 custom-service">
 				<!-- Start Single Service -->
 				<div class="single-service">
 					<i class="fa fa-refresh service-icon"></i>
@@ -20,7 +20,7 @@
 				</div>
 				<!-- End Single Service -->
 			</div>
-			<div class="col-lg-3 col-md-6 col-12 custom-service">
+			<div class="col-lg-3 col-md-6 col-3 custom-service">
 				<!-- Start Single Service -->
 				<div class="single-service">
 					<i class="fa fa-lock service-icon"></i>
@@ -29,7 +29,7 @@
 				</div>
 				<!-- End Single Service -->
 			</div>
-			<div class="col-lg-3 col-md-6 col-12 custom-service">
+			<div class="col-lg-3 col-md-6 col-3 custom-service">
 				<!-- Start Single Service -->
 				<div class="single-service">
 					<i class="fa fa-tag service-icon"></i>

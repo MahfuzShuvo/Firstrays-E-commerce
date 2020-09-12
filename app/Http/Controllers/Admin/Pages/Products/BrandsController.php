@@ -66,6 +66,14 @@ class BrandsController extends Controller
 
     	$brand = Brand::find($id);
 
+        // $validator  = \Validator::make($request->all(), [
+        //     'image' => 'mimes:jpg, jpeg, png'
+        // ]);
+
+        // if($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
+
     	$brand->name = $request->name;
     	$brand->description = $request->description;
 

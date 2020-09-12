@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 
 class MasterController extends Controller
 {
@@ -11,9 +12,17 @@ class MasterController extends Controller
     	return view('checkout');
     }
 
-    public function product_details()
+    public function product_details($slug)
     {
-    	return view('product-details');
+        $product = Product::where('slug', $slug)->first();
+        if (!is_null($product)) {
+            return view('product-details', compact('product'));
+        }
+        else
+        {
+            session()->flash('errors', 'There is no product by this URL.');
+            return redirect('/');
+        }
     }
 
     public function user()

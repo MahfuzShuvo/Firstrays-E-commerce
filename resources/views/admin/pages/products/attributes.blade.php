@@ -137,7 +137,7 @@
                     <div class="nk-block-head nk-block-head-sm">
                         <div class="nk-block-between">
                             <div class="nk-block-head-content">
-                                <h3 class="nk-block-title page-title">Brands</h3>
+                                <h3 class="nk-block-title page-title">Attributes</h3>
                             </div><!-- .nk-block-head-content -->
                             <div class="nk-block-head-content">
                                 <div class="toggle-wrap nk-block-tools-toggle">
@@ -177,11 +177,11 @@
                                                 </div>
                                             </th> --}}
                                             <th class="nk-tb-col tb-col-mb"><span class="sub-text">#</span></th>
-                                            <th class="nk-tb-col"><span class="sub-text">Brand Name</span></th>
-                                            <th class="nk-tb-col"><span class="sub-text">Image</span></th>
+                                            <th class="nk-tb-col"><span class="sub-text">Attribute Name</span></th>
+                                            {{-- <th class="nk-tb-col"><span class="sub-text">Image</span></th> --}}
                                             {{-- <th class="nk-tb-col tb-col-md"><span class="sub-text">Regular Price (&#2547;)</span></th>
                                             <th class="nk-tb-col tb-col-lg"><span class="sub-text">Discount Price (&#2547;)</span></th> --}}
-                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Description</span></th>
+                                            {{-- <th class="nk-tb-col tb-col-lg"><span class="sub-text">Description</span></th> --}}
                                             {{-- <th class="nk-tb-col tb-col-lg"><span class="sub-text">Category</span></th>
                                             <th class="nk-tb-col tb-col-lg"><span class="sub-text">Brand</span></th>
                                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th> --}}
@@ -191,7 +191,7 @@
                                     </thead>
                                     <tbody>
                                         @php $num = 0; @endphp
-                                        @foreach ($brands as $item)
+                                        @foreach ($attributes as $item)
                                         <tr class="nk-tb-item">
                                             {{--  <td class="nk-tb-col nk-tb-col-check">
                                                 <div class="custom-control custom-control-sm custom-checkbox notext">
@@ -204,25 +204,6 @@
                                             </td>
                                             <td class="nk-tb-col">
                                                 <span class="tb-amount">{{ $item->name }}</span>
-                                            </td>
-                                            <td class="nk-tb-col">
-                                                <a href="#viewModal{{ $item->id }}" data-toggle="modal">
-                                                    <div class="user-card">
-                                                        <div class="user-avatar bg-primary custom-avatar">
-                                                            
-                                                                {{-- <em class="icon ni ni-user-alt"></em> --}}
-                                                                <img src="{{ $item->image }}" class="custom-img">
-                                                        </div>
-                                                        {{-- <div class="user-info">
-                                                            <span class="tb-lead">{{ $user->name }} <span class="dot dot-success d-md-none ml-1"></span></span>
-                                                            <span>info@softnio.com</span>
-                                                        </div> --}}
-                                                    </div>
-                                                </a>
-                                            </td>
-
-                                            <td class="nk-tb-col tb-col-lg custom_des">
-                                                <span>{{ $item->description }}</span>
                                             </td>
                                             
                                            
@@ -280,7 +261,7 @@
                                                             <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <ul class="link-list-opt no-bdr">
-                                                                    <li>
+                                                                    {{-- <li>
                                                                         <a href="#viewModal{{ $item->id }}" data-toggle="modal">
                                                                             <em class="icon ni ni-eye"></em><span>View</span>
                                                                         </a>
@@ -290,7 +271,7 @@
                                                                             <em class="icon ni ni-edit"></em>
                                                                             <span>Edit</span>
                                                                         </a>
-                                                                    </li>
+                                                                    </li> --}}
                                                                     <li>
                                                                         <a href="#deleteModal{{ $item->id }}" data-toggle="modal">
                                                                             <em class="icon ni ni-trash"></em>
@@ -414,7 +395,7 @@
                                                         
                                                     </div> --}}
                                                     <div class="modal-footer">
-                                                        <form action="{{ url('/delete_brand', $item->id) }}" method="post">
+                                                        <form action="{{ url('/delete_attribute', $item->id) }}" method="post">
                                                             {{ csrf_field() }}
                                                             <button type="submit" class="btn btn-danger" style="font-size: 13px;">YES, delete permanently</button>
                                                         </form>
@@ -439,15 +420,15 @@
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-	                <h5 class="modal-title">Add Brands</h5>
+	                <h5 class="modal-title">Add Attributes</h5>
 	            </div>
-				<form action="{{ route('brand.store') }}" method="post" enctype="multipart/form-data">
+				<form action="{{ route('attribute.store') }}" method="post" enctype="multipart/form-data">
 					@csrf
 					<div class="row custom-banner-row">
 						<div class="col-md-12">
 							<div class="form-group">
 								<div class="form-control-wrap">
-									<input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" id="name" name="name" placeholder="Brand Name" >
+									<input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" id="name" name="name" placeholder="Attribute Name" >
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -455,25 +436,7 @@
                                     @enderror
 								</div>
 							</div>
-							<div class="form-group">
-								<div class="form-control-wrap">
-									<textarea type="text" class="form-control" id="description" name="description" placeholder="Description" rows="2" >{{ old('description') }}</textarea>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="form-label" for="default-06">Brand Image</label>
-								<div class="form-control-wrap">
-									<div class="custom-file">
-										<input type="file" class="custom-file-input @error('image') is-invalid @enderror" value="{{ old('image') }}" id="image" name="image">
-										<label class="custom-file-label" for="image">Choose file</label>
-                                        @error('image')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-									</div>
-								</div>
-							</div>
+							
 						</div>
 					</div>
 					<div class="row custom-banner-row">

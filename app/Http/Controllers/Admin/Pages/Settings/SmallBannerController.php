@@ -11,7 +11,17 @@ class SmallBannerController extends Controller
 {
     public function store(Request $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
+
+        $validator  = \Validator::make($request->all(), [
+            'img_1' => 'required',
+            'img_2' => 'required',
+            'img_3' => 'required'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $file_1 = $request->file('img_1');
         $file_2 = $request->file('img_2');

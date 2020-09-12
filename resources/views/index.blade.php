@@ -33,7 +33,4 @@
     @include('partials.upcoming-product-countdown')
     {{-- upcoming-product-countdown end --}}
 
-    {{-- quickview-modal start --}}
-    @include('partials.quickview-modal')
-    {{-- quickview-modal end --}}
 @endsection

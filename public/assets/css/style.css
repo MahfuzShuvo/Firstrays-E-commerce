@@ -187,7 +187,7 @@ a[data-toggle="collapse"] {
 section {
   background: #f8f9fa;
   margin-bottom: 20px;
-  position: relative;
+  /*position: relative;*/
   z-index: 1;
   padding-left: 2%;
   padding-right: 2%;
@@ -891,11 +891,12 @@ ul.social-icons li {
   opacity: 1;
 }
 .single-product .product-content h3 {
-    line-height: 22px;
+    /*line-height: 22px;*/
+    line-height: 10px;
 }
 .single-product .product-content h3 a {
-  font-size: 15px;
-    font-weight: 900;
+    font-size: 14px;
+    font-weight: 700;
     margin: 0;
     color: #0e0c96;
 }
@@ -1201,7 +1202,7 @@ ul.social-icons li {
   transform:scale(1);
 }
 .shop-home-list .single-list .no-padding{
-  padding-right:0px;
+  /*padding-right:0px;*/
 }
 .shop-home-list .single-list img{
   width:100%;
@@ -1997,7 +1998,7 @@ ul.social-icons li {
   display:inline-block;
 }
 .modal-dialog {
-  margin: 2% auto 8%;
+  margin: 5% auto 8%;
   max-width: 1358px;
   width: 1358px;
 }
@@ -2162,16 +2163,16 @@ ul.social-icons li {
     margin-left: 5px;
 }
 
-.quickview-content .quickview-ratting-review .quickview-stock {
-  margin-left: 24px;
+.quickview-content .quickview-ratting-review .quickview-in-stock {
+    margin-left: 24px;
     color: #63ab01;
 }
 
-.quickview-content .quickview-ratting-review .quickview-stock span {
+.quickview-content .quickview-ratting-review .quickview-in-stock span {
   font-size: 12px;
 }
 
-.quickview-content .quickview-ratting-review .quickview-stock span i {
+.quickview-content .quickview-ratting-review .quickview-in-stock span i {
   font-size: 16px;
   color: #63ab01;
   margin-right: 2px;
@@ -2179,6 +2180,22 @@ ul.social-icons li {
   top: 3px;
 }
 
+.quickview-content .quickview-ratting-review .quickview-out-of-stock {
+    margin-left: 24px;
+    color: #d10024;
+}
+
+.quickview-content .quickview-ratting-review .quickview-out-of-stock span {
+  font-size: 12px;
+}
+
+.quickview-content .quickview-ratting-review .quickview-out-of-stock span i {
+  font-size: 16px;
+  color: #d10024;
+  margin-right: 2px;
+  position: relative;
+  top: 3px;
+}
 .quickview-content h3 {
   font-size: 20px;
   margin: 12px 0 15px;
@@ -2186,9 +2203,10 @@ ul.social-icons li {
 }
 
 .quickview-content  h3 span {
-  text-decoration: line-through;
-  font-size: 14px;
+  /*text-decoration: line-through;*/
+  font-size: 16px;
   margin-right: 5px;
+  color: #ff005c;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -3137,4 +3155,10 @@ ul.social-icons li {
 .review-form .input-rating .stars>input:checked label:before, .review-form .input-rating .stars>input:checked~label:before {
   content: "\f005";
   color: #D10024;
+}
+
+
+.custom-pera {
+  padding-top: 20px;
+  border-top: 1px solid #e9ecef;
 }
