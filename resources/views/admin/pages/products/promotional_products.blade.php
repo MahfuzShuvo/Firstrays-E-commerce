@@ -137,7 +137,7 @@
                     <div class="nk-block-head nk-block-head-sm">
                         <div class="nk-block-between">
                             <div class="nk-block-head-content">
-                                <h3 class="nk-block-title page-title">All Products</h3>
+                                <h3 class="nk-block-title page-title">Promotional Products</h3>
                             </div><!-- .nk-block-head-content -->
                             <div class="nk-block-head-content">
                                 <div class="toggle-wrap nk-block-tools-toggle">
@@ -166,7 +166,7 @@
                                                     </div>
                                                 </div>
                                             </li> --}}
-                                            <li class="nk-block-tools-opt">
+                                            {{-- <li class="nk-block-tools-opt">
                                                 <a href="#" class="btn btn-icon btn-primary d-md-none" data-toggle="modal" data-target=".bd-example-modal-lg">
                                                 	<em class="icon ni ni-plus"></em>
                                                 </a>
@@ -174,7 +174,7 @@
                                                 	<em class="icon ni ni-plus"></em>
                                                 	<span>Add</span>
                                                 </a>
-                                            </li>
+                                            </li> --}}
                                         </ul>
                                     </div>
                                 </div>
@@ -202,8 +202,9 @@
                                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Price (&#2547;)</span></th>
                                             <th class="nk-tb-col tb-col-lg"><span class="sub-text">Promotional Price (&#2547;)</span></th>
                                             <th class="nk-tb-col"><span class="sub-text">Stock</span></th>
-                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Category</span></th>
-                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Brand</span></th>
+                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Promotion Starting Date</span></th>
+                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Promotion Ending Date</span></th>
+                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Remaining</span></th>
                                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Featured</span></th>
                                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th>
                                             <th class="nk-tb-col nk-tb-col-tools text-right">
@@ -261,14 +262,19 @@
                                             </td>
                                             <td class="nk-tb-col tb-col-md">
                                                 <span>
-                                                    @if ($item->category->parent_id != null)
-                                                        {{ App\Category::where('id', $item->category->parent_id)->first()->name }}, 
-                                                    @endif
-                                                    {{ $item->category->name }}
+                                                    {{ $item->starting_date }}
                                                 </span>
                                             </td>
                                             <td class="nk-tb-col tb-col-md">
-                                                <span>{{ $item->brand->name }}</span>
+                                                <span>{{ $item->end_date }}</span>
+                                            </td>
+                                            @php
+                                            	$start = \Carbon\Carbon::parse($item->starting_date);
+                                            	$end = \Carbon\Carbon::parse($item->end_date);
+                                            	$difference = date_diff($start, $end);
+                                            @endphp
+                                            <td class="nk-tb-col tb-col-md">
+                                                <span>{{ $difference->format('%d days') }}</span>
                                             </td>
                                             {{-- <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Unverified">
                                                 <ul class="list-status">
@@ -629,7 +635,7 @@
         </div>
     </div>
 
-	<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+	{{-- <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
                 <a href="#" class="close" data-dismiss="modal" aria-label="Close">
@@ -858,7 +864,7 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	</div> --}}
 @endsection
 
 @section('admin-js')

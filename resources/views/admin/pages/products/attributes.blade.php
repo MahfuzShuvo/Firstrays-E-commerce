@@ -323,15 +323,15 @@
                                         <!-- priority Modal end -->
 
                                         <!-- view Modal start -->
-                                        <div class="modal fade view_img_modal" tabindex="-1" id="viewModal{{ $item->id }}">
+                                        {{-- <div class="modal fade view_img_modal" tabindex="-1" id="viewModal{{ $item->id }}">
                                             <div class="modal-dialog view_img" role="document">
                                                 <img src="{{ $item->image }}">
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <!-- view Modal end -->
 
                                         <!-- edit Modal start -->
-                                        <div class="modal fade" tabindex="-1" id="editModal{{ $item->id }}">
+                                        {{-- <div class="modal fade" tabindex="-1" id="editModal{{ $item->id }}">
                                             <div class="modal-dialog modal-dialog-top" role="document">
                                                 <div class="modal-content">
                                                     <a href="#" class="close" data-dismiss="modal" aria-label="Close">
@@ -378,7 +378,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <!-- edit Modal end -->
 
                                         <!-- Delete Modal start -->

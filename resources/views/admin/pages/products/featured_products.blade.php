@@ -137,7 +137,7 @@
                     <div class="nk-block-head nk-block-head-sm">
                         <div class="nk-block-between">
                             <div class="nk-block-head-content">
-                                <h3 class="nk-block-title page-title">All Products</h3>
+                                <h3 class="nk-block-title page-title">Featured Products</h3>
                             </div><!-- .nk-block-head-content -->
                             <div class="nk-block-head-content">
                                 <div class="toggle-wrap nk-block-tools-toggle">
@@ -166,7 +166,7 @@
                                                     </div>
                                                 </div>
                                             </li> --}}
-                                            <li class="nk-block-tools-opt">
+                                            {{-- <li class="nk-block-tools-opt">
                                                 <a href="#" class="btn btn-icon btn-primary d-md-none" data-toggle="modal" data-target=".bd-example-modal-lg">
                                                 	<em class="icon ni ni-plus"></em>
                                                 </a>
@@ -174,7 +174,7 @@
                                                 	<em class="icon ni ni-plus"></em>
                                                 	<span>Add</span>
                                                 </a>
-                                            </li>
+                                            </li> --}}
                                         </ul>
                                     </div>
                                 </div>
@@ -629,7 +629,7 @@
         </div>
     </div>
 
-	<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+	{{-- <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
                 <a href="#" class="close" data-dismiss="modal" aria-label="Close">
@@ -858,7 +858,7 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	</div> --}}
 @endsection
 
 @section('admin-js')

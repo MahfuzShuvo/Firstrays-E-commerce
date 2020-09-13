@@ -48,6 +48,18 @@ class AdminController extends Controller
         return view('admin.pages.products.all_products', compact('products'));
     }
 
+    public function featured_products()
+    {
+        $products = Product::orderBy('id', 'desc')->where('isFeatured', 1)->get();
+        return view('admin.pages.products.featured_products', compact('products'));
+    }
+
+    public function promotional_products()
+    {
+        $products = Product::orderBy('id', 'desc')->where('promotion_price', '!=', null)->get();
+        return view('admin.pages.products.promotional_products', compact('products'));
+    }
+
     public function categories()
     {
         $categories = Category::orderBy('name', 'asc')->get();

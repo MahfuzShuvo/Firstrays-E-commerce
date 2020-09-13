@@ -20,11 +20,16 @@ class CreateProductsTable extends Migration
             $table->integer('brand_id')->unsigned();
             $table->integer('category_id')->unsigned();
             $table->integer('price');
-            $table->integer('discount')->nullable();
+            $table->integer('purchase');
+            $table->integer('promotion_price')->nullable();
+            $table->date('starting_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->integer('quantity');
+            $table->integer('alert_quantity');
             $table->text('description');
             $table->string('slug');
             $table->boolean('status')->default(0);
+            $table->boolean('isFeatured')->default(0);
             $table->timestamps();
         });
     }

@@ -7,7 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
 	public $fillable = [
-        'name', 'sku', 'brand_id', 'category_id', 'price', 'quantity', 'slug', 'status'
+        'name',
+        'sku',
+        'brand_id',
+        'category_id',
+        'price',
+        'purchase',
+        'promotion_price',
+        'starting_date',
+        'end_date',
+        'quantity',
+        'alert_quantity',
+        'slug',
+        'status',
+        'isFeaturd'
     ];
 
 
@@ -29,6 +42,5 @@ class Product extends Model
     public function attributes()
     {
         return $this->hasMany(ProductAttribute::class);
-        // return $this->hasMany(Attribute::class);
     }
 }

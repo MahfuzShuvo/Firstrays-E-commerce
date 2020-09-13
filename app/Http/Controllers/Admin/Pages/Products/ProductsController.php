@@ -19,9 +19,10 @@ class ProductsController extends Controller
             'name' => 'required|max:255',
             'description' => 'required',
             'price' => 'required|numeric',
+            'purchase' => 'required|numeric',
             'quantity' => 'required|numeric',
+            'alert_quantity' => 'required|numeric',
             'display_image' => 'required',
-            // 'image' => 'mimes:jpg, jpeg, png',
             'category_id' => 'required'
         ]);
 
@@ -34,8 +35,9 @@ class ProductsController extends Controller
     	$product->name = $request->name;
     	$product->description = $request->description;
     	$product->price = $request->price;
-    	$product->discount = $request->discount;
+        $product->purchase = $request->purchase;
     	$product->quantity = $request->quantity;
+        $product->alert_quantity = $request->alert_quantity;
 
     	$product->slug = Str::slug($product->name);
     	$product->category_id = $request->category_id;
@@ -97,6 +99,24 @@ class ProductsController extends Controller
     	return redirect()->back();
     }
 
+    public function add_product_promotion(Request $request, $id)
+    {
+        $product = Product::find($id);
+
+        if ($request->promotion_price) {
+            $product->promotion_price = $request->promotion_price;
+            $product->starting_date = $request->starting_date;
+            $product->end_date = $request->end_date;
+
+            $product->save();
+            return redirect()->back()->with('success', 'Promotion added successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('error', 'Please add promotion price first.');
+        }
+    }
+
     public function status($id)
     {
         $product = Product::find($id);
@@ -107,6 +127,21 @@ class ProductsController extends Controller
         else {
             $product->status = 1;
             session()->flash('success', 'Product enabled to show');
+        }
+        $product->save();
+        return redirect()->back();
+    }
+
+    public function featured($id)
+    {
+        $product = Product::find($id);
+        if ($product->isFeatured) {
+            $product->isFeatured = 0;
+            session()->flash('message', 'Make the product regular');
+        }
+        else {
+            $product->isFeatured = 1;
+            session()->flash('message', 'Make the product featured');
         }
         $product->save();
         return redirect()->back();

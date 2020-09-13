@@ -35,7 +35,7 @@
 								<div class="tab-pane fade @if ($key == 0) show active @endif" id="{{ $item->name }}" role="tabpanel">
 									<div class="tab-single">
 										<div class="row">
-											@foreach (App\Product::where('status', 1)->get() as $product)
+											@foreach (App\Product::where('status', 1)->where('isFeatured', 0)->get() as $product)
 												@if (($product->category->parent_id == $item->id) || ($product->category_id == $item->id))
 													<div class="col-xl-3 col-lg-4 col-md-4 col-6">
 														<div class="single-product">
@@ -63,7 +63,7 @@
 															<div class="product-content">
 																<h3><a href="{{ url('product-details', $product->slug) }}">{{ $product->name }}</a></h3>
 																<div class="product-price">
-																	@if ($product->discount == null)
+																	@if ($product->promotion_price == null)
 																		<span>
 																			@php
 																				echo number_format($product->price, 2);
@@ -73,7 +73,7 @@
 																	@else
 																		<span>
 																			@php
-																				echo number_format($product->discount, 2);
+																				echo number_format($product->promotion_price, 2);
 																			@endphp
 																			 &#2547;
 																		</span>

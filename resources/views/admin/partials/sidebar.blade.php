@@ -53,7 +53,10 @@
                                             <a href="{{ route('products') }}" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> All Products</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="html/user-list-regular.html" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Featured Products</span></a>
+                                            <a href="{{ route('featuredProducts') }}" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Featured Products</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ route('promotionalProducts') }}" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Promotional Products</span></a>
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="{{ route('categories') }}" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Categories</span></a>

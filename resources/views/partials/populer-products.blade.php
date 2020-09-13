@@ -13,112 +13,61 @@
 			<div class="col-12">
 				<div class="owl-carousel popular-slider">
 					<!-- Start Single Product -->
-					<div class="single-product">
-						<div class="product-img">
-							<a href="#">
-								<img class="default-img" src="{{asset('public/assets/images/products/product-4.jpg')}}" alt="#">
-								<!-- <img class="hover-img" src="assets/images/products/product-4.jpg" alt="#"> -->
-								<span class="out-of-stock">Hot</span>
-							</a>
-							<div class="button-head">
-								<div class="product-action">
-									<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" fa fa-eye"></i><span>Quick Shop</span></a>
-									<a title="Wishlist" href="#"><i class=" fa fa-heart "></i><span>Add to Wishlist</span></a>
-									<a title="Compare" href="#"><i class="fa fa-bar-chart"></i><span>Add to Compare</span></a>
-								</div>
-								<div class="product-action-2">
-									<a title="Add to cart" href="#">Add to cart</a>
+					@foreach (App\Product::where('status', 1)->where('isFeatured', 1)->get() as $product)
+						<div class="single-product">
+							<div class="product-img">
+								<a href="{{ url('product-details', $product->slug) }}">
+									@foreach ($product->images as $key => $product_img)
+	                                    @if ($key == 0)
+	                                    	<img class="default-img" src="{{ $product_img->display_image }}" alt="{{ $product->slug }}">
+	                                    @endif
+	                                @endforeach
+	                            </a>
+								<div class="button-head">
+									<div class="product-action">
+										<a data-toggle="modal" title="Quick View" href="#quickViewModal{{$product->id}}"><i class=" fa fa-eye"></i><span>Quick Shop</span></a>
+										<a title="Wishlist" href="#"><i class=" fa fa-heart "></i><span>Add to Wishlist</span></a>
+										<a title="Compare" href="#"><i class="fa fa-bar-chart"></i><span>Add to Compare</span></a>
+									</div>
+									<div class="product-action-2">
+										<a title="Add to cart" href="#">Add to cart</a>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="product-content">
-							<h3><a href="#">Black Sunglass For Women</a></h3>
-							<div class="product-price">
-								<span class="old">$60.00</span>
-								<span>$50.00</span>
+							<div class="product-content">
+								<h3><a href="{{ url('product-details', $product->slug) }}">{{ $product->name }}</a></h3>
+								<div class="product-price">
+									@if ($product->promotion_price == null)
+										<span>
+											@php
+												echo number_format($product->price, 2);
+											@endphp
+											 &#2547;
+										</span>
+									@else
+										<span>
+											@php
+												echo number_format($product->promotion_price, 2);
+											@endphp
+											 &#2547;
+										</span>
+										<span style="color: #a5a5a5; text-decoration: line-through; padding-left: 5px;">
+											@php
+												echo number_format($product->price, 2);
+											@endphp
+											 &#2547;
+										</span>
+									@endif
+								</div>
 							</div>
 						</div>
 					</div>
-					<!-- End Single Product -->
-					<!-- Start Single Product -->
-					<div class="single-product">
-						<div class="product-img">
-							<a href="#">
-								<img class="default-img" src="{{asset('public/assets/images/products/women-3.jpg')}}" alt="#">
-								<!-- <img class="hover-img" src="assets/images/products/women-3.jpg" alt="#"> -->
-							</a>
-							<div class="button-head">
-								<div class="product-action">
-									<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" fa fa-eye"></i><span>Quick Shop</span></a>
-									<a title="Wishlist" href="#"><i class=" fa fa-heart "></i><span>Add to Wishlist</span></a>
-									<a title="Compare" href="#"><i class="fa fa-bar-chart"></i><span>Add to Compare</span></a>
-								</div>
-								<div class="product-action-2">
-									<a title="Add to cart" href="#">Add to cart</a>
-								</div>
-							</div>
-						</div>
-						<div class="product-content">
-							<h3><a href="#">Women Hot Collection</a></h3>
-							<div class="product-price">
-								<span>$50.00</span>
-							</div>
-						</div>
-					</div>
-					<!-- End Single Product -->
-					<!-- Start Single Product -->
-					<div class="single-product">
-						<div class="product-img">
-							<a href="#">
-								<img class="default-img" src="{{asset('public/assets/images/products/product-9.jpg')}}" alt="#">
-								<!-- <img class="hover-img" src="assets/images/products/product-9.jpg" alt="#"> -->
-								<span class="new">New</span>
-							</a>
-							<div class="button-head">
-								<div class="product-action">
-									<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" fa fa-eye"></i><span>Quick Shop</span></a>
-									<a title="Wishlist" href="#"><i class=" fa fa-heart "></i><span>Add to Wishlist</span></a>
-									<a title="Compare" href="#"><i class="fa fa-bar-chart"></i><span>Add to Compare</span></a>
-								</div>
-								<div class="product-action-2">
-									<a title="Add to cart" href="#">Add to cart</a>
-								</div>
-							</div>
-						</div>
-						<div class="product-content">
-							<h3><a href="#">Awesome Pink Show</a></h3>
-							<div class="product-price">
-								<span>$50.00</span>
-							</div>
-						</div>
-					</div>
-					<!-- End Single Product -->
-					<!-- Start Single Product -->
-					<div class="single-product">
-						<div class="product-img">
-							<a href="#">
-								<img class="default-img" src="{{asset('public/assets/images/products/women-4.jpg')}}" alt="#">
-								<!-- <img class="hover-img" src="assets/images/products/women-4.jpg" alt="#"> -->
-							</a>
-							<div class="button-head">
-								<div class="product-action">
-									<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" fa fa-eye"></i><span>Quick Shop</span></a>
-									<a title="Wishlist" href="#"><i class=" fa fa-heart "></i><span>Add to Wishlist</span></a>
-									<a title="Compare" href="#"><i class="fa fa-bar-chart"></i><span>Add to Compare</span></a>
-								</div>
-								<div class="product-action-2">
-									<a title="Add to cart" href="#">Add to cart</a>
-								</div>
-							</div>
-						</div>
-						<div class="product-content">
-							<h3><a href="#">Awesome Bags Collection</a></h3>
-							<div class="product-price">
-								<span>$50.00</span>
-							</div>
-						</div>
-					</div>
-					<!-- End Single Product -->
+					{{-- quickview-modal start --}}
+				    @include('partials.quickview-modal')
+				    {{-- quickview-modal end --}}
+					@endforeach
+					
+					
 				</div>
 			</div>
 		</div>

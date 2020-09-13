@@ -70,8 +70,14 @@ Route::group(['prefix'=>'admin'], function() {
 	Route::get('/products', 'AdminController@all_products')->name('products');
 	Route::post('/products', 'Admin\Pages\Products\ProductsController@store')->name('product.store');
 	Route::post('/product_status/{id}', 'Admin\Pages\Products\ProductsController@status');
+	Route::post('/product_featured/{id}', 'Admin\Pages\Products\ProductsController@featured');
 	Route::post('/delete_product/{id}', 'Admin\Pages\Products\ProductsController@delete_product');
 	Route::post('/edit_product/{id}', 'Admin\Pages\Products\ProductsController@edit_product');
+	Route::post('/add_product_promotion/{id}', 'Admin\Pages\Products\ProductsController@add_product_promotion');
+	// featured products
+	Route::get('/featuredProducts', 'AdminController@featured_products')->name('featuredProducts');
+	// promotional products
+	Route::get('/promotionalProducts', 'AdminController@promotional_products')->name('promotionalProducts');
 	// categories
 	Route::get('/categories', 'AdminController@categories')->name('categories');
 	Route::post('/categories', 'Admin\Pages\Products\CategoriesController@store')->name('category.store');

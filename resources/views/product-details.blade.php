@@ -135,7 +135,7 @@
 										@endif
 									</div>
 									<h3>
-										@if ($product->discount == null)
+										@if ($product->promotion_price == null)
 											<span>
 												@php
 													echo number_format($product->price, 2);
@@ -145,7 +145,7 @@
 										@else
 											<span>
 												@php
-													echo number_format($product->discount, 2);
+													echo number_format($product->promotion_price, 2);
 												@endphp
 												 &#2547;
 											</span>
