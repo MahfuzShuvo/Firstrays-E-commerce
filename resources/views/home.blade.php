@@ -1,231 +1,244 @@
 @extends('main')
 @section('style')
 	<style type="text/css">
-		.nav-side-menu {
-  overflow: auto;
-  font-family: verdana;
-  font-size: 12px;
-  font-weight: 200;
-  background-color: #2e353d;
-  position: relative;
-  top: 0px;
-  left: -15px;
-  width: 300px;
-  height: 100%;
-  color: #e1ffff;
-}
-.nav-side-menu .brand {
-  background-color: #23282e;
-  line-height: 50px;
-  display: block;
-  text-align: center;
-  font-size: 14px;
-}
-.nav-side-menu .toggle-btn {
-  display: none;
-}
-.nav-side-menu ul,
-.nav-side-menu li {
-  list-style: none;
-  padding: 0px;
-  margin: 0px;
-  line-height: 35px;
-  cursor: pointer;
-  /*    
-    .collapsed{
-       .arrow:before{
-                 font-family: FontAwesome;
-                 content: "\f053";
-                 display: inline-block;
-                 padding-left:10px;
-                 padding-right: 10px;
-                 vertical-align: middle;
-                 float:right;
-            }
-     }
-*/
-}
-.nav-side-menu ul :not(collapsed) .arrow:before,
-.nav-side-menu li :not(collapsed) .arrow:before {
-  font-family: FontAwesome;
-  content: "\f078";
-  display: inline-block;
-  padding-left: 10px;
-  padding-right: 10px;
-  vertical-align: middle;
-  float: right;
-}
-.nav-side-menu ul .active,
-.nav-side-menu li .active {
-  border-left: 3px solid #d19b3d;
-  background-color: #4f5b69;
-}
-.nav-side-menu ul .sub-menu li.active,
-.nav-side-menu li .sub-menu li.active {
-  color: #d19b3d;
-}
-.nav-side-menu ul .sub-menu li.active a,
-.nav-side-menu li .sub-menu li.active a {
-  color: #d19b3d;
-}
-.nav-side-menu ul .sub-menu li,
-.nav-side-menu li .sub-menu li {
-  background-color: #181c20;
-  border: none;
-  line-height: 28px;
-  border-bottom: 1px solid #23282e;
-  margin-left: 0px;
-}
-.nav-side-menu ul .sub-menu li:hover,
-.nav-side-menu li .sub-menu li:hover {
-  background-color: #020203;
-}
-.nav-side-menu ul .sub-menu li:before,
-.nav-side-menu li .sub-menu li:before {
-  font-family: FontAwesome;
-  content: "\f105";
-  display: inline-block;
-  padding-left: 10px;
-  padding-right: 10px;
-  vertical-align: middle;
-}
-.nav-side-menu li {
-  padding-left: 0px;
-  border-left: 3px solid #2e353d;
-  border-bottom: 1px solid #23282e;
-}
-.nav-side-menu li a {
-  text-decoration: none;
-  color: #e1ffff;
-}
-.nav-side-menu li a i {
-  padding-left: 10px;
-  width: 20px;
-  padding-right: 20px;
-}
-.nav-side-menu li:hover {
-  border-left: 3px solid #d19b3d;
-  background-color: #4f5b69;
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  -ms-transition: all 1s ease;
-  transition: all 1s ease;
-}
-@media (max-width: 767px) {
-  .nav-side-menu {
-    position: relative;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .nav-side-menu .toggle-btn {
-    display: block;
-    cursor: pointer;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    z-index: 10 !important;
-    padding: 3px;
-    background-color: #ffffff;
-    color: #000;
-    width: 40px;
-    text-align: center;
-  }
-  .brand {
-    text-align: left !important;
-    font-size: 22px;
-    padding-left: 20px;
-    line-height: 50px !important;
-  }
-}
-@media (min-width: 767px) {
-  .nav-side-menu .menu-list .menu-content {
-    display: block;
-  }
-}
+        .container {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+		#wrapper {
+            overflow-x: hidden;
+         }
 
+        #sidebar-wrapper {
+          min-height: 100vh;
+          margin-left: -16rem;
+          -webkit-transition: margin .25s ease-out;
+          -moz-transition: margin .25s ease-out;
+          -o-transition: margin .25s ease-out;
+          transition: margin .25s ease-out;
+        }
+
+        #sidebar-wrapper .sidebar-heading {
+          padding: 0.875rem 1.25rem;
+          font-size: 1.2rem;
+        }
+
+        #sidebar-wrapper .list-group {
+          width: 15.4rem;
+        }
+
+        #page-content-wrapper {
+          min-width: 100vw;
+        }
+
+        #wrapper.toggled #sidebar-wrapper {
+          margin-left: 0;
+        }
+
+        @media (min-width: 768px) {
+          #sidebar-wrapper {
+            margin-left: 0;
+          }
+
+          #page-content-wrapper {
+            min-width: 0;
+            width: 100%;
+          }
+
+          #wrapper.toggled #sidebar-wrapper {
+            margin-left: -15rem;
+          }
+        }
+        .list-group-flush>.list-group-item  {
+            font-size: 13px;
+            color: #ced4da;
+            border-color: #08084a;
+        }
+        a.bg-theme-blue:focus, a.bg-theme-blue:hover, button.bg-theme-blue:focus, button.bg-theme-blue:hover {
+            color: #fff;
+            background-color: #212145!important;
+        }
+        .list-group-item.active {
+            color: #FF005C;
+            font-weight: bold;
+            background: #fff;
+            background-color: #212145!important;
+            border: none;
+        }
+        .navbar.bg-light {
+            background: #fff !important;
+             box-shadow: none; 
+        }
+        .user-phn {
+            font-size: 12px;
+            color: #a5a5a5;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .user-name {
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 15px;
+        }
+        .sidebar-heading {
+            text-align: center;
+            background: #0f0f4b;
+            border-bottom: 2px solid #fff;
+        }
+        .user-img {
+            margin-bottom: 20px;
+        }
+        .user-img img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 1px solid #6c757d;
+        }
+        .bg-theme-blue {
+            background-color: #07072d!important
+        }
+        .navbar-toggler {
+            padding: .25rem 1.75rem;
+        }
+        .logout-btn {
+            color: #07072d!important;
+            font-weight: bold;
+            font-size: 13px;
+            border: 1px solid #07072d;
+            border-radius: 5px;
+            padding: 6px 20px!important;
+        }
+        .logout-btn:hover {
+            background: #07072d;
+            color: #fff!important;
+            box-shadow: 1px 1px 3px #0000004d;
+        }
+        .url-class {
+            font-size: 12px;
+            color: #a5a5a5;
+        }
 	</style>
 
 @endsection
 @section('content')
 	
     <section>
-    	<div class="container" style="margin-top: 130px; margin-bottom: 50px; background: #fff;">
-    		<div class="nav-side-menu">
-    			
-    <div class="brand">Welcome, {{ Auth::user()->name }}<br><span style="font-size: 10px; color: #949494;">{{ Auth::user()->phone }}</span></div>
-    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-  
-        <div class="menu-list">
-  
-            <ul id="menu-content" class="menu-content collapse out">
-                <li class="active">
-                  <a href="#">
-                  <i class="fa fa-dashboard fa-lg"></i> Dashboard
-                  </a>
-                </li>
+        <div class="container" style="margin-top: 130px; margin-bottom: 50px; background: #fff;">
+            <div class="d-flex" id="wrapper">
+                <!-- Sidebar -->
+                <div class="bg-theme-blue border-right" id="sidebar-wrapper" style="max-width: 15.5rem;">
+                    <div class="sidebar-heading">
+                        <div class="user-img">
+                            @if (Auth::user()->image)
+                                <img src="{{ asset(Auth::user()->image) }}" alt="{{ Auth::user()->name }}" class="rounded-circle" width="150">
+                            @else
+                                <img src="{{ asset('public/assets/images/user/avatar.png') }}" alt="{{ Auth::user()->name }}" class="rounded-circle" width="150">
+                            @endif
+                            {{-- <img src="{{ asset('public/assets/images/user/avatar.png') }}" alt="Admin" class="rounded-circle" width="150"> --}}
+                        </div>
+                        <div class="user-name">{{ Auth::user()->name }}</div>
+                        <div class="user-phn">- {{ Auth::user()->phone }} -</div>
+                    </div>
+                    <div class="list-group list-group-flush">
+                       {{--  <li class="list-group-item list-group-item-action bg-dark active">
+                            <a href="{{ route('home') }}" >
+                                <i class="fa fa-tachometer" aria-hidden="true" style="margin-right: 5px;"></i> Dashboard
+                            </a>
+                        </li> --}}
+                        <a href="{{ route('home') }}" class="list-group-item list-group-item-action bg-theme-blue {{ Request::is('home') ? 'active' : '' }}">
+                            <i class="bx bxs-dashboard" aria-hidden="true" style="margin-right: 5px;"></i> Dashboard
+                        </a>
+                        <a href="{{ route('user.profile') }}" class="list-group-item list-group-item-action bg-theme-blue {{ Request::is('user/profile') ? 'active' : '' }}">
+                            <i class="bx bxs-user" aria-hidden="true" style="margin-right: 5px;"></i> Profile
+                        </a>
+                        <a href="{{ route('user.orders') }}" class="list-group-item list-group-item-action bg-theme-blue {{ Request::is('user/orders') ? 'active' : '' }}">
+                            <i class="bx bxs-shopping-bag" aria-hidden="true" style="margin-right: 5px;"></i> Orders
+                        </a>
+                        <a href="{{ route('user.wishlist') }}" class="list-group-item list-group-item-action bg-theme-blue {{ Request::is('user/wishlist') ? 'active' : '' }}">
+                            <i class="bx bxs-heart" aria-hidden="true" style="margin-right: 5px;"></i> Wishlist
+                        </a>
+                        <a href="{{ route('user.reviews') }}" class="list-group-item list-group-item-action bg-theme-blue {{ Request::is('user/reviews') ? 'active' : '' }}">
+                            <i class="bx bxs-star" aria-hidden="true" style="margin-right: 5px;"></i> Reviews
+                        </a>
+                        <a href="{{ route('user.settings') }}" class="list-group-item list-group-item-action bg-theme-blue {{ Request::is('user/settings') ? 'active' : '' }}">
+                            <i class="bx bxs-cog" aria-hidden="true" style="margin-right: 5px;"></i> Settings
+                        </a>
+                        <a href="{{ route('user.logout') }}" class="list-group-item list-group-item-action bg-theme-blue d-xl-none ml-n0">
+                            <i class="bx bx-log-out-circle" aria-hidden="true" style="margin-right: 5px;"></i> Logout
+                        </a>
+                    </div>
+                </div>
+                <!-- /#sidebar-wrapper -->
+                <!-- Page Content -->
+                <div id="page-content-wrapper">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                        <button class="btn btn-primary d-xl-none ml-n0" id="menu-toggle"><i class="fa fa-bars"></i></button>
+                        <span class="url-class">
+                            @if (Request::path() == "home")
+                                User &nbsp; > &nbsp; Dashborad
+                            @endif
+                            @if (Request::path() == "user/profile")
+                                User &nbsp; > &nbsp; Profile
+                            @endif
+                            @if (Request::path() == "user/wishlist")
+                                User &nbsp; > &nbsp; Wishlist
+                            @endif
+                            @if (Request::path() == "user/orders")
+                                User &nbsp; > &nbsp; Orders
+                            @endif
+                            @if (Request::path() == "user/reviews")
+                                User &nbsp; > &nbsp; Reviews
+                            @endif
+                            @if (Request::path() == "user/settings")
+                                User &nbsp; > &nbsp; Settings
+                            @endif
+                        </span>
+                        {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                        </button> --}}
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                                <li class="nav-item active">
+                                    <a class="nav-link logout-btn" href="{{ route('user.logout') }}"><i class="bx bx-log-out-circle"></i> Logout</a>
+                                </li>
+                                {{-- <li class="nav-item">
+                                    <a class="nav-link" href="#">Link</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Dropdown
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </li> --}}
+                            </ul>
+                        </div>
+                    </nav>
+                    <div class="container-fluid">
 
-                <li  data-toggle="collapse" data-target="#products" class="collapsed">
-                  <a href="#"><i class="fa fa-gift fa-lg"></i> Orders {{-- <span class="arrow"></span> --}}</a>
-                </li>
-                {{-- <ul class="sub-menu collapse" id="products">
-                    <li class="active"><a href="#">CSS3 Animation</a></li>
-                    <li><a href="#">General</a></li>
-                    <li><a href="#">Buttons</a></li>
-                    <li><a href="#">Tabs & Accordions</a></li>
-                    <li><a href="#">Typography</a></li>
-                    <li><a href="#">FontAwesome</a></li>
-                    <li><a href="#">Slider</a></li>
-                    <li><a href="#">Panels</a></li>
-                    <li><a href="#">Widgets</a></li>
-                    <li><a href="#">Bootstrap Model</a></li>
-                </ul> --}}
-
-
-                <li data-toggle="collapse" data-target="#service" class="collapsed">
-                  <a href="#"><i class="fa fa-globe fa-lg"></i> Wishlist {{-- <span class="arrow"></span> --}}</a>
-                </li>  
-                {{-- <ul class="sub-menu collapse" id="service">
-                  <li>New Service 1</li>
-                  <li>New Service 2</li>
-                  <li>New Service 3</li>
-                </ul> --}}
-
-
-                <li data-toggle="collapse" data-target="#new" class="collapsed">
-                  <a href="#"><i class="fa fa-car fa-lg"></i> Reviews {{-- <span class="arrow"></span> --}}</a>
-                </li>
-                {{-- <ul class="sub-menu collapse" id="new">
-                  <li>New New 1</li>
-                  <li>New New 2</li>
-                  <li>New New 3</li>
-                </ul> --}}
-
-
-                 <li>
-                  <a href="#">
-                  <i class="fa fa-user fa-lg"></i> Profile
-                  </a>
-                  </li>
-
-                 <li>
-                  <a href="#">
-                  <i class="fa fa-users fa-lg"></i> Settings
-                  </a>
-                </li>
-
-                <li>
-                  <a href="{{ route('user.logout') }}">
-                  <i class="fa fa-sign-out fa-lg"></i> Logout
-                  </a>
-                </li>
-            </ul>
-     </div>
-</div>
-    	</div>
+                        <!-- user content @s -->
+                        @yield('user-content')
+                        <!-- user content @e -->
+                        
+                    </div>
+                </div>
+                <!-- /#page-content-wrapper -->
+            </div>
+            <!-- /#wrapper -->
+        </div>
     </section>
 
 @endsection
 @section('js')
-	{{-- expr --}}
+	<script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
 @endsection

@@ -17,10 +17,23 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// user 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('user/logout', 'Auth\LoginController@logout')->name('user.logout');
 Route::post('/login', 'Auth\LoginController@login')->name('user.login');
+
+Route::group(['prefix'=>'user'], function() {
+	Route::get('/profile', 'HomeController@profile')->name('user.profile');
+	Route::post('/edit/{id}', 'HomeController@edit');
+
+	Route::get('logout', 'Auth\LoginController@logout')->name('user.logout');
+
+	Route::get('/wishlist', 'HomeController@wishlist')->name('user.wishlist');
+	Route::post('/wishlist/{id}', 'HomeController@add_to_wishlist');
+
+	Route::get('/orders', 'HomeController@orders')->name('user.orders');
+	Route::get('/reviews', 'HomeController@reviews')->name('user.reviews');
+	Route::get('/settings', 'HomeController@settings')->name('user.settings');
+});
 
 //Verify with OTP
 Route::get('/verify', 'VerifyController@getVerify')->name('getVerify');
@@ -33,7 +46,7 @@ Route::post('/postVerifyToken', 'Auth\VerificationTokenController@postVerifyToke
 //Reset Password
 Route::resource('/resetpassword', 'Auth\ResetPasswordController');
 
-
+// admin
 Route::group(['prefix'=>'admin'], function() {
 	Route::get('/', 'AdminController@index')->name('admin.home');
 	Route::get('/login', 'Admin\LoginController@showLoginForm')->name('admin.login');
@@ -59,9 +72,24 @@ Route::group(['prefix'=>'admin'], function() {
 // ...........................................................................................
 //  Back-end pages
 // ............................................................................................
-	// customer
+	// Customers module
+	// ..........................................................................
+	// all customers
 	Route::get('/customers', 'AdminController@customers')->name('customers');
 	Route::post('/customer_status/{id}', 'Admin\Pages\Customers\CustomerController@status');
+	// divisions
+	Route::get('/divisions', 'AdminController@divisions')->name('divisions');
+	Route::post('/divisions', 'Admin\Pages\Customers\DivisionsController@store')->name('division.store');
+	Route::post('/delete_division/{id}', 'Admin\Pages\Customers\DivisionsController@delete_division');
+	Route::post('/division_status/{id}', 'Admin\Pages\Customers\DivisionsController@status');
+	// districts
+	Route::get('/districts', 'AdminController@districts')->name('districts');
+	Route::post('/districts', 'Admin\Pages\Customers\DistrictsController@store')->name('district.store');
+	Route::post('/delete_district/{id}', 'Admin\Pages\Customers\DistrictsController@delete_district');
+	// zones
+	Route::get('/zones', 'AdminController@zones')->name('zones');
+	Route::post('/zones', 'Admin\Pages\Customers\ZonesController@store')->name('zone.store');
+	Route::post('/delete_zone/{id}', 'Admin\Pages\Customers\ZonesController@delete_zone');
 
 
 	// Products module
@@ -147,3 +175,26 @@ Route::group(['prefix'=>'admin'], function() {
 
 
 
+Route::get('get-districts/{id}', function($id){
+	// return json_encode(App\District::where('division_id', $id)->get());
+	$districtPath = 'public/assets/json/bd-districts.json';
+    $districtJson = json_decode(file_get_contents($districtPath), true);
+    $collection = collect($districtJson)->where('division_id', $id);
+    return $collection;
+});
+
+Route::get('get-zones/{id}', function($id){
+	// return json_encode(App\District::where('division_id', $id)->get());
+	$poastcodesPath = 'public/assets/json/bd-postcodes.json';
+    $poastcodesJson = json_decode(file_get_contents($poastcodesPath), true);
+    $collection = collect($poastcodesJson)->where('district_id', $id);
+    return $collection;
+});
+
+Route::get('get-postal-code/{code}', function($code){
+	// return json_encode(App\District::where('division_id', $id)->get());
+	$poastcodesPath = 'public/assets/json/bd-postcodes.json';
+    $poastcodesJson = json_decode(file_get_contents($poastcodesPath), true);
+    $collection = collect($poastcodesJson)->where('postCode', $code);
+    return $collection;
+});

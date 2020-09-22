@@ -79,6 +79,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'phone' => $data['phone'],
             'active' => 0,
+            'userID' => substr($data['name'], 0, 1).uniqid(),
             'password' => Hash::make($data['password']),
         ]);
 
@@ -86,5 +87,7 @@ class RegisterController extends Controller
             $user->code = SendCode::sendCode($user->phone);
             $user->save();
         }
+        // $user->userID = substr($data['name'], 0, 1).uniqid();
+        // $user->save();
     }
 }

@@ -27,6 +27,7 @@ class CreateProductsTable extends Migration
             $table->integer('quantity');
             $table->integer('alert_quantity');
             $table->text('description');
+            $table->text('short_description');
             $table->string('slug');
             $table->boolean('status')->default(0);
             $table->boolean('isFeatured')->default(0);

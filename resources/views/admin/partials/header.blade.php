@@ -11,8 +11,9 @@
                                 </a>
                             </div><!-- .nk-header-brand -->
                             <div class="nk-header-search ml-3 ml-xl-0">
-                                <em class="icon ni ni-search"></em>
-                                <input type="text" class="form-control border-transparent form-focus-none" placeholder="Search anything">
+                                <a href="{{ url('/') }}" class="nav-link"><i class="fa fa-globe" style="margin-right: 5px;"></i>View user site</a>
+                                
+                                {{-- <input type="text" class="form-control border-transparent form-focus-none" placeholder="Search anything"> --}}
                             </div><!-- .nk-header-news -->
                             <div class="nk-header-tools">
                                 <ul class="nk-quick-nav">

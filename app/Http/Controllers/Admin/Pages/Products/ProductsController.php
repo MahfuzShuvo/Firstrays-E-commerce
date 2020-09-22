@@ -17,12 +17,14 @@ class ProductsController extends Controller
         // Validation
         $validator  = \Validator::make($request->all(), [
             'name' => 'required|max:255',
+            'short_description' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
             'purchase' => 'required|numeric',
             'quantity' => 'required|numeric',
             'alert_quantity' => 'required|numeric',
-            'display_image' => 'required',
+            'display_image' => 'required|mimetypes:image/jpeg, image/png, image/jpg|max:1024',
+            // 'image' => 'required|mimetypes: image/jpeg, image/png, image/jpg|max:1024',
             'category_id' => 'required'
         ]);
 
@@ -33,7 +35,8 @@ class ProductsController extends Controller
     	$product = new Product;
 
     	$product->name = $request->name;
-    	$product->description = $request->description;
+    	$product->short_description = $request->short_description;
+        $product->description = $request->description;
     	$product->price = $request->price;
         $product->purchase = $request->purchase;
     	$product->quantity = $request->quantity;
@@ -46,27 +49,55 @@ class ProductsController extends Controller
 
     	$product->save();
 
-        if ($request->attribute_id2) {
-            foreach ($request->value2 as $value) {
-                $productAttribute = new ProductAttribute;
-                $productAttribute->value = $value;
-                $productAttribute->product_id = $product->id;
-                $productAttribute->attribute_id = $request->attribute_id2;
+        if ($request->attribute_id2 && $request->attribute_id1) {
+            
+                foreach ($request->value2 as $value) {
+                    if ($value) {
+                    $productAttribute = new ProductAttribute;
+                    $productAttribute->value = $value;
+                    $productAttribute->product_id = $product->id;
+                    $productAttribute->attribute_id = $request->attribute_id2;
 
-                $productAttribute->save();
+                    $productAttribute->save();
+                }
+            }
+                foreach ($request->value1 as $value) {
+                    if ($value) {
+                    $productAttribute = new ProductAttribute;
+                    $productAttribute->value = $value;
+                    $productAttribute->product_id = $product->id;
+                    $productAttribute->attribute_id = $request->attribute_id1;
+
+                    $productAttribute->save();
+                }
+            }
+        }
+        elseif ($request->attribute_id2) {
+                foreach ($request->value2 as $value) {
+                    if ($value) {
+                    $productAttribute = new ProductAttribute;
+                    $productAttribute->value = $value;
+                    $productAttribute->product_id = $product->id;
+                    $productAttribute->attribute_id = $request->attribute_id2;
+
+                    $productAttribute->save();
+                }
             }
         }
 
-        if ($request->attribute_id) {
-            foreach ($request->value as $value) {
-                $productAttribute = new ProductAttribute;
-                $productAttribute->value = $value;
-                $productAttribute->product_id = $product->id;
-                $productAttribute->attribute_id = $request->attribute_id;
+        elseif ($request->attribute_id1) {
+                foreach ($request->value1 as $value) {
+                    if ($value) {
+                    $productAttribute = new ProductAttribute;
+                    $productAttribute->value = $value;
+                    $productAttribute->product_id = $product->id;
+                    $productAttribute->attribute_id = $request->attribute_id1;
 
-                $productAttribute->save();
+                    $productAttribute->save();
+                }
             }
         }
+        
 
     	if ($request->hasFile('image') && $request->hasFile('display_image')) {
     		$image = $request->file('display_image');
@@ -95,6 +126,23 @@ class ProductsController extends Controller
 	            $product_image->save();
     		}
     	}
+        elseif ($request->hasFile('display_image')) {
+            $image = $request->file('display_image');
+
+            $imagename = $image->getClientOriginalName();
+            $imagesize = $image->getClientSize();
+            $ext = $image->getClientOriginalExtension();
+
+            $image_title = uniqid().time().'.'.$ext;
+            $image->move('public/assets/images/new-products/', $image_title);
+
+            $product_image = new ProductImage;
+
+            $product_image->product_id = $product->id;
+            $product_image->display_image = "public/assets/images/new-products/".$image_title;
+
+            $product_image->save();
+        }
     	session()->flash('success', 'Product added in the stock successfully');
     	return redirect()->back();
     }
@@ -176,7 +224,8 @@ class ProductsController extends Controller
     {
 
         $product = Product::find($id);
-        $product_img = ProductImage::where('product_id', $product->id)->get();
+        $product_img = ProductImage::where('product_id', $id)->get();
+        $product_attr = ProductAttribute::where('product_id', $id)->get();
 
         // $validator  = \Validator::make($request->all(), [
         //     'display_image' => 'mimes:jpg, jpeg, png',
@@ -188,15 +237,77 @@ class ProductsController extends Controller
         // }
 
         $product->name = $request->name;
+        $product->short_description = $request->short_description;
         $product->description = $request->description;
         $product->price = $request->price;
-        $product->discount = $request->discount;
+        $product->promotion_price = $request->promotion_price;
+        $product->purchase = $request->purchase;
         $product->quantity = $request->quantity;
+        $product->alert_quantity = $request->alert_quantity;
 
         $product->slug = Str::slug($product->name);
         $product->category_id = $request->category_id;
         $product->brand_id = $request->brand_id;
 
+        if ($request->attribute_id2 && $request->attribute_id1) {
+            foreach (ProductAttribute::where('product_id', $id)->where('attribute_id', $request->attribute_id2)->get() as $attr) {
+                $attr->delete();
+            }
+            foreach (ProductAttribute::where('product_id', $id)->where('attribute_id', $request->attribute_id1)->get() as $attr) {
+                $attr->delete();
+            }
+                foreach ($request->value2 as $value) {
+                    if ($value) {
+                    $productAttribute = new ProductAttribute;
+                    $productAttribute->value = $value;
+                    $productAttribute->product_id = $product->id;
+                    $productAttribute->attribute_id = $request->attribute_id2;
+
+                    $productAttribute->save();
+                }
+            }
+            foreach ($request->value1 as $value) {
+                    if ($value) {
+                    $productAttribute = new ProductAttribute;
+                    $productAttribute->value = $value;
+                    $productAttribute->product_id = $product->id;
+                    $productAttribute->attribute_id = $request->attribute_id1;
+
+                    $productAttribute->save();
+                }
+            }
+        }
+        elseif ($request->attribute_id2) {
+            foreach (ProductAttribute::where('product_id', $id)->where('attribute_id', $request->attribute_id2)->get() as $attr) {
+                $attr->delete();
+            }
+                foreach ($request->value2 as $value) {
+                    if ($value) {
+                    $productAttribute = new ProductAttribute;
+                    $productAttribute->value = $value;
+                    $productAttribute->product_id = $product->id;
+                    $productAttribute->attribute_id = $request->attribute_id2;
+
+                    $productAttribute->save();
+                }
+            }
+        }
+
+        elseif ($request->attribute_id1) {
+            foreach (ProductAttribute::where('product_id', $id)->where('attribute_id', $request->attribute_id1)->get() as $attr) {
+                $attr->delete();
+            }
+                foreach ($request->value1 as $value) {
+                    if ($value) {
+                    $productAttribute = new ProductAttribute;
+                    $productAttribute->value = $value;
+                    $productAttribute->product_id = $product->id;
+                    $productAttribute->attribute_id = $request->attribute_id1;
+
+                    $productAttribute->save();
+                }
+            }
+        }
 
         if ($request->hasFile('image'))
         {

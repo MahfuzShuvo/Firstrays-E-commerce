@@ -213,7 +213,12 @@
                                     <tbody>
                                         @php $num = 0; @endphp
                                         @foreach ($products as $item)
-                                        <tr class="nk-tb-item">
+                                        @if ($item->quantity <= $item->alert_quantity)
+                                            <tr class="nk-tb-item" style="background: #ff130017;">
+                                        @else
+                                            <tr class="nk-tb-item">
+                                        @endif
+                                        
                                            {{--  <td class="nk-tb-col nk-tb-col-check">
                                                 <div class="custom-control custom-control-sm custom-checkbox notext">
                                                     <input type="checkbox" class="custom-control-input" id="uid1">
@@ -311,15 +316,41 @@
                                                             <em class="icon ni ni-wallet-fill"></em>
                                                         </a>
                                                     </li> --}}
-                                                    <li class="nk-tb-action-hidden">
-                                                        <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Add Promotion">
-                                                            {{-- <span ></span> --}}
-                                                            <em data-toggle="modal" data-target="#promoModal{{ $item->id }}" class="icon ni ni-bulb-fill"></em>
-                                                            
-                                                        </button>
-                                                    </li>
+                                                    @if ($item->promotion_price)
+                                                        @if ($item->quantity <= $item->alert_quantity)
+                                                            <li class="nk-tb-action-hidden" style="background: transparent;">
+                                                        @else
+                                                            <li class="nk-tb-action-hidden">
+                                                        @endif
+                                                        {{-- <li class="nk-tb-action-hidden"> --}}
+                                                            <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Edit Promotion">
+                                                                {{-- <span ></span> --}}
+                                                                <em data-toggle="modal" data-target="#promoModal{{ $item->id }}" class="icon ni ni-bulb-fill" style="color: #09c2de;"></em>
+                                                                
+                                                            </button>
+                                                        </li>
+                                                    @else
+                                                        @if ($item->quantity <= $item->alert_quantity)
+                                                            <li class="nk-tb-action-hidden" style="background: transparent;">
+                                                        @else
+                                                            <li class="nk-tb-action-hidden">
+                                                        @endif
+                                                        {{-- <li class="nk-tb-action-hidden"> --}}
+                                                            <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Add Promotion">
+                                                                {{-- <span ></span> --}}
+                                                                <em data-toggle="modal" data-target="#promoModal{{ $item->id }}" class="icon ni ni-bulb-fill"></em>
+                                                                
+                                                            </button>
+                                                        </li>
+                                                    @endif
+                                                   
                                                     @if ($item->isFeatured)
-                                                        <li class="nk-tb-action-hidden">
+                                                       @if ($item->quantity <= $item->alert_quantity)
+                                                            <li class="nk-tb-action-hidden" style="background: transparent;">
+                                                        @else
+                                                            <li class="nk-tb-action-hidden">
+                                                        @endif
+                                                        {{-- <li class="nk-tb-action-hidden"> --}}
                                                             <form action="{{ url('/product_featured', $item->id) }}" method="post">
                                                                 @csrf
                                                                 <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Make Regular">
@@ -329,7 +360,12 @@
                                                             
                                                         </li>
                                                     @else
-                                                        <li class="nk-tb-action-hidden">
+                                                        @if ($item->quantity <= $item->alert_quantity)
+                                                            <li class="nk-tb-action-hidden" style="background: transparent;">
+                                                        @else
+                                                            <li class="nk-tb-action-hidden">
+                                                        @endif
+                                                        {{-- <li class="nk-tb-action-hidden"> --}}
                                                             <form action="{{ url('/product_featured', $item->id) }}" method="post">
                                                                 @csrf
                                                                 <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Make Featured">
@@ -339,7 +375,12 @@
                                                         </li>
                                                     @endif
                                                     @if ($item->status)
-                                                        <li class="nk-tb-action-hidden">
+                                                        @if ($item->quantity <= $item->alert_quantity)
+                                                            <li class="nk-tb-action-hidden" style="background: transparent;">
+                                                        @else
+                                                            <li class="nk-tb-action-hidden">
+                                                        @endif
+                                                        {{-- <li class="nk-tb-action-hidden"> --}}
                                                             <form action="{{ url('/product_status', $item->id) }}" method="post">
                                                                 @csrf
                                                                 <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Disable">
@@ -349,7 +390,12 @@
                                                             
                                                         </li>
                                                     @else
-                                                        <li class="nk-tb-action-hidden">
+                                                        @if ($item->quantity <= $item->alert_quantity)
+                                                            <li class="nk-tb-action-hidden" style="background: transparent;">
+                                                        @else
+                                                            <li class="nk-tb-action-hidden">
+                                                        @endif
+                                                        {{-- <li class="nk-tb-action-hidden"> --}}
                                                             <form action="{{ url('/product_status', $item->id) }}" method="post">
                                                                 @csrf
                                                                 <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Enable">
@@ -399,7 +445,7 @@
                                             </tr><!-- .nk-tb-item  -->
                                             <!-- Modal Content Code -->
 
-                                        <!-- add attributes Modal start -->
+                                        <!-- promotion Modal start -->
                                         <div class="modal fade" tabindex="-1" id="promoModal{{ $item->id }}">
                                             <div class="modal-dialog modal-dialog-top" role="document">
                                                 <div class="modal-content">
@@ -416,7 +462,7 @@
                                                             <div class="form-group">
                                                                 <div class="form-control-wrap">
                                                                     <label class="form-label" for="default-06">Promotional Price</label><span style="color: red; font-weight: bold;"> *</span>
-                                                                    <input type="number" class="form-control" value="{{ old('promotion_price') }}" id="promotion_price" name="promotion_price" placeholder="BDT.">
+                                                                    <input type="number" class="form-control" value="{{ $item->promotion_price }}" id="promotion_price" name="promotion_price" placeholder="BDT.">
                                                                 </div>
                                                             </div>
                                                             <div class="row" style="margin-bottom: 20px;">
@@ -427,7 +473,7 @@
                                                                             <div class="form-icon form-icon-left">
                                                                                 <em class="icon ni ni-calendar"></em>
                                                                             </div>
-                                                                            <input type="text" class="form-control date-picker" data-date-format="yyyy-mm-dd" name="starting_date" placeholder="yyyy-mm-dd">
+                                                                            <input type="text" class="form-control date-picker" data-date-format="yyyy-mm-dd" name="starting_date" value="{{ $item->starting_date }}" placeholder="yyyy-mm-dd">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -438,7 +484,7 @@
                                                                             <div class="form-icon form-icon-left">
                                                                                 <em class="icon ni ni-calendar"></em>
                                                                             </div>
-                                                                            <input type="text" class="form-control date-picker" data-date-format="yyyy-mm-dd" name="end_date" placeholder="yyyy-mm-dd">
+                                                                            <input type="text" class="form-control date-picker" data-date-format="yyyy-mm-dd" name="end_date" value="{{ $item->end_date }}" placeholder="yyyy-mm-dd">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -452,7 +498,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- add attributes Modal end -->
+                                        <!-- promotion Modal end -->
 
                                         <!-- view Modal start -->
                                         <div class="modal fade view_img_modal" tabindex="-1" id="viewModal{{ $item->id }}">
@@ -484,38 +530,174 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label class="form-label" for="default-06">Product Description</label>
+                                                                        <label class="form-label" for="default-06">Product Description (in short)</label>
+                                                                        <div class="form-control-wrap">
+                                                                            <textarea type="text" class="form-control" id="short_description" name="short_description" placeholder="Description" rows="2" >{{ $item->short_description }}</textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="form-label" for="default-06">Product Description (in details)</label>
                                                                         <div class="form-control-wrap">
                                                                             <textarea type="text" class="form-control" id="summary-ckeditor{{$item->id}}" name="description" placeholder="Description" rows="2" >{{ $item->description }}</textarea>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row" style="margin-bottom: 1.25rem;">
-                                                                        <div class="col-md-4">
+                                                                        <div class="col-md-3">
                                                                             <div class="form-group">
-                                                                                <label class="form-label" for="default-06">Price</label>
                                                                                 <div class="form-control-wrap">
-                                                                                    <input type="number" class="form-control" value="{{ $item->price }}" id="price" name="price" placeholder="Price" >
+                                                                                    <label class="form-label" for="default-06">Purchase Price</label>
+                                                                                    <input type="number" class="form-control" value="{{ $item->purchase }}" id="purchase" name="purchase" placeholder="BDT." >
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-4">
+                                                                        <div class="col-md-3">
                                                                             <div class="form-group">
-                                                                                <label class="form-label" for="default-06">Discount Price</label>
                                                                                 <div class="form-control-wrap">
-                                                                                    <input type="number" class="form-control" value="{{ $item->discount }}" id="discount" name="discount" placeholder="Discount Price">
+                                                                                    <label class="form-label" for="default-06">Selling Price</label>
+                                                                                    <input type="number" class="form-control" value="{{ $item->price }}" id="price" name="price" placeholder="BDT.">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-4">
+                                                                        <div class="col-md-3">
                                                                             <div class="form-group">
-                                                                                <label class="form-label" for="default-06">Quantity</label>
                                                                                 <div class="form-control-wrap">
-                                                                                    <input type="number" class="form-control @error('quantity') is-invalid @enderror" value="{{ $item->quantity }}" id="quantity" name="quantity" placeholder="Quantity" >
+                                                                                    <label class="form-label" for="default-06">Quantity</label>
+                                                                                    <input type="number" class="form-control" value="{{ $item->quantity }}" id="quantity" name="quantity" placeholder="Quantity" >
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <div class="form-control-wrap">
+                                                                                    <label class="form-label" for="default-06">Alert Quantity</label>
+                                                                                    <input type="number" class="form-control" value="{{ $item->alert_quantity }}" id="alert_quantity" name="alert_quantity" placeholder="Alert Quantity" >
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    
+                                                                    @php
+                                                                        $i=1;
+                                                                    @endphp
+                                                                    <div class="row" style="margin-bottom: 1.25rem;">
+                                                                        @php
+                                                                            $count = App\ProductAttribute::where('product_id', $item->id)->distinct('attribute_id')->count();
+                                                                        @endphp
+                                                                         @foreach ($item->attributes->unique('attribute_id') as $key => $attr)
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <div class="field_wrapper">
+                                                                                    <label class="form-label" for="default-06">Attribute</label>
+                                                                                    <div class="cus-attr{{ $i }}">
+                                                                                        <select class="form-control" name="attribute_id{{ $i }}" style="margin-right: 5px;">
+                                                                                            <option value="0">Select an attribute</option>
+                                                                                           
+
+                                                                                             {{--  <option value="{{ $attr->id }}">{{ $attr->name }}</option> --}}
+                                                                                             @foreach (App\Attribute::where('id', $attr->attribute_id)->get() as $attribute)
+                                                                                                 <option value="{{ $attribute->id }}" selected>{{ $attribute->name }}</option>
+                                                                                                 @php
+                                                                                                     $at_id = $attribute->id;
+                                                                                                 @endphp
+                                                                                             @endforeach
+                                                                                            
+                                                                                        </select>
+                                                                                        <div>
+                                                                                            @foreach (App\ProductAttribute::where('product_id', $item->id)->where('attribute_id', $at_id)->get() as $element)
+                                                                                                    <input type="text" name="value{{ $i }}[]" id="value" placeholder="Value" class="form-control" value="{{ $element->value }}" style="margin-right: 5px; margin-top: 5px;" />
+                                                                                                @endforeach
+                                                                                                <div style="display: flex;">
+                                                                                                    <input type="text" name="value{{ $i }}[]" id="value" placeholder="Value" class="form-control" style="margin-right: 5px; margin-top: 5px;" />
+                                                                                                    <a href="javascript:void(0);" class="add_button{{ $i }}" title="Add field" style="padding-top: 15px;">
+                                                                                                        <em class="icon ni ni-plus-circle-fill"></em>
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        @php
+                                                                            $i=2;
+                                                                        @endphp
+                                                                        @if ($count == 1)
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <div class="field_wrapper">
+                                                                                        <label class="form-label" for="default-06">Attribute</label>
+                                                                                        <div class="cus-attr2">
+                                                                                            <select class="form-control" name="attribute_id2" style="margin-right: 5px;">
+                                                                                                <option value="0">Select an attribute</option>
+                                                                                                @foreach (App\Attribute::orderBy('name', 'asc')->get() as $attr)
+
+                                                                                                  <option value="{{ $attr->id }}">{{ $attr->name }}</option>
+
+                                                                                                @endforeach
+                                                                                            </select>
+                                                                                            <div style="display: flex;">
+                                                                                                <input type="text" name="value2[]" id="value" placeholder="Value" class="form-control" style="margin-right: 5px; margin-top: 5px;" />
+                                                                                                <a href="javascript:void(0);" class="add_button2" title="Add field" style="padding-top: 15px;">
+                                                                                                    <em class="icon ni ni-plus-circle-fill"></em>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endif
+                                                                        
+                                                                        @endforeach
+
+                                                                        @if ($count == 0)
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <div class="field_wrapper">
+                                                                                        <label class="form-label" for="default-06">Attribute</label>
+                                                                                        <div class="cus-attr1">
+                                                                                            <select class="form-control" name="attribute_id1" style="margin-right: 5px;">
+                                                                                                <option value="0">Select an attribute</option>
+                                                                                                @foreach (App\Attribute::orderBy('name', 'asc')->get() as $attr)
+
+                                                                                                    <option value="{{ $attr->id }}">{{ $attr->name }}</option>
+
+                                                                                                @endforeach
+                                                                                            </select>
+                                                                                            <div style="display: flex;">
+                                                                                                <input type="text" name="value1[]" id="value" placeholder="Value" class="form-control" style="margin-right: 5px; margin-top: 5px;" />
+                                                                                                <a href="javascript:void(0);" class="add_button1" title="Add field" style="padding-top: 15px;">
+                                                                                                    <em class="icon ni ni-plus-circle-fill"></em>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <div class="field_wrapper">
+                                                                                        <label class="form-label" for="default-06">Attribute</label>
+                                                                                        <div class="cus-attr2">
+                                                                                            <select class="form-control" name="attribute_id2" style="margin-right: 5px;">
+                                                                                                <option value="0">Select an attribute</option>
+                                                                                                @foreach (App\Attribute::orderBy('name', 'asc')->get() as $attr)
+
+                                                                                                  <option value="{{ $attr->id }}">{{ $attr->name }}</option>
+
+                                                                                                @endforeach
+                                                                                            </select>
+                                                                                            <div style="display: flex;">
+                                                                                                <input type="text" name="value2[]" id="value" placeholder="Value" class="form-control" style="margin-right: 5px; margin-top: 5px;" />
+                                                                                                <a href="javascript:void(0);" class="add_button2" title="Add field" style="padding-top: 15px;">
+                                                                                                    <em class="icon ni ni-plus-circle-fill"></em>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endif
+                                                                        
+                                                                    </div>
                                                                     <div class="row" style="margin-bottom: 1.25rem;">
                                                                         <div class="col-md-6">
                                                                             <div class="form-group">
@@ -656,8 +838,19 @@
                                     @enderror
 								</div>
 							</div>
+                            <div class="form-group">
+                                <label class="form-label" for="default-06">Product Description (in short)</label><span style="color: red; font-weight: bold;"> *</span>
+                                <div class="form-control-wrap">
+                                    <textarea type="text" class="form-control @error('short_description') is-invalid @enderror" id="short_description" name="short_description" placeholder="Description" rows="2" >{{ old('short_description') }}</textarea>
+                                    @error('short_description')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 							<div class="form-group">
-                                <label class="form-label" for="default-06">Product Description</label><span style="color: red; font-weight: bold;"> *</span>
+                                <label class="form-label" for="default-06">Product Description (in details)</label><span style="color: red; font-weight: bold;"> *</span>
 								<div class="form-control-wrap">
 									<textarea type="text" class="form-control @error('description') is-invalid @enderror" id="summary-ckeditor" name="description" placeholder="Description" rows="2" >{{ old('description') }}</textarea>
                                     @error('description')
@@ -685,7 +878,7 @@
                                     <div class="form-group">
                                         <div class="form-control-wrap">
                                             <label class="form-label" for="default-06">Selling Price</label><span style="color: red; font-weight: bold;"> *</span>
-                                            <input type="number" class="form-control" value="{{ old('price') }}" id="price" name="price" placeholder="BDT.">
+                                            <input type="number" class="form-control @error('price') is-invalid @enderror" value="{{ old('price') }}" id="price" name="price" placeholder="BDT.">
                                             @error('price')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -726,8 +919,8 @@
                                     <div class="form-group">
                                         <div class="field_wrapper">
                                             <label class="form-label" for="default-06">First Attribute</label>
-                                            <div class="cus-attr">
-                                                <select class="form-control" name="attribute_id" style="margin-right: 5px;">
+                                            <div class="cus-attr1">
+                                                <select class="form-control" name="attribute_id1" style="margin-right: 5px;">
                                                     <option value="0">Select an attribute</option>
                                                     @foreach (App\Attribute::orderBy('name', 'asc')->get() as $attr)
 
@@ -736,8 +929,8 @@
                                                     @endforeach
                                                 </select>
                                                 <div style="display: flex;">
-                                                    <input type="text" name="value[]" id="value" placeholder="Value" class="form-control" style="margin-right: 5px; margin-top: 5px;" />
-                                                    <a href="javascript:void(0);" class="add_button" title="Add field" style="padding-top: 15px;">
+                                                    <input type="text" name="value1[]" id="value" placeholder="Value" class="form-control" style="margin-right: 5px; margin-top: 5px;" />
+                                                    <a href="javascript:void(0);" class="add_button1" title="Add field" style="padding-top: 15px;">
                                                         <em class="icon ni ni-plus-circle-fill"></em>
                                                     </a>
                                                 </div>
@@ -881,21 +1074,21 @@
     <script type="text/javascript">
     $(document).ready(function(){
         var maxField = 10; //Input fields increment limitation
-        var addButton = $('.add_button'); //Add button selector
+        var addButton1 = $('.add_button1'); //Add button selector
         var addButton2 = $('.add_button2'); //Add button selector
-        var wrapper = $('.cus-attr'); //Input field wrapper
+        var wrapper1 = $('.cus-attr1'); //Input field wrapper
         var wrapper2 = $('.cus-attr2'); //Input field wrapper
-        var fieldHTML = '<div style="display: flex;"><input type="text" name="value[]" id="value" placeholder="Value" class="form-control" style="margin-right: 5px; margin-top: 5px;" /><a href="javascript:void(0);" class="remove_button" style="padding-top: 15px;"><em class="icon ni ni-minus-circle-fill"></em></a></div>'; //New input field html 
+        var fieldHTML1 = '<div style="display: flex;"><input type="text" name="value1[]" id="value" placeholder="Value" class="form-control" style="margin-right: 5px; margin-top: 5px;" /><a href="javascript:void(0);" class="remove_button1" style="padding-top: 15px;"><em class="icon ni ni-minus-circle-fill"></em></a></div>'; //New input field html 
         var fieldHTML2 = '<div style="display: flex;"><input type="text" name="value2[]" id="value" placeholder="Value" class="form-control" style="margin-right: 5px; margin-top: 5px;" /><a href="javascript:void(0);" class="remove_button2" style="padding-top: 15px;"><em class="icon ni ni-minus-circle-fill"></em></a></div>'; //New input field html 
         var x = 1; //Initial field counter is 1
         var y = 1; //Initial field counter is 1
         
         //Once add button is clicked
-        $(addButton).click(function(){
+        $(addButton1).click(function(){
             //Check maximum number of input fields
             if(x < maxField){ 
                 x++; //Increment field counter
-                $(wrapper).append(fieldHTML); //Add field html
+                $(wrapper1).append(fieldHTML1); //Add field html
             }
         });
         $(addButton2).click(function(){
@@ -907,7 +1100,7 @@
         });
         
         //Once remove button is clicked
-        $(wrapper).on('click', '.remove_button', function(e){
+        $(wrapper1).on('click', '.remove_button1', function(e){
             e.preventDefault();
             $(this).parent('div').remove(); //Remove field html
             x--; //Decrement field counter

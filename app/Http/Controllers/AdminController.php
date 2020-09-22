@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\Division;
+use App\District;
+use App\Zone;
 use App\Product;
 use App\Category;
 use App\Brand;
@@ -36,12 +39,36 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
+    /**
+     * Customers Module...........................................................................
+     */
     public function customers()
     {
         $users = User::orderBy('id', 'desc')->get();
         return view('admin.pages.customers.customers', compact('users'));
     }
 
+    public function divisions()
+    {
+        $divisions = Division::orderBy('id', 'asc')->get();
+        return view('admin.pages.customers.divisions', compact('divisions'));
+    }
+
+    public function districts()
+    {
+        $districts = District::orderBy('division_id', 'asc')->orderBy('name', 'asc')->get();
+        return view('admin.pages.customers.districts', compact('districts'));
+    }
+
+    public function zones()
+    {
+        $zones = Zone::orderBy('district_id', 'asc')->orderBy('name', 'asc')->get();
+        return view('admin.pages.customers.zones', compact('zones'));
+    }
+
+    /**
+     * Products Module.............................................................................
+     */
     public function all_products()
     {
         $products = Product::orderBy('id', 'desc')->get();
@@ -79,6 +106,9 @@ class AdminController extends Controller
         return view('admin.pages.products.attributes', compact('attributes'));
     }
 
+    /**
+     * Settings Module..................................................................................
+     */
     public function slider()
     {
         $sliders = Slider::orderBy('id', 'desc')->get();

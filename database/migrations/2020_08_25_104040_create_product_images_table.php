@@ -17,7 +17,7 @@ class CreateProductImagesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('product_id')->unsigned();
             $table->string('display_image');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

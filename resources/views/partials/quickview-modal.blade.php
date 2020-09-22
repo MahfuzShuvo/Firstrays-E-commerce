@@ -21,7 +21,9 @@
                                 @endforeach
 								@foreach ($product->images as $pro_img)
 									<div class="single-slider">
-										<img src="{{ $pro_img->image }}" alt="#" style="height: 510px; width: auto;">
+										@if ($pro_img->image != null)
+											<img src="{{ $pro_img->image }}" alt="#" style="height: 510px; width: auto;">
+										@endif
 									</div>
 								@endforeach
 								{{-- <div class="single-slider">
@@ -86,7 +88,7 @@
 								@endif
 							</h3>
 							<div class="quickview-peragraph">
-								<p>{{ $product->description }}</p>
+								<p>{{ $product->short_description }}</p>
 								<div class="custom-pera">
 									<p style="margin-bottom: 0;"><b>SKU: </b>{{ $product->sku}}</p>
 									<p><b>Category: </b>

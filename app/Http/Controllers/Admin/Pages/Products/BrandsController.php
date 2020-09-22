@@ -14,7 +14,7 @@ class BrandsController extends Controller
     	// Validation
     	$validator  = \Validator::make($request->all(), [
 	        'name' => 'required|max:500',
-	        'image' => 'required'
+	        'image' => 'required|mimetypes:image/jpeg, image/png, image/jpg|max:1024'
     	]);
 
     	if($validator->fails()) {

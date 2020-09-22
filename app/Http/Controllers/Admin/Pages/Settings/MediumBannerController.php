@@ -13,8 +13,8 @@ class MediumBannerController extends Controller
     {
         // $input = $request->all();
         $validator  = \Validator::make($request->all(), [
-            'img_1' => 'required',
-            'img_2' => 'required',
+            'img_1' => 'required|mimetypes:image/jpeg, image/png, image/jpg|max:1024',
+            'img_2' => 'required|mimetypes:image/jpeg, image/png, image/jpg|max:1024',
 
             'header_txt_1' => 'required',
             'header_txt_2' => 'required',

@@ -14,9 +14,9 @@ class SmallBannerController extends Controller
         // $input = $request->all();
 
         $validator  = \Validator::make($request->all(), [
-            'img_1' => 'required',
-            'img_2' => 'required',
-            'img_3' => 'required'
+            'img_1' => 'required|mimetypes:image/jpeg, image/png, image/jpg|max:1024',
+            'img_2' => 'required|mimetypes:image/jpeg, image/png, image/jpg|max:1024',
+            'img_3' => 'required|mimetypes:image/jpeg, image/png, image/jpg|max:1024'
         ]);
 
         if($validator->fails()) {

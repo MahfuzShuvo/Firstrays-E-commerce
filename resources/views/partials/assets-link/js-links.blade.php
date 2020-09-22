@@ -5,6 +5,9 @@
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
+{{-- Sweet alert CDN --}}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
 <!-- Jquery -->
 <script src="{{asset('public/assets/js/jquery.min.js')}}"></script>
@@ -19,3 +22,41 @@
 
 <!-- custom js -->
 <script type="text/javascript" src="{{asset('public/assets/js/script.js')}}"></script>
+
+<script>
+	@if (session('success'))
+		swal({
+		  title: "Success!",
+		  text: "{{ session('success') }}",
+		  icon: "success",
+		  button: "OK",
+		});
+	@endif
+
+	@if (session('error'))
+		swal({
+		  title: "Error!",
+		  text: "{{ session('error') }}",
+		  icon: "error",
+		  button: "OK",
+		});
+	@endif
+
+	@if (session('warning'))
+		swal({
+		  title: "Warning!",
+		  text: "{{ session('warning') }}",
+		  icon: "warning",
+		  button: "OK",
+		});
+	@endif
+
+	@if (session('message'))
+		swal({
+		  // title: "Info!",
+		  text: "{{ session('message') }}",
+		  icon: "info",
+		  button: "OK",
+		});
+	@endif
+</script>

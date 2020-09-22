@@ -52,7 +52,12 @@
 																<div class="button-head">
 																	<div class="product-action">
 																		<a data-toggle="modal" title="Quick View" href="#quickViewModal{{$product->id}}"><i class=" fa fa-eye"></i><span>Quick Shop</span></a>
-																		<a title="Wishlist" href="#"><i class=" fa fa-heart "></i><span>Add to Wishlist</span></a>
+																		<form class="custom-btn-form" id="form" action="{{ url('user/wishlist', $product->id) }}" method="post">
+																			@csrf
+																			<a title="Wishlist" href="#" id="wishlist" onclick="$ (this).closest ('form').submit ()"><i class=" fa fa-heart "></i><span>Add to Wishlist</span></a>
+																		</form>
+																		{{-- 
+																		<a title="Wishlist" href=""><i class=" fa fa-heart "></i><span>Add to Wishlist</span></a> --}}
 																		<a title="Compare" href="#"><i class="fa fa-bar-chart"></i><span>Add to Compare</span></a>
 																	</div>
 																	<div class="product-action-2">
@@ -106,3 +111,24 @@
 	<!-- End Product Area -->
 </section>
 {{-- Trending item end --}}
+
+<script type="text/javascript">
+	$("#form").submit(function(){ //Handle the sumbit here.           
+            var url = $("#form").attr("action");
+            var formData = $("#form").serialize();
+            console.log(url);
+            $.post(url, formData, function(response){
+                console.log(response);
+            });//end post
+  });//end submit
+
+  $(document).on("click","#wishlist",function(evt){
+    evt.preventDefault();    
+    if (canSubmit()) {
+        $("#form").submit(); //Trigger the Submit Here
+    } else {
+        console.log("the forms info is not valid");
+    }
+});
+  
+</script>

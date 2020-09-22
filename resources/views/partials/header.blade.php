@@ -3,11 +3,11 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12 col-md-6">
-					<p class="small"><i class="fa fa-envelope" style="padding-right: 5px;"></i> support@firstrays.com.bd &nbsp;&nbsp; | &nbsp;&nbsp; <i class="fa fa-phone" style="padding-right: 5px;"></i> +8809642506070
+					<p class="extra-small"><i class="fa fa-envelope" style="padding-right: 5px;"></i> support@firstrays.com.bd &nbsp;&nbsp; | &nbsp;&nbsp; <i class="fa fa-phone" style="padding-right: 5px;"></i> +8809642506070
 					</p>
 				</div>
 				<div class="col-12 col-md-6 text-right">
-					<p class="small">Biggest online shopping in Bangladesh</p>
+					<p class="extra-small">Biggest online shopping in Bangladesh</p>
 				</div>
 			</div>
 		</div>
@@ -45,7 +45,7 @@
 					@else
 						@if (Auth::guard('web')->check())
 							<li class="nav-item ml-md-3">
-								<a class="btn btn-primary custom-btn" href="{{ route('user') }}"><i class="bx bxs-user-circle mr-1"></i> Account</a>
+								<a class="btn btn-primary custom-btn" href="{{ route('home') }}"><i class="bx bxs-user-circle mr-1"></i> Account</a>
 							</li>
 						@endif
 					@endguest

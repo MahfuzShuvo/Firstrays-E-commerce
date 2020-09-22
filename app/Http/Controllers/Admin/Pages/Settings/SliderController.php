@@ -14,7 +14,7 @@ class SliderController extends Controller
     {
         // $input = $request->all();
         // $validator  = \Validator::make($request->all(), [
-        //     'file' => 'mimes:jpg, jpeg, png'
+        //     'file' => 'required|mimetypes:image/jpeg, image/png, image/jpg|max:1024'
         // ]);
 
         // if($validator->fails()) {

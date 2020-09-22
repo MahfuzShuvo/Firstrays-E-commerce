@@ -38,9 +38,11 @@
 											@endif
                                 		@endforeach
                                 		@foreach ($product->images as $pro_img)
+                                		@if ($pro_img->image != null)
 											<div class="tab-pane mag1" id="pic-{{ $i }}">
 												<img data-toggle="magnify" src="{{ asset($pro_img->image) }}" class="img-fluid img-rounded mx-auto"/>
 											</div>
+										@endif
 											@php
 												$i++;
 											@endphp
@@ -78,11 +80,13 @@
 											@endif
                                 		@endforeach
                                 		@foreach ($product->images as $pro_img)
+                                		@if ($pro_img->image != null)
                                 			<li>
 												<a data-target="#pic-{{ $j }}" data-toggle="tab">
 													<img src="{{ asset($pro_img->image) }}" />
 												</a>
 											</li>
+										@endif
 											@php
 												$j++;
 											@endphp
@@ -158,7 +162,7 @@
 										@endif
 									</h3>
 									<div class="quickview-peragraph">
-										{{-- <p>@php echo $product->description; @endphp</p> --}}
+										<p>{{ $product->short_description }}</p>
 										<div class="custom-pera">
 											<p style="margin-bottom: 0;"><b>SKU: </b>{{ $product->sku}}</p>
 											<p><b>Category: </b>
@@ -204,7 +208,7 @@
 														<div class="col-lg-3 col-12">
 															<h5 class="title">{{ $element->name }}</h5>
 															<select class="custom-select">
-																@foreach (App\ProductAttribute::where('attribute_id', $element->id)->get() as $key => $e)
+																@foreach (App\ProductAttribute::where('attribute_id', $element->id)->where('product_id', $product->id)->get() as $key => $e)
 																	<option value="{{ $e->id }}" >{{ $e->value }}</option>
 																@endforeach
 																{{-- <option selected="selected">s</option>
@@ -273,10 +277,10 @@
 								<a class="nav-link active" id="home-tab-md" data-toggle="tab" href="#home-md" role="tab" aria-controls="home-md"
 								aria-selected="true">Description</a>
 							</li>
-							<li class="nav-item">
+							{{-- <li class="nav-item">
 								<a class="nav-link" id="profile-tab-md" data-toggle="tab" href="#profile-md" role="tab" aria-controls="profile-md"
 								aria-selected="false">Details</a>
-							</li>
+							</li> --}}
 							<li class="nav-item">
 								<a class="nav-link" id="contact-tab-md" data-toggle="tab" href="#contact-md" role="tab" aria-controls="contact-md"
 								aria-selected="false">Review</a>
@@ -286,7 +290,7 @@
 							<div class="tab-pane fade show active" id="home-md" role="tabpanel" aria-labelledby="home-tab-md">
 								<div class="pro-detailes-cls">@php echo $product->description; @endphp</div>
 							</div>
-							<div class="tab-pane fade" id="profile-md" role="tabpanel" aria-labelledby="profile-tab-md">
+							{{-- <div class="tab-pane fade" id="profile-md" role="tabpanel" aria-labelledby="profile-tab-md">
 								<p class="pro-detailes-cls">Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
 									Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
 									farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip
@@ -295,7 +299,7 @@
 									fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry
 									richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus
 								tattooed echo park.</p>
-							</div>
+							</div> --}}
 							<div class="tab-pane fade" id="contact-md" role="tabpanel" aria-labelledby="contact-tab-md">
 								<!-- <p class="pro-detailes-cls">Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo
 									retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer,

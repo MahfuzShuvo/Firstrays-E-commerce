@@ -6,17 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductAttribute extends Model
 {
-    public $fillable = [
-        'product_id', 'attribute_id', 'value'
-    ];
+    
 
     public function product()
     {
-    	return $this->belongsTo(Product::class);
+    	return $this->belongsTo(Product::class)->withDefault();
     }
 
     public function attribute()
     {
-    	return $this->belongsTo(Attribute::class);
+    	return $this->belongsTo(Attribute::class)->withDefault();
     }
 }
