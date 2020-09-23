@@ -59,4 +59,12 @@
 		  button: "OK",
 		});
 	@endif
+	@if (session('delete'))
+		swal({
+		  title: "Removed!",
+		  text: "{{ session('delete') }}",
+		  icon: "success",
+		  button: "OK",
+		});
+	@endif
 </script>

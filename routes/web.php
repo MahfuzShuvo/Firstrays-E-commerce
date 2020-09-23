@@ -29,6 +29,7 @@ Route::group(['prefix'=>'user'], function() {
 
 	Route::get('/wishlist', 'HomeController@wishlist')->name('user.wishlist');
 	Route::post('/wishlist/{id}', 'HomeController@add_to_wishlist');
+	Route::post('/remove_wishlist/{id}', 'HomeController@remove_wishlist');
 
 	Route::get('/orders', 'HomeController@orders')->name('user.orders');
 	Route::get('/reviews', 'HomeController@reviews')->name('user.reviews');
@@ -77,19 +78,6 @@ Route::group(['prefix'=>'admin'], function() {
 	// all customers
 	Route::get('/customers', 'AdminController@customers')->name('customers');
 	Route::post('/customer_status/{id}', 'Admin\Pages\Customers\CustomerController@status');
-	// divisions
-	Route::get('/divisions', 'AdminController@divisions')->name('divisions');
-	Route::post('/divisions', 'Admin\Pages\Customers\DivisionsController@store')->name('division.store');
-	Route::post('/delete_division/{id}', 'Admin\Pages\Customers\DivisionsController@delete_division');
-	Route::post('/division_status/{id}', 'Admin\Pages\Customers\DivisionsController@status');
-	// districts
-	Route::get('/districts', 'AdminController@districts')->name('districts');
-	Route::post('/districts', 'Admin\Pages\Customers\DistrictsController@store')->name('district.store');
-	Route::post('/delete_district/{id}', 'Admin\Pages\Customers\DistrictsController@delete_district');
-	// zones
-	Route::get('/zones', 'AdminController@zones')->name('zones');
-	Route::post('/zones', 'Admin\Pages\Customers\ZonesController@store')->name('zone.store');
-	Route::post('/delete_zone/{id}', 'Admin\Pages\Customers\ZonesController@delete_zone');
 
 
 	// Products module

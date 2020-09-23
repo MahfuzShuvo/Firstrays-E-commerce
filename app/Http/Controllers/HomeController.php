@@ -36,7 +36,8 @@ class HomeController extends Controller
 
     public function wishlist()
     {
-        return view('user.wishlist');
+        $wishlists = Wishlist::where('user_id', Auth::user()->id)->get();
+        return view('user.wishlist', compact('wishlists'));
     }
 
     public function orders()
@@ -110,10 +111,29 @@ class HomeController extends Controller
     public function add_to_wishlist($id)
     {
         $wishlist = new Wishlist;
-        $wishlist->user_id = Auth::user()->id;
-        $wishlist->product_id = $id;
 
-        $wishlist->save();
-        return redirect()->back()->with('success', 'Product is added to your wishlist');
+        $wish = Wishlist::where('product_id', $id)->where('user_id', Auth::user()->id)->first();
+        // dd($wish);
+
+        if ($wish) {
+            return redirect()->back()->with('error', 'You already added this product as your wishlist');
+        }
+        if (is_null($wish)) {
+            $wishlist->user_id = Auth::user()->id;
+            $wishlist->product_id = $id;
+
+            $wishlist->save();
+            return redirect()->back()->with('success', 'Product is added to your wishlist');
+        }
+    }
+
+    public function remove_wishlist($id)
+    {
+        $wishlist = Wishlist::find($id);
+
+        if (!is_null($wishlist)) {
+            $wishlist->delete();
+            return redirect()->back()->with('delete', 'This product is removed from your wishlist');
+        }
     }
 }

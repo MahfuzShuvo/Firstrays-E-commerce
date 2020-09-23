@@ -255,7 +255,7 @@ ul.social-icons li {
 }
 
 .search-bar .form-control {
-  width: calc(100% - 45px);
+  width: calc(100% - 60px);
 }
 
 .avatar {
@@ -3061,52 +3061,3 @@ ul.social-icons li {
     top: 2px;
 }
 
-.single-product .product-img .product-action button {
-    background-color: transparent;
-    color: #333;
-    display: block;
-    font-size: 16px;
-    display: inline-block;
-    margin-right: 15px;
-    text-align: right;
-    height: 52px;
-    position: relative;
-    top: 2px;
-}
-
-.single-product .product-img .product-action button:hover {
-    color: #FF005C;
-}
-
-.single-product .product-img .product-action button span {
-    visibility: hidden;
-    position: absolute;
-    background: #FF005C !important;
-    color: #fff !important;
-    text-align: center;
-    padding: 5px 12px;
-    z-index: 3;
-    opacity: 0;
-    -webkit-transition: opacity .6s, margin .3s;
-    -o-transition: opacity .6s, margin .3s;
-    transition: opacity .6s, margin .3s;
-    font-size: 11px;
-    right: 0;
-    line-height: 14px;
-    top: -12px;
-    margin-top: -5px;
-    margin-right: 0;
-    display: inline-block;
-    width: 120px;
-    border-radius: 15px 0 0 15px;
-}
-.single-product .product-img .button-head .product-action button span::after {
-    position: absolute;
-    content: "";
-    right: 0;
-    bottom: -12px;
-    border: 6px solid #FF005C;
-    border-left: 0px solid transparent;
-    border-right: 6px solid transparent;
-    border-bottom: 6px solid transparent;
-}

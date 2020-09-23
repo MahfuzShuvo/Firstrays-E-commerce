@@ -1,6 +1,7 @@
 @extends('home')
 
 @section('style')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
 	<style type="text/css">
         .container {
             padding-left: 0px;
@@ -120,18 +121,143 @@
             color: #a5a5a5;
             letter-spacing: 1px;
         }
-
+        .dataTables_info {
+            font-size: 12px;
+        }
+        .dataTables_paginate {
+            font-size: 12px;
+        }
+        .dataTables_length {
+            font-size: 12px;
+        }
+        .dataTables_filter {
+            font-size: 12px;
+        }
+        .custom-action-btn {
+            font-size: 12px;
+            font-weight: 400;
+        }
 	</style>
 
 @endsection
 
 @section('user-content')
-	<h1 class="mt-4">Wishlist</h1>
-    <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
-    <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p>
+	<h2 class="mt-4">Wishlist</h2>
+    <div class="container mt-5 mb-3">
+        <div class="row">
+            <div class="col-md-12">
+                <table id="example" class="table table-striped table-bordered" style="width:100%; font-size: 12px!important;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Product</th>
+                            <th>Image</th>
+                            <th>SKU</th>
+                            <th>Price (&#2547;)</th>
+                            <th>Category</th>
+                            <th>Brand</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    @php $num = 0; @endphp
+                    <tbody>
+                        @foreach ($wishlists as $wishlist)
+                            @foreach (App\Product::where('id', $wishlist->product_id)->get() as $product)
+                                <tr>
+                                    <td>@php echo ++$num; @endphp</td>
+                                    <td>{{ $product->name }}</td>
+                                    <td>
+                                        @foreach ($product->images as $key => $product_img)
+                                            @if ($key == 0)
+                                                <img src="{{ asset($product_img->display_image) }}" width="50px">
+                                            @endif
+                                        @endforeach
+                                    </td>
+                                    <td>{{ $product->sku }}</td>
+                                    <td>
+                                        @if ($product->promotion_price == null)
+                                            <span>
+                                                @php
+                                                    echo number_format($product->price, 2);
+                                                @endphp
+                                                 
+                                            </span>
+                                        @else
+                                            <span>
+                                                @php
+                                                    echo number_format($product->promotion_price, 2);
+                                                @endphp
+                                                 &#2547;
+                                            </span>
+                                            <span style="color: #a5a5a5; text-decoration: line-through; padding-left: 5px;">
+                                                @php
+                                                    echo number_format($product->price, 2);
+                                                @endphp
+                                                 
+                                            </span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($product->category->parent_id != null)
+                                            {{ App\Category::where('id', $product->category->parent_id)->first()->name }}, 
+                                        @endif
+                                        {{ $product->category->name }}
+                                    </td>
+                                    <td>{{ $product->brand->name }}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-icon" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="bx bx-dots-horizontal-rounded" data-toggle="tooltip" data-placement="top"
+                                                title="Actions"></i>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                                <a class="dropdown-item custom-action-btn" href="{{ url('product-details', $product->slug) }}"><i class="bx bx-show-alt mr-2"></i> View Product</a>
+                                                <a class="dropdown-item custom-action-btn" href="#removeWishlistModal{{ $wishlist->id }}" data-toggle="modal"><i class="bx bx-trash mr-2"></i> Remove Wishlist</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Remove Wishlist Modal start -->
+                                        <div class="modal fade" tabindex="-1" id="removeWishlistModal{{ $wishlist->id }}">
+                                            <div class="modal-dialog modal-dialog-top" role="document">
+                                                <div class="modal-content">
+                                                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <em class="icon ni ni-cross"></em>
+                                                    </a>
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Are you sure to remove from wishlist?</h5>
+                                                    </div>
+                                                    {{-- <div class="modal-body">
+                                                        
+                                                    </div> --}}
+                                                    <div class="modal-footer">
+                                                        <form action="{{ url('/user/remove_wishlist', $wishlist->id) }}" method="post">
+                                                            {{ csrf_field() }}
+                                                            <button type="submit" class="btn btn-danger" style="font-size: 13px;">YES, remove permanently</button>
+                                                        </form>
+                                                        <button type="button" class="btn btn-success" data-dismiss="modal" style="font-weight: 400; font-size: 12px;">NO</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Remove Wishlist Modal end -->
+                            @endforeach
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('js')
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+    </script>
 	<script>
     $("#menu-toggle").click(function(e) {
       e.preventDefault();

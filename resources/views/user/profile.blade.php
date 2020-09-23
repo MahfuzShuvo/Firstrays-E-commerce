@@ -331,11 +331,11 @@
 @endsection
 
 @section('user-content')
-	<h1 class="mt-4">Profile</h1>
+	<h2 class="mt-4">Profile</h2>
     {{-- <div class="card-body">
         @include('partials.alert')
     </div> --}}
-    <div class="container emp-profile">
+    <div class="container emp-profile mt-5">
         <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
