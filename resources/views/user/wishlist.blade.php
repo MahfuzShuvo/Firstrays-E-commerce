@@ -152,42 +152,40 @@
                             <th>#</th>
                             <th>Product</th>
                             <th>Image</th>
-                            <th>SKU</th>
+                            <th class="tb-col-mb tb-col-md tb-col-sm tb-col-lg">SKU</th>
                             <th>Price (&#2547;)</th>
-                            <th>Category</th>
-                            <th>Brand</th>
+                            <th class="tb-col-mb tb-col-md tb-col-sm tb-col-lg">Category</th>
+                            <th class="tb-col-mb tb-col-md tb-col-sm tb-col-lg">Brand</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     @php $num = 0; @endphp
                     <tbody>
                         @foreach ($wishlists as $wishlist)
-                            @foreach (App\Product::where('id', $wishlist->product_id)->get() as $product)
+                            @foreach (App\Product::where('id', $wishlist->product_id)->where('status', 1)->get() as $product)
                                 <tr>
                                     <td>@php echo ++$num; @endphp</td>
                                     <td>{{ $product->name }}</td>
                                     <td>
                                         @foreach ($product->images as $key => $product_img)
                                             @if ($key == 0)
-                                                <img src="{{ asset($product_img->display_image) }}" width="50px">
+                                                <img src="{{ asset($product_img->display_image) }}" width="40px">
                                             @endif
                                         @endforeach
                                     </td>
-                                    <td>{{ $product->sku }}</td>
+                                    <td class="tb-col-mb tb-col-md tb-col-sm tb-col-lg">{{ $product->sku }}</td>
                                     <td>
                                         @if ($product->promotion_price == null)
                                             <span>
                                                 @php
                                                     echo number_format($product->price, 2);
                                                 @endphp
-                                                 
                                             </span>
                                         @else
                                             <span>
                                                 @php
                                                     echo number_format($product->promotion_price, 2);
                                                 @endphp
-                                                 &#2547;
                                             </span>
                                             <span style="color: #a5a5a5; text-decoration: line-through; padding-left: 5px;">
                                                 @php
@@ -197,13 +195,13 @@
                                             </span>
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="tb-col-mb tb-col-md tb-col-sm tb-col-lg">
                                         @if ($product->category->parent_id != null)
                                             {{ App\Category::where('id', $product->category->parent_id)->first()->name }}, 
                                         @endif
                                         {{ $product->category->name }}
                                     </td>
-                                    <td>{{ $product->brand->name }}</td>
+                                    <td class="tb-col-mb tb-col-md tb-col-sm tb-col-lg">{{ $product->brand->name }}</td>
                                     <td>
                                         <div class="dropdown">
                                             <button class="btn btn-sm btn-icon" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

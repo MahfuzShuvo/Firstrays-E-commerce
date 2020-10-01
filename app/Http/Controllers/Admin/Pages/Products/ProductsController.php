@@ -199,6 +199,7 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
         $product_img = ProductImage::where('product_id', $product->id)->get();
+        $product_attr = ProductAttribute::where('product_id', $id)->get();
 
         if (!is_null($product)) {
             // delete the old image from folder
@@ -213,6 +214,10 @@ class ProductsController extends Controller
 		        }
 		        $image->delete();
 		    }
+
+            foreach ($product_attr as $attr) {
+                $attr->delete();
+            }
 		    $product->delete();
         }
             

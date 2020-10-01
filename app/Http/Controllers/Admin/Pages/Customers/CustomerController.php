@@ -17,6 +17,9 @@ class CustomerController extends Controller
         }
         else {
             $user->active = 1;
+            if ($user->code != null) {
+                $user->code = null;
+            }
             session()->flash('success', 'Customer Activated');
         }
         $user->save();

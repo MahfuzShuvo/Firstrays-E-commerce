@@ -68,3 +68,198 @@
 		});
 	@endif
 </script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+{{-- add to wishlist --}}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.addwishlist').on('click', function(e) {
+			var id = $(this).data('id');
+			if (id) {
+				$.ajax({
+					url: "{{ url('/user/wishlist/') }}/"+id,
+					type: "GET",
+					dataType: "json",
+					success:function(data) {
+						// const Toast = Swal({
+						// 	toast: true,
+						// 	position: 'top-end',
+						// 	showConfirmButton: false,
+						// 	timer: 3000
+						// });
+
+						if ($.isEmptyObject(data.error)) {
+							swal({
+							  title: "Success!",
+							  text: data.success,
+							  icon: "success",
+							  button: "OK",
+							});
+						} else {
+							swal({
+							  title: "Error!",
+							  text: data.error,
+							  icon: "error",
+							  button: "OK",
+							});
+						}
+					}
+				});
+			} else {
+				alert('danger');
+			}
+			e.preventDefault();
+		});
+	});
+</script>
+
+{{-- add to cart --}}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.addcart').on('click', function(e) {
+			var total = 0;
+			var id = $(this).data('id');
+			if (id) {
+				$.ajax({
+					url: "{{ url('/user/cart/') }}/"+id,
+					type: "GET",
+					dataType: "json",
+					success:function(data) {
+						// const Toast = Swal({
+						// 	toast: true,
+						// 	position: 'top-end',
+						// 	showConfirmButton: false,
+						// 	timer: 3000
+						// });
+
+						if ($.isEmptyObject(data.error)) {
+							swal({
+							  title: "Success!",
+							  text: data.success,
+							  icon: "success",
+							  button: "OK",
+							});
+							$('#cartItem').html(`
+								<li>
+									<span>
+		                                <img src="`+data.cart['image']+`" width="40px" style="border-radius: 3px;">
+									</span>
+									<span style="padding-left: 10px; font-size: 13px;">
+										<span class="cd-qty">`+data.cart['quantity']+`<span style="color: red;"> x </span></span> `+data.cart['name']+`
+										<div class="cd-price"><span style="font-weight: bold;">`+data.cart['price']+`</span> <small>tk/pcs</small></div>
+									</span>
+									
+									<span class="cd-subtotal">`+data.cart['price'] * data.cart['quantity']+` &#2547;</span>
+									<a href="#0" class="cd-item-remove cd-img-replace"><i class="bx bx-x"></i></a>
+								</li>
+							`);
+							$('#cartTotal').html(`
+								<p>SUBTOTAL <span>`+(total+(data.cart['price'] * data.cart['quantity']))+` &#2547;</span></p>
+							`);
+							$(`#essenceCartBtn2`).html(`
+								<a class="btn btn-link custom-cart" id="essenceCartBtn2" href="#"><i class="ti-bag icon-single" style="font-weight: 900;"></i> <span class="badge badge-danger" style="top: -2px!important;">`+data.totalCartQuantity+`</span></a>
+							`);
+							$(`#essenceCartBtn`).html(`
+								<a class="btn btn-link custom-cart" id="essenceCartBtn" href="#">
+							<span class="badge badge-danger" style="top: -12px; left: 4px;">`+data.totalCartQuantity+`</span>
+							<i class="ti-bag icon-single" style="font-weight: 900;"></i>&nbsp; Cart
+						</a>
+							`);
+						} else {
+							swal({
+							  title: "Error!",
+							  text: data.error,
+							  icon: "error",
+							  button: "OK",
+							});
+						}
+					}
+				});
+			} else {
+				alert('danger');
+			}
+			e.preventDefault();
+		});
+	});
+</script>
+
+
+{{-- add to cart with attribute--}}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.addCartWithattribute').on('click', function(e) {
+			var total = 0;
+			var id = $(this).data('id');
+			var quantity = $('#quantity').val();
+			var attributes1 = $('#attributes1').val();
+			var attributes2 = $('#attributes2').val();
+			// alert('Quantity: '+quantity+' '+'Attribute1: '+attributes1+' '+'Attribute2: '+attributes2);
+			if (id) {
+				$.ajax({
+					url: "{{ url('/user/cart-with-attr/') }}/"+id,
+					type: "GET",
+					dataType: "json",
+					data: {
+				        quantity: quantity,
+				        attributes1: attributes1,
+				        attributes2: attributes2,
+				      },
+					success:function(data) {
+						// const Toast = Swal({
+						// 	toast: true,
+						// 	position: 'top-end',
+						// 	showConfirmButton: false,
+						// 	timer: 3000
+						// });
+
+						if ($.isEmptyObject(data.error)) {
+							swal({
+							  title: "Success!",
+							  text: data.success,
+							  icon: "success",
+							  button: "OK",
+							});
+							$('#cartItem').html(`
+								<li>
+									<span>
+		                                <img src="../`+data.cart['image']+`" width="40px" style="border-radius: 3px;">
+									</span>
+									<span style="padding-left: 10px; font-size: 13px;">
+										<span class="cd-qty">`+data.cart['quantity']+`<span style="color: red;"> x </span></span> `+data.cart['name']+`
+										<div class="cd-price"><span style="font-weight: bold;">`+data.cart['price']+`</span> <small>tk/pcs</small></div>
+									</span>
+									
+									<span class="cd-subtotal">`+data.cart['price'] * data.cart['quantity']+` &#2547;</span>
+									<a href="#0" class="cd-item-remove cd-img-replace"><i class="bx bx-x"></i></a>
+								</li>
+							`);
+							$('#cartTotal').html(`
+								<p>SUBTOTAL <span>`+(total+(data.cart['price'] * data.cart['quantity']))+` &#2547;</span></p>
+							`);
+							$(`#essenceCartBtn2`).html(`
+								<a class="btn btn-link custom-cart" id="essenceCartBtn2" href="#"><i class="ti-bag icon-single" style="font-weight: 900;"></i> <span class="badge badge-danger" style="top: -2px!important;">`+data.totalCartQuantity+`</span></a>
+							`);
+							$(`#essenceCartBtn`).html(`
+								<a class="btn btn-link custom-cart" id="essenceCartBtn" href="#">
+							<span class="badge badge-danger" style="top: -12px; left: 4px;">`+data.totalCartQuantity+`</span>
+							<i class="ti-bag icon-single" style="font-weight: 900;"></i>&nbsp; Cart
+						</a>
+							`);
+						} else {
+							swal({
+							  title: "Error!",
+							  text: data.error,
+							  icon: "error",
+							  button: "OK",
+							});
+						}
+					}
+				});
+			} else {
+				alert('danger');
+			}
+			e.preventDefault();
+		});
+	});
+</script>

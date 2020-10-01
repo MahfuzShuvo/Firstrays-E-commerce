@@ -146,10 +146,11 @@
 								@if ($product->quantity > 0)
 									<a href="#" class="btn">Add to cart</a>
 								@else
+									<span style="color: red; font-size: 11px; font-weight: 600;"><i class="fa fa-times-circle-o"></i> out of stock</span>
 									<a href="#" class="btn disabled">Add to cart</a>
 								@endif
 								
-								<a href="#" class="btn min"><i class="ti-heart"></i></a>
+								<a class="btn min addwishlist" data-id="{{ $product->id }}"><i class="ti-heart"></i></a>
 								<a href="#" class="btn min"><i class="fa fa-compress"></i></a>
 							</div>
 							<div class="default-social">

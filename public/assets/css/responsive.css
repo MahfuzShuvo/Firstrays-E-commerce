@@ -6,7 +6,30 @@ Description: Eshop - eCommerce HTML5 Template.
 Version:1.0
 ========================================*/
 /* Tablet Screen */
+.tb-col-hide, .tb-col-mb, .tb-col-sm, .tb-col-md, .tb-col-lg, .tb-col-xl, .tb-col-xxl, .tb-col-xs, .tb-col-mb { display: none !important; }
+
+@media (min-width: 420px) { .tb-col-mb { display: table-cell !important; } }
+
+@media (min-width: 576px) { .tb-col-sm { display: table-cell !important; } }
+
+@media (min-width: 768px) { .tb-col-md { display: table-cell !important; } }
+
+@media (min-width: 992px) { .tb-col-lg { display: table-cell !important; } }
+
+@media (min-width: 1200px) { .tb-col-xl { display: table-cell !important; } }
+
+@media (min-width: 1540px) { .tb-col-xxl { display: table-cell !important; } }
+
+@media (min-width: 359px) { .tb-col-xs { display: table-cell !important; } }
+
+@media (min-width: 414px) { .tb-col-mb { display: table-cell !important; } }
+
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+	.cd-subtotal {
+	  position: absolute;
+	  right: 5em;
+	  top: 45%;
+	}
 	.custom-user-div h5 {
 		text-align: center;
 		margin-top: 20px;
@@ -346,6 +369,11 @@ Version:1.0
 }
 /* Mobile Screen */
 @media only screen and (max-width: 767px) {
+	.cd-subtotal {
+	  position: absolute;
+	  right: 5em;
+	  top: 45%;
+	}
 	.custom-user-div h5 {
 		text-align: center;
 		margin-top: 20px;
@@ -1077,6 +1105,11 @@ Version:1.0
 }
 /* Mobile Screen */
 @media only screen and (max-width: 450px) {
+	.cd-subtotal {
+	  position: absolute;
+	  right: 5em;
+	  top: 45%;
+	}
 	.custom-user-div h5 {
 		text-align: center;
 		margin-top: 20px;

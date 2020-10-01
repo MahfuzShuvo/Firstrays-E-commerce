@@ -79,9 +79,12 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'phone' => $data['phone'],
             'active' => 0,
-            'userID' => substr($data['name'], 0, 1).uniqid(),
+            // 'userID' => substr($data['name'], 0, 1).uniqid(),
             'password' => Hash::make($data['password']),
         ]);
+
+        $user->userID = 'FRU'.str_pad($user->id, 5, '0', STR_PAD_LEFT);
+        $user->save();
 
         if ($user) {
             $user->code = SendCode::sendCode($user->phone);

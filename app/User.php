@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'phone_verified_at' => 'datetime',
     ];
+
+    // public static function boot()
+    // {
+    //     parent::boot();
+
+    //     static::creating(function($model) {
+    //         // $user = User::all()->count() + 1;
+    //         $model->userID = 'FRU'.str_pad($user->id, 5, '0', STR_PAD_LEFT);
+    //     });
+    // }
 }

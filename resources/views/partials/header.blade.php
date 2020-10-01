@@ -23,7 +23,7 @@
 			</a>
 			<ul class="navbar-nav ml-auto d-block d-md-none">
 				<li class="nav-item">
-					<a class="btn btn-link custom-cart" id="essenceCartBtn2" href="#"><i class="ti-bag icon-single" style="font-weight: 900;"></i> <span class="badge badge-danger" style="top: -2px!important;">3</span></a>
+					<a class="btn btn-link custom-cart" id="essenceCartBtn2" href="#"><i class="ti-bag icon-single" style="font-weight: 900;"></i> <span class="badge badge-danger" style="top: -2px!important;">{{ App\Cart::totalItems() }}</span></a>
 				</li>
 			</ul>
 			<div class="collapse navbar-collapse">
@@ -34,7 +34,7 @@
 				<ul class="navbar-nav">
 					<li class="nav-item">
 						<a class="btn btn-link custom-cart" id="essenceCartBtn" href="#">
-							<span class="badge badge-danger" style="top: -12px; left: 4px;">3</span>
+							<span class="badge badge-danger" style="top: -12px; left: 4px;">{{ App\Cart::totalItems() }}</span>
 							<i class="ti-bag icon-single" style="font-weight: 900;"></i>&nbsp; Cart
 						</a>
 					</li>

@@ -189,13 +189,13 @@
 													<!-- Input Order -->
 													<div class="input-group">
 														<span class="input-group-btn button minus">
-															<button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]" style="border-radius: .25rem 0px 0px .25rem;">
+															<button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant" style="border-radius: .25rem 0px 0px .25rem;">
 															<i class="bx bx-minus" style="font-size:12px;"></i>
 															</button>
 														</span>
-														<input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="{{ $product->quantity }}">
+														<input type="text" id="quantity" name="quant" class="form-control input-number" value="1" min="1" max="{{ $product->quantity }}">
 														<span class="input-group-btn button plus">
-															<button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]" style="border-radius: 0px .25rem .25rem 0px;">
+															<button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant" style="border-radius: 0px .25rem .25rem 0px;">
 															<i class="bx bx-plus" style="font-size:12px;"></i>
 															</button>
 														</span>
@@ -203,11 +203,14 @@
 													<!--/ End Input Order -->
 												</div>
 											</div>
+											@php
+												$att_i = 1;
+											@endphp
 											@foreach ($product->attributes->unique('attribute_id') as $key => $attr)
 												@foreach (App\Attribute::where('id', $attr->attribute_id)->get() as $element)
 														<div class="col-lg-3 col-12">
 															<h5 class="title">{{ $element->name }}</h5>
-															<select class="custom-select">
+															<select class="custom-select" id="attributes{{ $att_i }}">
 																@foreach (App\ProductAttribute::where('attribute_id', $element->id)->where('product_id', $product->id)->get() as $key => $e)
 																	<option value="{{ $e->id }}" >{{ $e->value }}</option>
 																@endforeach
@@ -217,6 +220,9 @@
 																<option>xl</option> --}}
 															</select>
 														</div>
+														@php
+															$att_i++;
+														@endphp
 												@endforeach	
 											@endforeach
 											{{-- <div class="col-sm-2 col-12">
@@ -239,14 +245,21 @@
 											</div> --}}
 										</div>
 									</div>
-									
 									<div class="add-to-cart">
 										@if ($product->quantity > 0)
-											<a href="#" class="btn">Add to cart</a>
+											<a href="#" class="btn addCartWithattribute" data-id="{{ $product->id }}">Add to cart</a>
 										@else
 											<a href="#" class="btn disabled">Add to cart</a>
 										@endif
-										<a href="#" class="btn min"><i class="ti-heart"></i></a>
+									</div>
+									<div class="add-to-cart">
+										{{-- @if ($product->quantity > 0)
+											<a href="#" class="btn">Add to cart</a>
+										@else
+											<a href="#" class="btn disabled">Add to cart</a>
+										@endif --}}
+
+										<a class="btn min addwishlist" data-id="{{ $product->id }}"><i class="ti-heart"></i></a>
 										<a href="#" class="btn min"><i class="fa fa-compress"></i></a>
 									</div>
 									<div class="default-social">
@@ -487,4 +500,52 @@
 			</div>
 		</section>
     {{-- product-details end --}}
+@endsection
+
+@section('js')
+	{{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> --}}
+
+{{-- add to wishlist --}}
+{{-- <script type="text/javascript">
+	$(document).ready(function() {
+		$('.addwishlist').on('click', function(e) {
+			var id = $(this).data('id');
+			if (id) {
+				$.ajax({
+					url: "{{ url('/user/wishlist/') }}/"+id,
+					type: "GET",
+					dataType: "json",
+					success:function(data) {
+						// const Toast = Swal({
+						// 	toast: true,
+						// 	position: 'top-end',
+						// 	showConfirmButton: false,
+						// 	timer: 3000
+						// });
+
+						if ($.isEmptyObject(data.error)) {
+							swal({
+							  title: "Success!",
+							  text: data.success,
+							  icon: "success",
+							  button: "OK",
+							});
+						} else {
+							swal({
+							  title: "Error!",
+							  text: data.error,
+							  icon: "error",
+							  button: "OK",
+							});
+						}
+					}
+				});
+			} else {
+				alert('danger');
+			}
+			e.preventDefault();
+		});
+	});
+</script> --}}
+
 @endsection

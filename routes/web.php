@@ -16,20 +16,26 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::get('/check', 'User\CartController@check');
 // user 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/login', 'Auth\LoginController@login')->name('user.login');
 
 Route::group(['prefix'=>'user'], function() {
+	// profile
 	Route::get('/profile', 'HomeController@profile')->name('user.profile');
-	Route::post('/edit/{id}', 'HomeController@edit');
+	Route::post('/edit/{id}', 'User\UserController@edit');
 
 	Route::get('logout', 'Auth\LoginController@logout')->name('user.logout');
 
+	// wishlist
 	Route::get('/wishlist', 'HomeController@wishlist')->name('user.wishlist');
-	Route::post('/wishlist/{id}', 'HomeController@add_to_wishlist');
-	Route::post('/remove_wishlist/{id}', 'HomeController@remove_wishlist');
+	Route::get('/wishlist/{id}', 'User\WishlistController@add_to_wishlist');
+	Route::post('/remove_wishlist/{id}', 'User\WishlistController@remove_wishlist');
+
+	// cart
+	Route::get('/cart/{id}', 'User\CartController@add_to_cart');
+	Route::get('/cart-with-attr/{id}', 'User\CartController@add_to_cart_with_attr');
 
 	Route::get('/orders', 'HomeController@orders')->name('user.orders');
 	Route::get('/reviews', 'HomeController@reviews')->name('user.reviews');
@@ -129,6 +135,12 @@ Route::group(['prefix'=>'admin'], function() {
 	Route::post('/medium_banner', 'Admin\Pages\Settings\MediumBannerController@store')->name('medium_banner.store');
 	Route::post('/medium_banner_status/{id}', 'Admin\Pages\Settings\MediumBannerController@status');
 	Route::post('/delete_medium_banner/{id}', 'Admin\Pages\Settings\MediumBannerController@delete_medium_banner');
+	// shipping
+	Route::get('/shipping', 'AdminController@shipping')->name('shipping');
+	Route::post('/shipping', 'Admin\Pages\Settings\ShippingController@store')->name('shipping.store');
+	Route::post('/shipping_status/{id}', 'Admin\Pages\Settings\ShippingController@status');
+	Route::post('/edit_shipping/{id}', 'Admin\Pages\Settings\ShippingController@edit_shipping');
+	Route::post('/delete_shipping/{id}', 'Admin\Pages\Settings\ShippingController@delete_shipping');
 	// faq
 	Route::get('/faqs', 'AdminController@faqs')->name('faqs');
 	Route::post('/faqs', 'Admin\Pages\Settings\FaqController@store')->name('faqs.store');

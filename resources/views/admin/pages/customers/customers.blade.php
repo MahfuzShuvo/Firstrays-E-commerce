@@ -5,6 +5,13 @@
         .card-body {
             padding: 0px!important;
         }
+        .custom-user-card {
+            display: contents;
+        }
+        .custom-user-info {
+            margin-top: 5px;
+            margin-left: 0px!important;
+        }
     </style>
 @endsection
 
@@ -68,12 +75,15 @@
                                                                     <label class="custom-control-label" for="uid"></label>
                                                                 </div>
                                                             </th> --}}
-                                                            <th class="nk-tb-col"><span class="sub-text">#</span></th>
+                                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">#</span></th>
                                                             <th class="nk-tb-col"><span class="sub-text">Name</span></th>
                                                             {{-- <th class="nk-tb-col tb-col-mb"><span class="sub-text">Balance</span></th> --}}
-                                                            <th class="nk-tb-col tb-col-md"><span class="sub-text">Phone</span></th>
-                                                            {{-- <th class="nk-tb-col tb-col-lg"><span class="sub-text">Verified</span></th>
-                                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Last Login</span></th> --}}
+                                                            <th class="nk-tb-col"><span class="sub-text">Phone</span></th>
+                                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Street Address</span></th>
+                                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Division</span></th>
+                                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">District</span></th>
+                                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Thana</span></th>
+                                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">ZIP</span></th>
                                                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th>
                                                             <th class="nk-tb-col nk-tb-col-tools text-right">
                                                             </th>
@@ -94,12 +104,17 @@
                                                                 </td>
                                                                 <td class="nk-tb-col">
                                                                     <div class="user-card">
-                                                                        <div class="user-avatar bg-dim-primary d-none d-sm-flex">
-                                                                            <div class="user-avatar sm" style="background: #0e0c96; font-size: 14px;">
-                                                                                <em class="icon ni ni-user-alt"></em>
+                                                                        <div class="user-avatar bg-dim-primary d-none d-sm-flex" style="background: none;">
+                                                                            <div class="user-avatar sm" style="font-size: 14px; background: none;">
+                                                                                @if (is_null($user->image))
+                                                                                    <img src="{{ asset('public/assets/images/user/no-man.png') }}">
+                                                                                @else
+                                                                                    <img src="{{ $user->image }}">
+                                                                                @endif
+                                                                                
                                                                             </div>
                                                                         </div>
-                                                                        <div class="user-info">
+                                                                        <div class="user-info custom-user-info">
                                                                             <span class="tb-lead">{{ $user->name }}
                                                                                 @if ($user->active)
                                                                                     <span class="dot dot-success d-md-none ml-1"></span>
@@ -107,15 +122,31 @@
                                                                                     <span class="dot dot-warning d-md-none ml-1"></span>
                                                                                 @endif
                                                                             </span>
-                                                                            <span>info@softnio.com</span>
+                                                                            <span>{{ $user->email }}</span>
+                                                                            <span style="display: block; font-size: 10px;"><span style="font-weight: bold; color: #364a63;">UID: </span>{{ $user->userID }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </td>
                                                                 {{-- <td class="nk-tb-col tb-col-mb" data-order="35040.34">
                                                                     <span class="tb-amount">35040.34 <span class="currency">USD</span></span>
                                                                 </td> --}}
-                                                                <td class="nk-tb-col tb-col-md">
+                                                                <td class="nk-tb-col">
                                                                     <span>{{ $user->phone }}</span>
+                                                                </td>
+                                                                <td class="nk-tb-col tb-col-md">
+                                                                    <span>{{ $user->street_address }}</span>
+                                                                </td>
+                                                                <td class="nk-tb-col tb-col-md">
+                                                                    <span>{{ $user->division }}</span>
+                                                                </td>
+                                                                <td class="nk-tb-col tb-col-md">
+                                                                    <span>{{ $user->district }}</span>
+                                                                </td>
+                                                                <td class="nk-tb-col tb-col-md">
+                                                                    <span>{{ $user->zone }}</span>
+                                                                </td>
+                                                                <td class="nk-tb-col tb-col-md">
+                                                                    <span>{{ $user->postal_code }}</span>
                                                                 </td>
                                                                 {{-- <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Unverified">
                                                                     <ul class="list-status">
