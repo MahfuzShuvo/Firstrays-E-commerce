@@ -119,6 +119,7 @@
 	$(document).ready(function() {
 		$('.addcart').on('click', function(e) {
 			var total = 0;
+			var sub;
 			var id = $(this).data('id');
 			if (id) {
 				$.ajax({
@@ -132,7 +133,7 @@
 						// 	showConfirmButton: false,
 						// 	timer: 3000
 						// });
-
+						
 						if ($.isEmptyObject(data.error)) {
 							swal({
 							  title: "Success!",
@@ -140,22 +141,28 @@
 							  icon: "success",
 							  button: "OK",
 							});
-							$('#cartItem').html(`
-								<li>
-									<span>
-		                                <img src="`+data.cart['image']+`" width="40px" style="border-radius: 3px;">
-									</span>
-									<span style="padding-left: 10px; font-size: 13px;">
-										<span class="cd-qty">`+data.cart['quantity']+`<span style="color: red;"> x </span></span> `+data.cart['name']+`
-										<div class="cd-price"><span style="font-weight: bold;">`+data.cart['price']+`</span> <small>tk/pcs</small></div>
-									</span>
-									
-									<span class="cd-subtotal">`+data.cart['price'] * data.cart['quantity']+` &#2547;</span>
-									<a href="#0" class="cd-item-remove cd-img-replace"><i class="bx bx-x"></i></a>
-								</li>
-							`);
+							$('#cartItem').empty();
+							$.each(data.cart, function(index, cart) {
+								sub = cart['price'] * cart['quantity'];
+								$('#cartItem').append(`
+									<li>
+										<span>
+			                                <img src="`+cart['image']+`" width="40px" style="border-radius: 3px;">
+										</span>
+										<span style="padding-left: 10px; font-size: 13px;">
+											<span class="cd-qty">`+cart['quantity']+`<span style="color: red;"> x </span></span> `+cart['name']+`<small> - `+cart['attribute']+`</small>
+											<div class="cd-price"><span style="font-weight: bold;">`+cart['price']+`</span> <small>tk/pcs</small></div>
+										</span>
+										
+										<span class="cd-subtotal">`+sub+` &#2547;</span>
+										<a href="#0" class="cd-item-remove cd-img-replace"><i class="bx bx-x"></i></a>
+									</li>
+								`);
+								total = total + sub;
+							});
+							
 							$('#cartTotal').html(`
-								<p>SUBTOTAL <span>`+(total+(data.cart['price'] * data.cart['quantity']))+` &#2547;</span></p>
+								<p>SUBTOTAL <span>`+total+` &#2547;</span></p>
 							`);
 							$(`#essenceCartBtn2`).html(`
 								<a class="btn btn-link custom-cart" id="essenceCartBtn2" href="#"><i class="ti-bag icon-single" style="font-weight: 900;"></i> <span class="badge badge-danger" style="top: -2px!important;">`+data.totalCartQuantity+`</span></a>
@@ -190,6 +197,7 @@
 	$(document).ready(function() {
 		$('.addCartWithattribute').on('click', function(e) {
 			var total = 0;
+			var sub;
 			var id = $(this).data('id');
 			var quantity = $('#quantity').val();
 			var attributes1 = $('#attributes1').val();
@@ -220,22 +228,28 @@
 							  icon: "success",
 							  button: "OK",
 							});
-							$('#cartItem').html(`
-								<li>
-									<span>
-		                                <img src="../`+data.cart['image']+`" width="40px" style="border-radius: 3px;">
-									</span>
-									<span style="padding-left: 10px; font-size: 13px;">
-										<span class="cd-qty">`+data.cart['quantity']+`<span style="color: red;"> x </span></span> `+data.cart['name']+`
-										<div class="cd-price"><span style="font-weight: bold;">`+data.cart['price']+`</span> <small>tk/pcs</small></div>
-									</span>
-									
-									<span class="cd-subtotal">`+data.cart['price'] * data.cart['quantity']+` &#2547;</span>
-									<a href="#0" class="cd-item-remove cd-img-replace"><i class="bx bx-x"></i></a>
-								</li>
-							`);
+							$('#cartItem').empty();
+							$.each(data.cart, function(index, cart) {
+								sub = cart['price'] * cart['quantity'];
+								$('#cartItem').append(`
+									<li>
+										<span>
+			                                <img src="../`+cart['image']+`" width="40px" style="border-radius: 3px;">
+										</span>
+										<span style="padding-left: 10px; font-size: 13px;">
+											<span class="cd-qty">`+cart['quantity']+`<span style="color: red;"> x </span></span> `+cart['name']+`<small> - `+cart['attribute']+`</small>
+											<div class="cd-price"><span style="font-weight: bold;">`+cart['price']+`</span> <small>tk/pcs</small></div>
+										</span>
+										
+										<span class="cd-subtotal">`+sub+` &#2547;</span>
+										<a href="#0" class="cd-item-remove cd-img-replace"><i class="bx bx-x"></i></a>
+									</li>
+								`);
+								total = total + sub;
+							});
+							
 							$('#cartTotal').html(`
-								<p>SUBTOTAL <span>`+(total+(data.cart['price'] * data.cart['quantity']))+` &#2547;</span></p>
+								<p>SUBTOTAL <span>`+total+` &#2547;</span></p>
 							`);
 							$(`#essenceCartBtn2`).html(`
 								<a class="btn btn-link custom-cart" id="essenceCartBtn2" href="#"><i class="ti-bag icon-single" style="font-weight: 900;"></i> <span class="badge badge-danger" style="top: -2px!important;">`+data.totalCartQuantity+`</span></a>

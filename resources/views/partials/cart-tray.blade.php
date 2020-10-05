@@ -41,7 +41,7 @@
 								
 							</span>
 							<span style="padding-left: 10px; font-size: 13px;">
-								<span class="cd-qty">{{ $cart->quantity }}<span style="color: red;"> x </span></span> {{ $cart->product->name }}
+								<span class="cd-qty">{{ $cart->quantity }}<span style="color: red;"> x </span></span> {{ $cart->product->name }} <small>{{ ($cart->attribute) ? ' - '.$cart->attribute : '' }}</small>
 								<div class="cd-price"><span style="font-weight: bold;">{{ $cart->price }}</span> <small>tk/pcs</small></div>
 							</span>
 							@php

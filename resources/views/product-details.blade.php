@@ -247,7 +247,7 @@
 									</div>
 									<div class="add-to-cart">
 										@if ($product->quantity > 0)
-											<a href="#" class="btn addCartWithattribute" data-id="{{ $product->id }}">Add to cart</a>
+											<a class="btn addCartWithattribute" data-id="{{ $product->id }}">Add to cart</a>
 										@else
 											<a href="#" class="btn disabled">Add to cart</a>
 										@endif

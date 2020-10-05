@@ -20,8 +20,8 @@ class CreateCartsTable extends Migration
             $table->string('name');
             $table->string('image');
             $table->string('price')->nullable();
-            $table->string('attribute_1')->nullable();
-            $table->string('attribute_2')->nullable();
+            $table->string('attribute')->nullable();
+            // $table->string('attribute_2')->nullable();
             $table->string('ip_address')->nullable();
             $table->integer('quantity')->default(1);
             $table->timestamps();
