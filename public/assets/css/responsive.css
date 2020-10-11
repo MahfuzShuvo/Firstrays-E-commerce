@@ -25,6 +25,9 @@ Version:1.0
 @media (min-width: 414px) { .tb-col-mb { display: table-cell !important; } }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+	.right-side-cart-area .cart-content .cart-amount-summary {
+		height: 450px;
+	}
 	.cd-subtotal {
 	  position: absolute;
 	  right: 5em;
@@ -369,6 +372,9 @@ Version:1.0
 }
 /* Mobile Screen */
 @media only screen and (max-width: 767px) {
+	.right-side-cart-area .cart-content .cart-amount-summary {
+		height: 450px;
+	}
 	.cd-subtotal {
 	  position: absolute;
 	  right: 5em;
@@ -1105,6 +1111,9 @@ Version:1.0
 }
 /* Mobile Screen */
 @media only screen and (max-width: 450px) {
+	.right-side-cart-area .cart-content .cart-amount-summary {
+		height: 450px;
+	}
 	.cd-subtotal {
 	  position: absolute;
 	  right: 5em;

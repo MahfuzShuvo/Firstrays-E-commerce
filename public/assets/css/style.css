@@ -1622,6 +1622,8 @@ ul.social-icons li {
         .right-side-cart-area .cart-content .cart-list .single-cart-item:hover .product-image .cart-item-desc {
           background-color: rgba(0, 0, 0, 0.8); }
     .right-side-cart-area .cart-content .cart-amount-summary {
+      height: 500px;
+      overflow-y: scroll;
       /*padding: 100px 6%;*/
       position: relative;
       /*z-index: 10;
@@ -1631,6 +1633,22 @@ ul.social-icons li {
       /*width: calc(100% - 190px);*/
       width: 100%
     }
+    /* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+::-webkit-scrollbar-track {
+    background-color: #ebebeb;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #898989; 
+}
       /*@media only screen and (max-width: 767px) {
         .right-side-cart-area .cart-content .cart-amount-summary {
           -webkit-box-flex: 0;
@@ -1776,14 +1794,15 @@ ul.social-icons li {
   font-weight: 600;
   color: #282828;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 13px;
 }
 .shopping-cart .table p {
   font-size: 12px;
   color: #666;
 }
 .shopping-summery tbody .product-name a:hover{
-  color:#F7941D;
+  color: #ff005c;
+  text-decoration: none;
 }
 .shopping-summery tbody .product img {
   max-width: 70px;
@@ -3120,9 +3139,7 @@ ul.social-icons li {
   padding: 1em;
   border-radius: 5px;
   background: #eee;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem;
 }
 .cd-cart-total p {
   margin: 0px!important;
@@ -3143,7 +3160,7 @@ ul.social-icons li {
 .cd-subtotal {
   position: absolute;
   right: 8em;
-  top: 30%;
+  top: 48%;
   font-size: 14px;
   font-weight: 600;
   color: #6c757d;

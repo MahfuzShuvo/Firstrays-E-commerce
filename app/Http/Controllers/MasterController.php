@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Cart;
 
 class MasterController extends Controller
 {
     public function checkout()
     {
     	return view('checkout');
+    }
+
+    public function cart()
+    {
+        return view('cart');
     }
 
     public function product_details($slug)

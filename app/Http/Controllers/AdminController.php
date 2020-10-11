@@ -16,6 +16,7 @@ use App\Slider;
 use App\SmallBanner;
 use App\MediumBanner;
 use App\Shipping;
+use App\Coupon;
 use App\Faq;
 
 class AdminController extends Controller
@@ -132,6 +133,12 @@ class AdminController extends Controller
     {
         $shipping = Shipping::orderBy('id', 'asc')->get();
         return view('admin.pages.settings.shipping', compact('shipping'));
+    }
+
+    public function coupon()
+    {
+        $coupon = Coupon::orderBy('id', 'desc')->get();
+        return view('admin.pages.settings.coupon', compact('coupon'));
     }
 
     public function faqs()

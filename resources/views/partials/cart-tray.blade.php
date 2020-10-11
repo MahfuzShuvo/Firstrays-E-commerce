@@ -49,8 +49,25 @@
 								$total = $total + $sub;
 							@endphp
 							<span class="cd-subtotal">{{ $sub }} &#2547;</span>
-							<a href="#0" class="cd-item-remove cd-img-replace"><i class="bx bx-x"></i></a>
+							<a data-toggle="collapse" data-target="#deleteCollapse{{ $cart->id }}" class="cd-item-remove cd-img-replace" style="position: absolute!important;"><i class="bx bx-x"></i></a>
+							
+							<div class="collapse" id="deleteCollapse{{ $cart->id }}" style="position: absolute; width: -webkit-fill-available; bottom: 5px; right: 0px">
+							  	<div class="card card-body" style="margin-top: 0px; padding: 10px;">
+							  		<p style="font-size: 12px; margin-bottom: 0px; text-align: center;">Are sure to remove??</p>
+							  		<div style="display: flex; justify-content: center;">
+							  			<form action="{{ url('/cart_delete', $cart->id) }}" method="post">
+	                                  		@csrf
+	                                  		<button type="submit" class="btn btn-danger" style="font-weight: 400; font-size: 10px; margin: 2px; padding: 2px 5px;">YES</button>
+                                		</form>
+							  			<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#deleteCollapse{{ $cart->id }}" style="font-weight: 400; font-size: 10px; margin: 2px; padding: 2px 5px;">NO</button>
+							  		</div>
+							  	</div>
+							</div>
+
 						</li>
+						
+
+						
 					@endforeach
 					
 
@@ -91,7 +108,7 @@
 			<a href="{{ route('checkout') }}" class="btn essence-btn">check out</a>
 		</div>
 		<div class="checkout-btn mt-100" >
-			<a href="{{ route('checkout') }}" class="btn essence-btn">view cart</a>
+			<a href="{{ route('cart') }}" class="btn essence-btn">view cart</a>
 		</div>
 	</div>
 </div>

@@ -36,6 +36,7 @@ Route::group(['prefix'=>'user'], function() {
 	// cart
 	Route::get('/cart/{id}', 'User\CartController@add_to_cart');
 	Route::get('/cart-with-attr/{id}', 'User\CartController@add_to_cart_with_attr');
+	Route::get('/cart/update_quantity/{id}', 'User\CartController@update_quantity');
 
 	Route::get('/orders', 'HomeController@orders')->name('user.orders');
 	Route::get('/reviews', 'HomeController@reviews')->name('user.reviews');
@@ -141,6 +142,12 @@ Route::group(['prefix'=>'admin'], function() {
 	Route::post('/shipping_status/{id}', 'Admin\Pages\Settings\ShippingController@status');
 	Route::post('/edit_shipping/{id}', 'Admin\Pages\Settings\ShippingController@edit_shipping');
 	Route::post('/delete_shipping/{id}', 'Admin\Pages\Settings\ShippingController@delete_shipping');
+	// coupon
+	Route::get('/coupon', 'AdminController@coupon')->name('coupon');
+	Route::post('/coupon', 'Admin\Pages\Settings\CouponController@store')->name('coupon.store');
+	Route::post('/coupon_status/{id}', 'Admin\Pages\Settings\CouponController@status');
+	Route::post('/edit_coupon/{id}', 'Admin\Pages\Settings\CouponController@edit_coupon');
+	Route::post('/delete_coupon/{id}', 'Admin\Pages\Settings\CouponController@delete_coupon');
 	// faq
 	Route::get('/faqs', 'AdminController@faqs')->name('faqs');
 	Route::post('/faqs', 'Admin\Pages\Settings\FaqController@store')->name('faqs.store');
@@ -154,6 +161,12 @@ Route::group(['prefix'=>'admin'], function() {
 // ......................................................................................................
 	// checkout
 	Route::get('/checkout', 'MasterController@checkout')->name('checkout');
+	// cart
+	Route::get('/cart', 'MasterController@cart')->name('cart');
+	Route::post('/cart_delete/{id}', 'User\CartController@cart_delete');
+
+	Route::get('/cart/remove_coupon', 'User\CartController@remove_coupon');
+	Route::post('/cart/apply_coupon', 'User\CartController@apply_coupon');
 	// product-details
 	Route::get('/product-details/{slug}', 'MasterController@product_details');
 	// user-dashboard

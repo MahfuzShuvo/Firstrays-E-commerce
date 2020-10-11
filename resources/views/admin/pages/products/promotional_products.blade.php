@@ -273,12 +273,18 @@
                                                 <span>{{ $item->end_date }}</span>
                                             </td>
                                             @php
-                                            	$start = \Carbon\Carbon::parse($item->starting_date);
+                                            	$today = \Carbon\Carbon::now();
                                             	$end = \Carbon\Carbon::parse($item->end_date);
-                                            	$difference = date_diff($start, $end);
+                                            	$difference = $today->diffInDays($end, false)
                                             @endphp
                                             <td class="nk-tb-col tb-col-md">
-                                                <span>{{ $difference->format('%d days') }}</span>
+                                                @if ($difference < 0)
+                                                    <span class="text-danger">Expired</span>
+                                                @elseif ($difference == 0)
+                                                    <span class="text-warning">Only today</span>
+                                                @else
+                                                    <span class="text-success">{{ $difference + 1 }} days</span>
+                                                @endif
                                             </td>
                                             {{-- <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Unverified">
                                                 <ul class="list-status">

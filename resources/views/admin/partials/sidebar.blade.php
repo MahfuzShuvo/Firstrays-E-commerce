@@ -144,6 +144,9 @@
                                             <a href="{{ route('shipping') }}" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Shipping</span></a>
                                         </li>
                                         <li class="nk-menu-item">
+                                            <a href="{{ route('coupon') }}" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Coupon</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
                                             <a href="html/user-details-regular.html" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Blog</span></a>
                                         </li>
                                         <li class="nk-menu-item">
