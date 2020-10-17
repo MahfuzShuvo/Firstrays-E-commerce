@@ -549,11 +549,11 @@
                                     $divisionPath = 'public/assets/json/bd-divisions.json';
                                     $divisionJson = json_decode(file_get_contents($divisionPath), true);
 
-                                    // $districtPath = 'public/assets/json/districts.json';
-                                    // $districtJson = json_decode(file_get_contents($districtPath), true);
+                                    $districtPath = 'public/assets/json/bd-districts.json';
+                                    $districtJson = json_decode(file_get_contents($districtPath), true);
 
-                                    // $upazilaPath = 'public/assets/json/upazilas.json';
-                                    // $upazilaJson = json_decode(file_get_contents($upazilaPath), true);
+                                    $zonePath = 'public/assets/json/bd-postcodes.json';
+                                    $zoneJson = json_decode(file_get_contents($zonePath), true);
 
 
                                 @endphp
@@ -576,12 +576,10 @@
                                             <div class="form-control-wrap">
                                                 <select class="form-control @error('district') is-invalid @enderror" name="district" id="district_id">
                                                     <option value="" style="color: #a5a5a5;">Select a district</option>
-                                                    {{-- @if (Auth::user()->district)
-                                                        <option value="{{ $value['id'] }}" selected>{{ Auth::user()->district }}</option>
-                                                    @endi --}}
-                                                    {{-- @foreach ($districtJson as $key => $value)
-                                                        <option value="{{ $value['id'] }}">{{ $value['name'] }}</option>
-                                                    @endforeach --}}
+                                                    
+                                                    @foreach ($districtJson as $key => $value)
+                                                        <option value="{{ $value['id'] }}" {{ ($value['name'] == Auth::user()->district) ? 'selected' : '' }}>{{ $value['name'] }}</option>
+                                                    @endforeach
                                                  </select>
                                             </div>
                                         </div>
@@ -591,9 +589,10 @@
                                             <div class="form-control-wrap">
                                                 <select class="form-control @error('zone') is-invalid @enderror" name="zone" id="zone_id">
                                                     <option value="" style="color: #a5a5a5;">Select a thana/zone</option>
-                                                    {{-- @foreach ($districtJson as $key => $value)
-                                                        <option value="{{ $value['id'] }}">{{ $value['name'] }}</option>
-                                                    @endforeach --}}
+                                                    
+                                                    @foreach ($zoneJson as $key => $value)
+                                                        <option value="{{ $value['postCode'] }}" {{ ($value['postOffice'] == Auth::user()->zone) ? 'selected' : '' }}>{{ $value['postOffice'] }} ({{ $value['postCode'] }})</option>
+                                                    @endforeach
                                                  </select>
                                             </div>
                                         </div>
@@ -647,7 +646,7 @@
 
             var option = "<option value='' style='color: #a5a5a5;'>Choose a district</option>";
 
-            $.get("http://localhost/firstrays/get-districts/"+division, 
+            $.get("{{ url('/get-districts') }}/"+division, 
                 function(data){
                     $.each(data, function(i, element) {
                         option += "<option value='"+ element.id +"'>"+ element.name +"</option>";
@@ -671,7 +670,7 @@
 
             var option = "<option value='' style='color: #a5a5a5;'>Choose a thana/zone</option>";
 
-            $.get("http://localhost/firstrays/get-zones/"+district, 
+            $.get("{{ url('/get-zones') }}/"+district, 
                 function(data){
                     $.each(data, function(i, element) {
                         option += "<option value='"+ element.postCode +"'>"+ element.postOffice + " ("+ element.postCode +")"+"</option>";

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Order;
 use App\User;
 use App\Division;
 use App\District;
@@ -39,6 +40,15 @@ class AdminController extends Controller
     public function index()
     {
         return view('admin.dashboard');
+    }
+
+     /**
+     * Orders Module...........................................................................
+     */
+    public function total_orders()
+    {
+        $orders = Order::orderBy('id', 'desc')->get();
+        return view('admin.pages.orders.total_orders', compact('orders'));
     }
 
     /**

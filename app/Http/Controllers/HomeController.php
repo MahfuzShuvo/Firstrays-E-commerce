@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use App\Wishlist;
+use App\Order;
 
 class HomeController extends Controller
 {
@@ -42,7 +43,8 @@ class HomeController extends Controller
 
     public function orders()
     {
-        return view('user.orders');
+        $orders = Order::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
+        return view('user.orders', compact('orders'));
     }
 
     public function reviews()

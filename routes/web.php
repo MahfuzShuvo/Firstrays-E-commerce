@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/check', 'User\CartController@check');
+
 // user 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/login', 'Auth\LoginController@login')->name('user.login');
@@ -80,6 +80,14 @@ Route::group(['prefix'=>'admin'], function() {
 // ...........................................................................................
 //  Back-end pages
 // ............................................................................................
+	// Orders module
+	// ..........................................................................
+	// total orders
+	Route::get('/orders', 'AdminController@total_orders')->name('orders');
+	Route::post('/customer_status/{id}', 'Admin\Pages\Customers\CustomerController@status');
+
+
+
 	// Customers module
 	// ..........................................................................
 	// all customers
@@ -167,6 +175,11 @@ Route::group(['prefix'=>'admin'], function() {
 
 	Route::get('/cart/remove_coupon', 'User\CartController@remove_coupon');
 	Route::post('/cart/apply_coupon', 'User\CartController@apply_coupon');
+	// order
+	Route::post('/place_order', 'User\OrderController@placeOrder');
+	Route::get('/thanks', 'User\OrderController@thanks');
+	Route::post('/delete_orders_product/{id}', 'User\OrderController@delete_orders_product');
+	Route::get('/orderStatus/{id}', 'User\OrderController@orderStatus');
 	// product-details
 	Route::get('/product-details/{slug}', 'MasterController@product_details');
 	// user-dashboard

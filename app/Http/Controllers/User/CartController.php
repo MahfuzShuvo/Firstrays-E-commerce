@@ -302,10 +302,14 @@ class CartController extends Controller
                 $expiry_date = $couponDetails->expiry_date;
                 $current_date = date('Y-m-d');
 
-                if($expiry_date < $current_date) {
-                    session()->flash('error', 'Coupon code is already expired.');
-                    return redirect()->back();
+                if (!is_null($expiry_date)) {
+                    if($expiry_date < $current_date) {
+                        session()->flash('error', 'Coupon code is already expired.');
+                        return redirect()->back();
+                    }
                 }
+
+                
 
                 // $session_id = Session::get('session_id');
                 // $userCart = Cart::where(['session_id'=>$session_id])->get();

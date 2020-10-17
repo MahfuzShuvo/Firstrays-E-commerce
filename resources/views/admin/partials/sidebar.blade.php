@@ -29,7 +29,7 @@
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="html/user-list-default.html" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Total Order</span></a>
+                                            <a href="{{ route('orders') }}" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Total Order</span></a>
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="html/user-list-regular.html" class="nk-menu-link"><span class="nk-menu-text custom-sub-menu"><em class="icon ni ni-curve-down-right" style="color: #ccc;"></em> Completed Order</span></a>
