@@ -30,8 +30,9 @@ class CreateOrdersTable extends Migration
             $table->string('coupon_code')->nullable();
             $table->integer('coupon_amount')->nullable();
             $table->integer('grand_total');
-            $table->string('payment_method');
-            $table->unsignedTinyInteger('order_status')->comment('1 = confirm, 2 = sent to shipping, 3 = recieved by customer');
+            $table->string('payment')->nullable();
+            $table->string('trxID')->nullable();
+            $table->unsignedTinyInteger('order_status')->comment('0 = pending, 1 = confirm, 2 = shipping, 3 = recieved');
             $table->timestamps();
         });
     }

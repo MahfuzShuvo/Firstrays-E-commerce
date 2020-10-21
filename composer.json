@@ -11,9 +11,11 @@
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
         "haruncpi/laravel-id-generator": "^1.0",
+        "infobip/infobip-api-php-client": "dev-master",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
-        "nexmo/laravel": "^2.2"
+        "nexmo/laravel": "^2.2",
+        "pnlinh/laravel-infobip-sms": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

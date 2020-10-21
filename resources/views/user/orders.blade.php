@@ -235,17 +235,11 @@
                                         
                                     </td>
                                     <td class="tb-col-mb tb-col-md tb-col-sm tb-col-lg" style="vertical-align: middle;">
-                                        {{-- <div class="dropdown">
-                                            <button class="btn btn-sm btn-icon" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="bx bx-dots-horizontal-rounded" data-toggle="tooltip" data-placement="top"
-                                                title="Actions"></i>
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                                <a class="dropdown-item custom-action-btn" href="{{ url('product-details', $product->slug) }}"><i class="bx bx-show-alt mr-2"></i> View Product</a>
-                                                <a class="dropdown-item custom-action-btn" href="#removeWishlistModal{{ $order->id }}" data-toggle="modal"><i class="bx bx-trash mr-2"></i> Remove Wishlist</a>
-                                            </div>
-                                        </div> --}}
-                                        {{ $order->payment_method}}
+                                        <b>{{ $order->payment}}</b>
+                                        @if (!is_null($order->trxID))
+                                            <br>
+                                            <small><b>TrxID: </b>{{ $order->trxID }}</small>
+                                        @endif
                                     </td>
                                     <td class="tb-col-mb tb-col-md tb-col-sm tb-col-lg" style="vertical-align: middle;">Regular</td>
                                     <td class="tb-col-mb tb-col-md tb-col-sm tb-col-lg" style="vertical-align: middle;">{{ $order->created_at }}</td>

@@ -73,8 +73,6 @@ Route::group(['prefix'=>'admin'], function() {
 	//Reset Password
 	Route::resource('/adminresetpassword', 'Admin\ResetPasswordController');
 
-
-
 });
 
 // ...........................................................................................
@@ -177,7 +175,8 @@ Route::group(['prefix'=>'admin'], function() {
 	Route::post('/cart/apply_coupon', 'User\CartController@apply_coupon');
 	// order
 	Route::post('/place_order', 'User\OrderController@placeOrder');
-	Route::get('/thanks', 'User\OrderController@thanks');
+	Route::get('/payment', 'User\OrderController@payment');
+	Route::get('/thanks', 'User\OrderController@thanks')->name('thanks');
 	Route::post('/delete_orders_product/{id}', 'User\OrderController@delete_orders_product');
 	Route::get('/orderStatus/{id}', 'User\OrderController@orderStatus');
 	// product-details
@@ -201,6 +200,26 @@ Route::group(['prefix'=>'admin'], function() {
 
 
 
+// ..............................................................................
+// Bkash Payment Gateway
+// ..............................................................................
+	// Bkash token issue
+	Route::post('token', 'PaymentController@token')->name('token');
+	Route::get('createpayment', 'PaymentController@createpayment')->name('createpayment');
+	Route::get('executepayment', 'PaymentController@executepayment')->name('executepayment');
+
+Route::get('cod_order/{orderID}', function($orderID){
+	$order = App\Order::where('orderID', $orderID)->first();
+
+	$order->payment = "Cash on delivery";
+	$order->save();
+
+    return view('thanks', compact('order'));
+});
+
+
+// Division, District, Post office, Post code
+// ............................................................................
 Route::get('get-districts/{id}', function($id){
 	// return json_encode(App\District::where('division_id', $id)->get());
 	$districtPath = 'public/assets/json/bd-districts.json';

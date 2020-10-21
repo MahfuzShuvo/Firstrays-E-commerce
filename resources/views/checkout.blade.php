@@ -95,7 +95,7 @@
 							@endphp
 							<li class="list-group-item d-flex justify-content-between" style="background: #efefef; border-top: 2px solid #d0d0d0;">
 								<span style="font-weight: bold; color: #ff005c;">Total</span>
-								<strong style="color: #ff005c;">{{ $grand_total }} &#2547;</strong>
+								<strong style="color: #ff005c;" class="grand_total">{{ $grand_total }} &#2547;</strong>
 							</li>
 						@else
 							@php
@@ -103,7 +103,7 @@
 							@endphp
 							<li class="list-group-item d-flex justify-content-between" style="background: #efefef; border-top: 2px solid #d0d0d0;">
 								<span style="font-weight: bold; color: #ff005c;">Total</span>
-								<strong style="color: #ff005c;">{{ $grand_total }} &#2547;</strong>
+								<strong style="color: #ff005c;" class="grand_total">{{ $grand_total }} &#2547;</strong>
 							</li>
 							{{-- <form class="card p-2" action="{{ url('cart/apply_coupon') }}" method="post">
 								@csrf
@@ -257,7 +257,6 @@
 								</div>
 							</div> --}}
 						</div>
-						<hr class="mb-4">
 						{{-- <div class="custom-control custom-checkbox">
 							<input type="checkbox" class="custom-control-input" id="same-address">
 							<label class="custom-control-label custom-label" for="same-address">Shipping address is the same as my billing address</label>
@@ -267,7 +266,7 @@
 							<label class="custom-control-label custom-label" for="save-info">Save this information for next time</label>
 						</div>
 						<hr class="mb-4"> --}}
-						<h4 class="mb-3">Payment</h4>
+						{{-- <h4 class="mb-3">Payment</h4>
 						<div class="d-block my-3">
 							@foreach (App\PaymentMethod::all() as $key => $payment)
 								<div class="custom-control custom-radio">
@@ -275,16 +274,7 @@
 									<label class="custom-control-label custom-label" for="{{ $payment->short_name }}">{{ $payment->method }}</label>
 								</div>
 							@endforeach
-							
-							{{-- <div class="custom-control custom-radio">
-								<input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-								<label class="custom-control-label custom-label" for="debit">Debit card</label>
-							</div>
-							<div class="custom-control custom-radio">
-								<input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-								<label class="custom-control-label custom-label" for="paypal">PayPal</label>
-							</div> --}}
-						</div>
+						</div> --}}
 						{{-- <div class="row">
 							<div class="col-md-6 mb-3">
 								<label class="custom-label" for="cc-name">Name on card</label>
@@ -322,7 +312,7 @@
 						<input type="hidden" name="grand_total" value="{{ $grand_total }}">
 						<input type="hidden" name="coupon_code" value="{{ Session::get('couponCode') }}">
 						<input type="hidden" name="coupon_amount" value="{{ Session::get('couponAmount') }}">
-						<button class="btn btn-primary btn-lg btn-block custom-btn" type="submit" onclick="return sendPaymentmethod();">PLACE ORDER</button>
+						<button class="btn btn-primary btn-lg btn-block custom-btn" type="submit">PROCEED TO ORDER</button>
 					</form>
 				</div>
 			</div>
@@ -390,7 +380,7 @@
 
         
     </script>
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
 		function sendPaymentmethod() {
 			if ($('#cod').is(':checked') || $('#bkash').is(':checked')) {
     			// alert(($('#payment_method').val());
@@ -399,5 +389,105 @@
     			return false;
     		}
 		}
-    </script>
+    </script> --}}
+
+    {{-- Bkash --}}
+	{{-- <script type="text/javascript">
+		$(document).ready(function () {
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+
+			$.ajax({
+	            url: "{{ route('token') }}",
+	            type: 'POST',
+	            contentType: 'application/json',
+	            success: function (data) {
+	                console.log('got data from token  ..');
+					console.log(JSON.stringify(data));
+					
+	                accessToken = JSON.stringify(data);
+	            },
+				error: function(){
+					console.log('error');
+	                        
+	            }
+	        });
+
+	        var paymentConfig={
+	            createCheckoutURL: "{{ route('createpayment') }}",
+	            executeCheckoutURL: "{{ route('executepayment') }}",
+	        };
+
+			
+	        var paymentRequest;
+	        paymentRequest = { amount: $('.grand_total').text(), intent:'sale'};
+			console.log(JSON.stringify(paymentRequest));
+
+			bKash.init({
+	            paymentMode: 'checkout',
+	            paymentRequest: paymentRequest,
+	            createRequest: function(request){
+	                console.log('=> createRequest (request) :: ');
+	                console.log(request);
+	                
+	                $.ajax({
+	                    url: paymentConfig.createCheckoutURL+"?amount="+paymentRequest.amount,
+	                    type:'GET',
+	                    contentType: 'application/json',
+	                    success: function(data) {
+	                        console.log('got data from create  ..');
+	                        console.log('data ::=>');
+	                        console.log(JSON.stringify(data));
+	                        
+	                        var obj = JSON.parse(data);
+	                        
+	                        if(data && obj.paymentID != null){
+	                            paymentID = obj.paymentID;
+	                            bKash.create().onSuccess(obj);
+	                        }
+	                        else {
+								console.log('error');
+	                            bKash.create().onError();
+	                        }
+	                    },
+	                    error: function(){
+							console.log('error');
+	                        bKash.create().onError();
+	                    }
+	                });
+	            },
+	            
+	            executeRequestOnAuthorization: function(){
+	                console.log('=> executeRequestOnAuthorization');
+	                $.ajax({
+	                    url: paymentConfig.executeCheckoutURL+"?paymentID="+paymentID,
+	                    type: 'GET',
+	                    contentType:'application/json',
+	                    success: function(data){
+	                        console.log('got data from execute  ..');
+	                        console.log('data ::=>');
+	                        console.log(JSON.stringify(data));
+	                        
+	                        data = JSON.parse(data);
+	                        if(data && data.paymentID != null){
+	                            alert('[SUCCESS] data : ' + JSON.stringify(data));
+	                            window.location.href = "success.html";                              
+	                        }
+	                        else {
+	                            bKash.execute().onError();
+	                        }
+	                    },
+	                    error: function(){
+	                        bKash.execute().onError();
+	                    }
+	                });
+	            }
+	        });
+	        
+			console.log("Right after init ");
+		});
+	</script> --}}
 @endsection

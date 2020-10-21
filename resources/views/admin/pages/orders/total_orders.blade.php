@@ -244,37 +244,37 @@
                                             </td>
                                             <td class="nk-tb-col tb-col-mb" style="padding: 0px;">
                                                 <table class="datatable-init nk-tb-list nk-tb-ulist borderless" style="width: -webkit-fill-available; font-size: 10px;">
-                                                    <tr>
+                                                    <tr style="vertical-align: initial;">
                                                         <td><b>Name</b></td>
                                                         <td><b>:</b></td>
                                                         <td>{{ $item->user_name }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr style="vertical-align: initial;">
                                                         <td><b>Phone</b></td>
                                                         <td><b>:</b></td>
                                                         <td>{{ $item->user_phone }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr style="vertical-align: initial;">
                                                         <td><b>Address</b></td>
                                                         <td><b>:</b></td>
                                                         <td>{{ $item->shipping_address }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr style="vertical-align: initial;">
                                                         <td><b>Division</b></td>
                                                         <td><b>:</b></td>
                                                         <td>{{ $item->division }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr style="vertical-align: initial;">
                                                         <td><b>District</b></td>
                                                         <td><b>:</b></td>
                                                         <td>{{ $item->district }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr style="vertical-align: initial;">
                                                         <td><b>Zone</b></td>
                                                         <td><b>:</b></td>
                                                         <td>{{ $item->zone }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr style="vertical-align: initial;">
                                                         <td><b>ZIP</b></td>
                                                         <td><b>:</b></td>
                                                         <td>{{ $item->postal_code }}</td>
@@ -403,7 +403,13 @@
                                                 </td>
                                             @endif --}}
                                             <td class="nk-tb-col" style="font-weight: bold;">
-                                                <span>{{ $item->payment_method }}</span>
+                                                <span>
+                                                    <b>{{ $item->payment}}</b>
+                                                    @if (!is_null($item->trxID))
+                                                        <br>
+                                                        <small><b>TrxID: </b>{{ $item->trxID }}</small>
+                                                    @endif
+                                                </span>
                                             </td>
                                             <td class="nk-tb-col" style="font-weight: bold;">
                                                 <span>Regular</span>
