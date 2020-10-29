@@ -352,6 +352,12 @@
 	                        }
 	                    },
 	                    error: function(){
+	                    	swal({
+								  title: "Payment Failed!",
+								  text: "Duplicate for all transactions",
+								  icon: "error",
+								  button: "OK",
+								});
 	                        bKash.execute().onError();
 	                    }
 	                });

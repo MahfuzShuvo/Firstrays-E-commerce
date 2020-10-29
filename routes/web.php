@@ -14,7 +14,10 @@
 Route::get('/', function () {
     return view('index');
 });
-
+Route::get('/invoice', function() {
+	$order = App\Order::where('id', 1)->first();
+	return view('admin.pages.orders.invoice', compact('order'));
+});
 Auth::routes();
 
 // user 
@@ -73,6 +76,9 @@ Route::group(['prefix'=>'admin'], function() {
 	//Reset Password
 	Route::resource('/adminresetpassword', 'Admin\ResetPasswordController');
 
+	// Create invoice PDF
+	Route::get('/order/invoice/{id}', 'Admin\Pages\Orders\OrdersController@generate_invoice');
+
 });
 
 // ...........................................................................................
@@ -82,7 +88,8 @@ Route::group(['prefix'=>'admin'], function() {
 	// ..........................................................................
 	// total orders
 	Route::get('/orders', 'AdminController@total_orders')->name('orders');
-	Route::post('/customer_status/{id}', 'Admin\Pages\Customers\CustomerController@status');
+	// Route::post('/customer_status/{id}', 'Admin\Pages\Customers\CustomerController@status');
+	Route::get('/viewSingleOrder/{id}', 'Admin\Pages\Orders\OrdersController@viewSingleOrder');
 
 
 
@@ -208,14 +215,14 @@ Route::group(['prefix'=>'admin'], function() {
 	Route::get('createpayment', 'PaymentController@createpayment')->name('createpayment');
 	Route::get('executepayment', 'PaymentController@executepayment')->name('executepayment');
 
-Route::get('cod_order/{orderID}', function($orderID){
-	$order = App\Order::where('orderID', $orderID)->first();
+	Route::get('cod_order/{orderID}', function($orderID){
+		$order = App\Order::where('orderID', $orderID)->first();
 
-	$order->payment = "Cash on delivery";
-	$order->save();
+		$order->payment = "Cash on delivery";
+		$order->save();
 
-    return view('thanks', compact('order'));
-});
+	    return view('thanks', compact('order'));
+	});
 
 
 // Division, District, Post office, Post code

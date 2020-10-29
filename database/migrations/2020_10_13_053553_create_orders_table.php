@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('user_name');
             $table->string('orderID');
             $table->string('user_phone');
-            $table->string('user_email');
+            $table->string('user_email')->nullable();
             $table->string('shipping_address');
             $table->string('division');
             $table->string('district');
@@ -32,6 +32,7 @@ class CreateOrdersTable extends Migration
             $table->integer('grand_total');
             $table->string('payment')->nullable();
             $table->string('trxID')->nullable();
+            $table->string('order_note')->nullable();
             $table->unsignedTinyInteger('order_status')->comment('0 = pending, 1 = confirm, 2 = shipping, 3 = recieved');
             $table->timestamps();
         });

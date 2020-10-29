@@ -134,19 +134,49 @@
                                                                     <span>{{ $user->phone }}</span>
                                                                 </td>
                                                                 <td class="nk-tb-col tb-col-md">
-                                                                    <span>{{ $user->street_address }}</span>
+                                                                    <span>
+                                                                        @if ($user->street_address)
+                                                                            {{ $user->street_address }}
+                                                                        @else
+                                                                        -
+                                                                        @endif
+                                                                    </span>
                                                                 </td>
                                                                 <td class="nk-tb-col tb-col-md">
-                                                                    <span>{{ $user->division }}</span>
+                                                                    <span>
+                                                                        @if ($user->division)
+                                                                            {{ $user->division }}
+                                                                        @else
+                                                                        -
+                                                                        @endif
+                                                                    </span>
                                                                 </td>
                                                                 <td class="nk-tb-col tb-col-md">
-                                                                    <span>{{ $user->district }}</span>
+                                                                    <span>
+                                                                        @if ($user->district)
+                                                                            {{ $user->district }}
+                                                                        @else
+                                                                        -
+                                                                        @endif
+                                                                    </span>
                                                                 </td>
                                                                 <td class="nk-tb-col tb-col-md">
-                                                                    <span>{{ $user->zone }}</span>
+                                                                    <span>
+                                                                        @if ($user->zone)
+                                                                            {{ $user->zone }}
+                                                                        @else
+                                                                        -
+                                                                        @endif
+                                                                    </span>
                                                                 </td>
                                                                 <td class="nk-tb-col tb-col-md">
-                                                                    <span>{{ $user->postal_code }}</span>
+                                                                    <span>
+                                                                        @if ($user->postal_code)
+                                                                            {{ $user->postal_code }}
+                                                                        @else
+                                                                        -
+                                                                        @endif
+                                                                    </span>
                                                                 </td>
                                                                 {{-- <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Unverified">
                                                                     <ul class="list-status">

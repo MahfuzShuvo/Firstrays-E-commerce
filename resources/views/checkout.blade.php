@@ -147,17 +147,21 @@
 						<div class="row">
 							<div class="col-md-6 mb-3">
 								<label class="custom-label" for="name">Name</label><span style="color: red;"> *</span>
-								<input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ Auth::check() ? Auth::user()->name : '' }}" required>
-								<div class="invalid-feedback">
-									Name is required.
-								</div>
+								<input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{ Auth::check() ? Auth::user()->name : '' }}">
+								@error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
 							</div>
 							<div class="col-md-6 mb-3">
 								<label class="custom-label" for="phone">Contact</label>
-								<input type="text" class="form-control" id="phone" name="phone" placeholder="+880123456789" value="{{ Auth::check() ? Auth::user()->phone : '' }}" required>
-								<div class="invalid-feedback">
-									Phone number is required.
-								</div>
+								<input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder="+880123456789" value="{{ Auth::check() ? Auth::user()->phone : '' }}">
+								@error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
 							</div>
 						</div>
 						<!-- <div class="mb-3">
@@ -187,16 +191,20 @@
 						<div class="mb-3">
 							<label class="custom-label" for="email">Email <span class="text-muted">(Optional)</span></label>
 							<input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="{{ Auth::check() ? Auth::user()->email : '' }}">
-							<div class="invalid-feedback">
-								Please enter a valid email address for shipping updates.
-							</div>
+							{{-- @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror --}}
 						</div>
 						<div class="mb-3">
 							<label class="custom-label" for="address">Address</label><span style="color: red;"> *</span>
-							<input type="text" class="form-control" id="address" name="street_address" value="{{ Auth::check() ? Auth::user()->street_address : '' }}" placeholder="1234 Main St" required>
-							<div class="invalid-feedback">
-								Please enter your shipping address.
-							</div>
+							<input type="text" class="form-control @error('street_address') is-invalid @enderror" id="address" name="street_address" value="{{ Auth::check() ? Auth::user()->street_address : '' }}" placeholder="1234 Main St">
+							@error('street_address')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
 						</div>
 						{{-- <div class="mb-3">
 							<label class="custom-label" for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
@@ -215,47 +223,59 @@
 							@endphp
 							<div class="col-md-4 mb-3">
 								<label class="custom-label" for="country">Division</label><span style="color: red;"> *</span>
-								<select class="custom-select d-block w-100" id="division_id" name="division" required>
+								<select class="custom-select d-block w-100 @error('division') is-invalid @enderror" id="division_id" name="division" >
 									<option value="" style="color: #a5a5a5;">Select a division</option>
 									@foreach ($divisionJson as $key => $value)
                                         <option value="{{ $value['id'] }}" {{ Auth::check() ? (($value['name'] == Auth::user()->division) ? 'selected':'') : '' }}>{{ $value['name'] }}</option>
                                     @endforeach
 								</select>
-								{{-- <div class="invalid-feedback">
-									Please select a valid country.
-								</div> --}}
+								@error('division')
+	                                <span class="invalid-feedback" role="alert">
+	                                    <strong>{{ $message }}</strong>
+	                                </span>
+	                            @enderror
 							</div>
 							<div class="col-md-4 mb-3">
 								<label class="custom-label" for="country">District</label><span style="color: red;"> *</span>
-								<select class="custom-select d-block w-100" id="district_id" name="district" required>
+								<select class="custom-select d-block w-100 @error('district') is-invalid @enderror" id="district_id" name="district" >
 									<option value="" style="color: #a5a5a5;">Select a district</option>
 									@foreach ($districtJson as $key => $value)
                                         <option value="{{ $value['id'] }}" {{ Auth::check() ? (($value['name'] == Auth::user()->district) ? 'selected':'') : '' }}>{{ $value['name'] }}</option>
                                     @endforeach
 								</select>
-								{{-- <div class="invalid-feedback">
-									Please select a valid country.
-								</div> --}}
+								@error('district')
+	                                <span class="invalid-feedback" role="alert">
+	                                    <strong>{{ $message }}</strong>
+	                                </span>
+                            @enderror
 							</div>
 							<div class="col-md-4 mb-3">
 								<label class="custom-label" for="state">Thana/Zone</label><span style="color: red;"> *</span>
-								<select class="custom-select d-block w-100" id="zone_id" name="zone" required>
+								<select class="custom-select d-block w-100 @error('zone') is-invalid @enderror" id="zone_id" name="zone" >
 									<option value="" style="color: #a5a5a5;">Select a thana/zone</option>
 									@foreach ($zoneJson as $key => $value)
                                         <option value="{{ $value['postCode'] }}" {{ Auth::check() ? (($value['postOffice'] == Auth::user()->zone) ? 'selected':'') : '' }}>{{ $value['postOffice'] }} ({{ $value['postCode'] }})</option>
                                     @endforeach
 								</select>
-								{{-- <div class="invalid-feedback">
-									Please provide a valid state.
-								</div> --}}
+								@error('zone')
+	                                <span class="invalid-feedback" role="alert">
+	                                    <strong>{{ $message }}</strong>
+	                                </span>
+	                            @enderror
 							</div>
 							{{-- <div class="col-md-3 mb-3">
 								<label class="custom-label" for="zip">Zip</label><span style="color: red;"> *</span>
-								<input type="text" class="form-control" id="zip" placeholder="0000" required>
+								<input type="text" class="form-control" id="zip" placeholder="0000" >
 								<div class="invalid-feedback">
 									Zip code required.
 								</div>
 							</div> --}}
+
+						</div>
+						<div class="mb-3">
+							<label class="custom-label" for="email">Order Note <span class="text-muted">(Optional)</span></label>
+							<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Order note" name="order_note"></textarea>
+							
 						</div>
 						{{-- <div class="custom-control custom-checkbox">
 							<input type="checkbox" class="custom-control-input" id="same-address">

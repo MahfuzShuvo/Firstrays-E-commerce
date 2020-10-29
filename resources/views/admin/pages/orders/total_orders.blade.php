@@ -429,8 +429,8 @@
                                                     <span class="badge badge-dark">shipping</span>
                                                 @endif
                                                 @if ($item->order_status == 3)
-                                                    <span class="badge badge-success">recieved</span><br>
-                                                    <span class="badge badge-success">complete</span>
+                                                    <span class="badge badge-outline-success mb-1">Recieved</span><br>
+                                                    <span class="badge badge-success">Completed</span>
                                                 @endif
                                             </td>
                                             {{-- <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Unverified">
@@ -486,7 +486,7 @@
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <ul class="link-list-opt no-bdr">
                                                                     <li>
-                                                                        <a href="#viewModal{{ $item->id }}" data-toggle="modal">
+                                                                        <a href="{{ url('viewSingleOrder', $item->id) }}">
                                                                             <em class="icon ni ni-eye"></em><span>View</span>
                                                                         </a>
                                                                     </li>
@@ -552,7 +552,7 @@
                                             <!-- Modal Content Code -->
 
                                         <!-- promotion Modal start -->
-                                        <div class="modal fade" tabindex="-1" id="promoModal{{ $item->id }}">
+                                        {{-- <div class="modal fade" tabindex="-1" id="promoModal{{ $item->id }}">
                                             <div class="modal-dialog modal-dialog-top" role="document">
                                                 <div class="modal-content">
                                                     <a href="#" class="close" data-dismiss="modal" aria-label="Close">
@@ -603,15 +603,15 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <!-- promotion Modal end -->
 
                                         <!-- view Modal start -->
-                                        <div class="modal fade view_img_modal" tabindex="-1" id="viewModal{{ $item->id }}">
+                                        {{-- <div class="modal fade view_img_modal" tabindex="-1" id="viewModal{{ $item->id }}">
                                             <div class="modal-dialog view_img" role="document">
                                                 <img src="{{ $item->path }}">
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <!-- view Modal end -->
 
                                         <!-- edit Modal start -->

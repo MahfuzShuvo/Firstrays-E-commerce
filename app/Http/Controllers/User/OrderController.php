@@ -23,6 +23,21 @@ class OrderController extends Controller
     	
     	// $order = $request->all();
     	// echo "<pre>"; print_r($order); die;
+
+        // Validation
+        $validator  = \Validator::make($request->all(), [
+            'name' => 'required',
+            'phone' => 'required',
+            'street_address' => 'required',
+            'division' => 'required',
+            'district' => 'required',
+            'zone' => 'required'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         if (Cart::totalCarts()->count() > 0) {
             $id = "INV-".uniqid();
             $order = new Order;

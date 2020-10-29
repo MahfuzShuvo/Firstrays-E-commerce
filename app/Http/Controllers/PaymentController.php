@@ -139,6 +139,8 @@ class PaymentController extends Controller
     protected function _updateOrderStatus($resultdatax) {
     	$resultdatax = json_decode($resultdatax);
 
+    	
+
     	if ($resultdatax && ( $resultdatax->paymentID != null ) && ( $resultdatax->transactionStatus == 'Completed')) {
     		$order = Order::where('orderID', $resultdatax->merchantInvoiceNumber)->first();
     		$order->order_status = 1;
@@ -146,5 +148,13 @@ class PaymentController extends Controller
     		$order->trxID = $resultdatax->trxID;
     		$order->save();
     	}
+    	// if ($resultdatax->transactionStatus != 'Completed')) {
+    	// 	session()->flash('error', 'Payment Failed');
+    	//  	return redirect()->back();
+    	// }
+    	// else {
+    	// 	session()->flash('error', 'Payment Failed');
+    	// 	return redirect('/attributes');
+    	// }
     }
 }

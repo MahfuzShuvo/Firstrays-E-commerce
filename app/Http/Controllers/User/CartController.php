@@ -326,14 +326,21 @@ class CartController extends Controller
                     $total_amount = $total_amount + ($value->price * $value->quantity);
                 }
 
-                if($couponDetails->type == "Fixed") {
-                    $couponAmount = $couponDetails->amount;
-                    $couponAmount = round($couponAmount);
+                if ($total_amount < 200) {
+                    session()->flash('error', 'Oops! The minimum spend for this coupon is 200 ৳');
+                    return redirect()->back();
                 }
-                else  {
-                    $couponAmount = $total_amount * ( $couponDetails->amount / 100 );
-                    $couponAmount = round($couponAmount);
+                else {
+                    if($couponDetails->type == "Fixed") {
+                        $couponAmount = $couponDetails->amount;
+                        $couponAmount = round($couponAmount);
+                    }
+                    else  {
+                        $couponAmount = $total_amount * ( $couponDetails->amount / 100 );
+                        $couponAmount = round($couponAmount);
+                    }
                 }
+                
 
                 Session::put('couponAmount', $couponAmount);
                 Session::put('couponCode', $coupon);
