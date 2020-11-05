@@ -13,7 +13,7 @@ class SendCode
 	{
 		$code = rand(1111,9999);
 		
-		$client = new SendSingleTextualSms(new BasicAuthConfiguration('FirstRays', 'Arm@n3@jed'));
+		$client = new SendSingleTextualSms(new BasicAuthConfiguration('username', 'password'));
 
 		$requestBody = new SMSTextualRequest();
 		$requestBody->setFrom('First Rays');
